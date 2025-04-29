@@ -12,7 +12,7 @@ const useAddClass = async ({}) => {
     setLoading(true);
     try {
       const res = await axios.post(
-        `${base_url}/addClass`,
+        `${base_url}/class/addClass`,
         {
           className,
           date,
@@ -24,8 +24,8 @@ const useAddClass = async ({}) => {
       const data = res.data;
       toast.success("class added successfully");
       navigate("/class");
-    } catch (error) {
-      toast.error(
+    } catch (err) {
+      toast.err(
         err?.response?.data?.msg || err?.error || "something went wrong"
       );
     } finally {

@@ -9,11 +9,11 @@ const useDeleteClass = () => {
   const deleteClass = async ({ id }) => {
     setLoading(true);
     try {
-      const res = await axios.delete(`${base_url}/deleteClass/${id}/`);
+      const res = await axios.delete(`${base_url}/class/deleteClass/${id}/`);
       const data = res.data;
       toast.success("Class Successfully Deleted");
     } catch (err) {
-      toast.error(
+      toast.err(
         err?.response?.data?.msg || err?.error || "something went wrong"
       );
     } finally {

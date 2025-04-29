@@ -12,7 +12,7 @@ const useUpdateClass = async () => {
     setLoading(true);
     try {
       const res = await axios.patch(
-        `${base_url}/updateClass`,
+        `${base_url}/class/updateClass`,
         {
           className,
           date,
@@ -24,8 +24,8 @@ const useUpdateClass = async () => {
       const data = res.data;
       toast.success("class updated successfully");
       navigate("/class");
-    } catch (error) {
-      toast.error(
+    } catch (err) {
+      toast.err(
         err?.response?.data?.msg || err?.error || "something went wrong"
       );
     } finally {

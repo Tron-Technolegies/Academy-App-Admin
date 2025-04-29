@@ -10,13 +10,13 @@ const useGetAllClasses = () => {
   const getAllClasses = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`${base_url}/getAllClass`, {
+      const res = await axios.get(`${base_url}/class/getAllClass`, {
         withCredentials: true,
       });
       const data = res.data;
       setClasses(data.class);
     } catch (err) {
-      toast.error(
+      console.log(
         err?.response?.data?.msg || err?.error || "something went wrong"
       );
     } finally {

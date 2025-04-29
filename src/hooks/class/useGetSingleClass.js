@@ -10,13 +10,13 @@ const useGetSingleClass = ({ id }) => {
   const getSingleClass = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`${base_url}/getSingleClass/${id}/`, {
+      const res = await axios.get(`${base_url}/class/getSingleClass/${id}/`, {
         withCredentials: true,
       });
       const data = res.data;
       setClasses(data);
     } catch (err) {
-      toast.error(
+      console.log(
         err?.response?.data?.msg || err?.error || "something went wrong"
       );
     } finally {
