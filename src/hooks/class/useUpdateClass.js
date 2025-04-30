@@ -8,11 +8,11 @@ const useUpdateClass = async () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const updateClass = async ({ className, date, time, instructor }) => {
+  const updateClass = async ({ className, date, time, instructor, id }) => {
     setLoading(true);
     try {
       const res = await axios.patch(
-        `${base_url}/class/updateClass`,
+        `${base_url}/class/updateClass/${id}`,
         {
           className,
           date,

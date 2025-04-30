@@ -14,7 +14,7 @@ const useGetAllClasses = () => {
         withCredentials: true,
       });
       const data = res.data;
-      setClasses(data.class);
+      setClasses(data.classes);
     } catch (err) {
       console.log(
         err?.response?.data?.msg || err?.error || "something went wrong"

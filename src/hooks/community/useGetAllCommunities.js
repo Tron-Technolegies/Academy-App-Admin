@@ -1,12 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { base_url } from "../../pages/utils/constants";
 
 const useGetAllCommunity = () => {
   const [loading, setLoading] = useState(false);
   const [community, setCommunity] = useState([]);
 
-  const getAllCommunities = async () => {
+  const getAllCommunity = async () => {
     setLoading(true);
     try {
       const res = await axios.get(`${base_url}/community/getCommunities`, {
@@ -23,14 +24,14 @@ const useGetAllCommunity = () => {
     }
   };
   useEffect(() => {
-    getAllCommunities();
+    getAllCommunity();
   }, []);
 
   const refetch = () => {
-    getAllCommunities();
+    getAllCommunity();
   };
 
-  return { loading, getAllCommunities, refetch };
+  return { loading, community, refetch };
 };
 
 export default useGetAllCommunity;
