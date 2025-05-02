@@ -14,7 +14,7 @@ const useGetAllCourse = () => {
         withCredentials: true,
       });
       const data = res.data;
-      setClasses(data.course);
+      setCourse(data.course);
     } catch (err) {
       console.log(
         err?.response?.data?.msg || err?.error || "something went wrong"

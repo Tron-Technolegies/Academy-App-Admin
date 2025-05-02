@@ -17,7 +17,7 @@ const useGetSingleCommunity = ({ id }) => {
         }
       );
       const data = res.data;
-      setClasses(data);
+      setCommunity(data);
     } catch (err) {
       console.log(
         err?.response?.data?.msg || err?.error || "something went wrong"

@@ -1,0 +1,26 @@
+import axios from "axios";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
+import { base_url } from "../../pages/utils/constants";
+
+const useDeletePlan = () => {
+  const [loading, setLoading] = useState(false);
+
+  const deletePlan = async ({ id }) => {
+    setLoading(true);
+    try {
+      const res = await axios.delete(`${base_url}/plan/deletePlan/${id}/`);
+      const data = res.data;
+      toast.success("Plan Successfully Deleted");
+    } catch (err) {
+      toast.err(
+        err?.response?.data?.msg || err?.error || "something went wrong"
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+  return { loading, deletePlan };
+};
+
+export default useDeletePlan;
