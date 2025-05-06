@@ -10,22 +10,22 @@ export default function SideBar() {
   const location = useLocation();
   return (
     <div className="w-[350px] h-screen p-7 flex flex-col bg-[#1D0B30]">
-      <div className="flex gap-5 mt-10 p-7">
-        <img src="src/assets/Tron2.png" className="w-[50px]"></img>
-        <img src="src/assets/Tron.png" className="w-[120px]"></img>
+      <div className="flex gap-5 mt-4 p-7">
+        <img src="src/assets/Tron2.png" className="w-[50px] h-[60px]"></img>
+        <img src="src/assets/Tron3.png" className="w-[100px] h-[50px]"></img>
       </div>
 
       <div className="my-7 flex flex-col gap-2">
         <NavLink
           to={"/"}
-          className={`flex items-center gap-3 px-4 py-2 rounded-lg text-white hover:text-black hover:bg-[#FAEBEB] ease-in-out duration-500 ${
-            location.pathname === "/" && "bg-[#FAEBEB] text-black"
+          className={`flex items-center gap-3 px-3 py-2 rounded-lg hover:text-white hover:bg-[#48089F] ease-in-out duration-500 ${
+            location.pathname === "/" && "bg-[#48089F] text-white"
           }`}
         >
-          <p>
+          <p className="text-white">
             <MdDashboard />
           </p>
-          <p>Dashboard</p>
+          <p className="text-white">Dashboard</p>
         </NavLink>
 
         {navItems.map((item) => (
