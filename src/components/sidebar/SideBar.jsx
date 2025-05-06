@@ -18,7 +18,7 @@ export default function SideBar() {
       <div className="my-7 flex flex-col gap-2">
         <NavLink
           to={"/"}
-          className={`flex items-center gap-3 px-3 py-2 rounded-lg hover:text-white hover:bg-[#48089F] ease-in-out duration-500 ${
+          className={`flex items-center gap-3 px-3 py-2 rounded-lg hover:outline hover:outline-[#FAEBEB] ease-in-out duration-500 ${
             location.pathname === "/" && "bg-[#48089F] text-white"
           }`}
         >
@@ -37,8 +37,8 @@ export default function SideBar() {
             location={location?.pathname}
           />
         ))}
-        <button className="text-white mt-10 px-4">
-          <IoIosLogOut />
+        <button className=" flex items-center gap-2 px-3 py-2 text-white rounded-lg  hover:outline hover:outline-[#FAEBEB] ease-in-out duration-500">
+          <IoIosLogOut /> Logout
         </button>
       </div>
     </div>
