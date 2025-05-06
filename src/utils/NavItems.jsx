@@ -1,37 +1,46 @@
+import { FaChalkboardTeacher } from "react-icons/fa";
+import {
+  FaUserGraduate,
+  FaRegCreditCard,
+  FaFolderOpen,
+  FaUsers,
+  FaVideo,
+} from "react-icons/fa";
+
 export const navItems = [
   {
     id: 1,
-    icon: "",
+    icon: <FaChalkboardTeacher />,
     name: "Teachers",
     path: "/teachers",
   },
   {
     id: 2,
-    icon: "",
+    icon: <FaUserGraduate />,
     name: "Students",
     path: "/students",
   },
   {
     id: 3,
-    icon: "",
+    icon: <FaRegCreditCard />,
     name: "Subscription",
     path: "/subscription",
   },
   {
     id: 4,
-    icon: "",
+    icon: <FaFolderOpen />,
     name: "Course & Category",
     path: "/domain",
   },
   {
     id: 5,
-    icon: "",
+    icon: <FaUsers />,
     name: "Community & Sub",
     path: "/community",
   },
   {
     id: 6,
-    icon: "",
+    icon: <FaVideo />,
     name: "Videos",
     path: "/videos",
   },

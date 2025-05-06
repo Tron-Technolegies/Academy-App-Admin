@@ -9,13 +9,19 @@ import { useLocation } from "react-router-dom";
 export default function SideBar() {
   const location = useLocation();
   return (
-    <div>
-      <div>
-        <img src></img>
+    <div className="w-[350px] h-screen p-7 flex flex-col bg-[#1D0B30]">
+      <div className="flex gap-5 mt-10 p-7">
+        <img src="src/assets/Tron2.png" className="w-[50px]"></img>
+        <img src="src/assets/Tron.png" className="w-[120px]"></img>
       </div>
 
-      <div>
-        <NavLink to="/">
+      <div className="my-7 flex flex-col gap-2">
+        <NavLink
+          to={"/"}
+          className={`flex items-center gap-3 px-4 py-2 rounded-lg text-white hover:text-black hover:bg-[#FAEBEB] ease-in-out duration-500 ${
+            location.pathname === "/" && "bg-[#FAEBEB] text-black"
+          }`}
+        >
           <p>
             <MdDashboard />
           </p>
@@ -31,9 +37,8 @@ export default function SideBar() {
             location={location?.pathname}
           />
         ))}
-        <button>
+        <button className="text-white mt-10 px-4">
           <IoIosLogOut />
-          Logout
         </button>
       </div>
     </div>
