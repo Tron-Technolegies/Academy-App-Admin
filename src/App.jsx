@@ -2,7 +2,7 @@ import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./pages/Layout";
 import ErrorPage from "./pages/errorPage/ErrorPage";
-import LoginPage from "./pages/login/LoginPage";
+
 import TeachersPage from "./pages/teachers/TeachersPage";
 import SubscriptionPage from "./pages/subscription/SubscriptionPage";
 import DomainPage from "./pages/domain/DomainPage";
@@ -14,6 +14,8 @@ import ChatRoomPage from "./pages/chatRoom/ChatRoomPage";
 import DashboardPage from "./pages/dashboard/DashboardPage";
 import StudentsPage from "./pages/students/StudentsPage";
 import VideosPage from "./pages/videos/VideosPage";
+import LoginPage from "./pages/login/LoginPage";
+
 function App() {
   const router = createBrowserRouter([
     {
@@ -22,10 +24,7 @@ function App() {
       errorElement: <ErrorPage />,
       children: [
         { index: true, element: <DashboardPage /> },
-        {
-          path: "login",
-          element: <LoginPage />,
-        },
+
         {
           path: "teachers",
           element: <TeachersPage />,
@@ -67,6 +66,10 @@ function App() {
           element: <VideosPage />,
         },
       ],
+    },
+    {
+      path: "/login",
+      element: <LoginPage />,
     },
   ]);
   return <RouterProvider router={router} />;

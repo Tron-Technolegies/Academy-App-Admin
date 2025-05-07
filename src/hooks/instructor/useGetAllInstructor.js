@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { base_url } from "../../utils/constants";
+
 const useGetAllInstructor = () => {
   const [loading, setLoading] = useState(false);
   const [instructor, setInstructor] = useState([]);
