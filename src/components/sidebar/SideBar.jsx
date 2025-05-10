@@ -18,14 +18,14 @@ export default function SideBar() {
       <div className="my-7 flex flex-col gap-2">
         <NavLink
           to={"/"}
-          className={`flex items-center gap-3 px-3 py-2 rounded-lg hover:outline hover:outline-[#FAEBEB] ease-in-out duration-500 ${
+          className={`flex items-center gap-3 px-3 py-2 rounded-sm hover:outline hover:outline-[#FAEBEB] ease-in-out duration-500 ${
             location.pathname === "/" && "bg-[#48089F] text-white"
           }`}
         >
           <p className="text-white">
             <MdDashboard />
           </p>
-          <p className="text-white">Dashboard</p>
+          <p className="text-white hover:text-[#c7b1e6]">Dashboard</p>
         </NavLink>
 
         {navItems.map((item) => (
@@ -37,7 +37,7 @@ export default function SideBar() {
             location={location?.pathname}
           />
         ))}
-        <button className=" flex items-center gap-2 px-3 py-2 text-white rounded-lg  hover:outline hover:outline-[#FAEBEB] ease-in-out duration-500">
+        <button className=" flex items-center gap-2 px-3 py-2 text-white rounded-sm  hover:outline hover:outline-[#FAEBEB] hover:text-[#c7b1e6]  ease-in-out duration-500">
           <IoIosLogOut /> Logout
         </button>
       </div>

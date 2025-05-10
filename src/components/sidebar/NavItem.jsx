@@ -6,7 +6,7 @@ export default function NavItem({ icon, name, path, location }) {
   return (
     <NavLink
       to={path}
-      className={`flex items-center gap-3 px-3 py-2 rounded-lg text-white hover:text-white hover:outline hover:outline-[#FAEBEB] ease-in-out duration-500 ${
+      className={`flex items-center gap-3 px-3 py-2 rounded-sm text-white hover:text-[#c7b1e6] hover:outline hover:outline-[#FAEBEB] ease-in-out duration-500 ${
         location && location.includes(path) && "bg-[#48089F] text-white"
       }`}
     >

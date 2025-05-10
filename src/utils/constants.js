@@ -1,1 +1,1 @@
-export const base_url = "https://academyappbackend-wsi3.onrender.com/api/v1";
+export const base_url = "http://localhost:3000/api/v1";

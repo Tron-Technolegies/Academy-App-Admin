@@ -15,6 +15,8 @@ import DashboardPage from "./pages/dashboard/DashboardPage";
 import StudentsPage from "./pages/students/StudentsPage";
 import VideosPage from "./pages/videos/VideosPage";
 import LoginPage from "./pages/login/LoginPage";
+import AddPlanPage from "./pages/subscription/AddPlanPage";
+import EditPlanPage from "./pages/subscription/EditPlanPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -36,6 +38,14 @@ function App() {
         {
           path: "subscription",
           element: <SubscriptionPage />,
+        },
+        {
+          path: "subscription/new",
+          element: <AddPlanPage />,
+        },
+        {
+          path: "subscription/:id/edit",
+          element: <EditPlanPage />,
         },
         {
           path: "domain",

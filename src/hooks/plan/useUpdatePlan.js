@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { base_url } from "../../pages/utils/constants";
+import { base_url } from "../../utils/constants";
 
 const useUpdatePlan = async () => {
   const [loading, setLoading] = useState(false);
@@ -22,7 +22,7 @@ const useUpdatePlan = async () => {
       );
       const data = res.data;
       toast.success("Plan updated successfully");
-      navigate("/plan");
+      navigate("/subscription");
     } catch (err) {
       toast.err(
         err?.response?.data?.msg || err?.error || "something went wrong"

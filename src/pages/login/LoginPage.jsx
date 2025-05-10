@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import useLogin from "../../hooks/auth/useLogin"; // Adjust path based on your folder structure
+import useLogin from "../../hooks/auth/useLogin";
 
 const LoginPage = () => {
   const { login, loading } = useLogin();
@@ -8,44 +8,50 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Submitting login with:", { email, password });
     await login(email, password); // handled inside the hook
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded-2xl shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="flex items-center justify-center h-screen">
+      <div className="text-center">
+        <div className="flex justify-center">
+          <img src="src/assets/Tron2.png" className="w-[100px] h-[120px]"></img>
+        </div>{" "}
+        <h2 className="text-[#4F4F4F] text-[28px] leading-[100%] font-semibold text-center">
+          Welcome,
+          <br /> Log into your account
+        </h2>
+        <p className="mt-10 text-[#667085] font-semibold text-xl">
+          It is our great pleasure to have <br /> you on board!
+        </p>
+        <form onSubmit={handleSubmit} className="space-y-4 w-100 mt-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Email
-            </label>
             <input
               type="email"
-              className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-2 border border-[#A7A7A7] rounded-sm placeholder:font-semibold focus:outline-none"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
               required
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Password
-            </label>
             <input
               type="password"
-              className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-2  border border-[#A7A7A7] rounded-sm placeholder:font-semibold  focus:outline-none"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password "
               required
             />
           </div>
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-[#48089F] text-white p-2 rounded-lg hover:bg-[#9171bf] transition duration-200"
+            className="w-full p-2  border border-[#A7A7A7] rounded-sm bg-[#48089F] text-amber-50 font-semibold hover:bg-[#b59cd7] transition"
           >
-            {loading ? "Logging in..." : "Login"}
+            {loading ? "Logging in..." : "Log in"}
           </button>
         </form>
       </div>

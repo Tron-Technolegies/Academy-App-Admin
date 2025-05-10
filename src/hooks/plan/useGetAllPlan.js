@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { base_url } from "../../pages/utils/constants";
+import { base_url } from "../../utils/constants";
 
 const useGetAllPlan = () => {
   const [loading, setLoading] = useState(false);
@@ -14,7 +14,7 @@ const useGetAllPlan = () => {
         withCredentials: true,
       });
       const data = res.data;
-      setPlan(data.plan);
+      setPlan(data);
     } catch (err) {
       console.log(
         err?.response?.data?.msg || err?.error || "something went wrong"
