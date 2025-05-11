@@ -55,12 +55,12 @@ const AddPlanForm = () => {
               value={features}
               onChange={(e) => setFeatures(e.target.value)}
               placeholder=""
-              className="flex flex-col border border-[#c9bfbf] rounded-md w-80 h-30  bg-[#F5F5F5]  focus:outline-none"
+              className="flex flex-col border border-[#c9bfbf] rounded-md w-1/2 h-30  bg-[#F5F5F5]  focus:outline-none"
             />
           </div>
           <div className="flex justify-end mt-4">
             <button
-              className="bg-[#48089F] py-2 px-4 min-w-20 rounded-sm text-white transition-all duration-300 ease-in-out hover:bg-gradient-to-r hover:from-purple-800 hover:scale-105"
+              className="bg-[#48089F] py-2 px-4 w-32 rounded-sm text-white transition-all duration-300 ease-in-out hover:bg-gradient-to-r hover:from-purple-800 hover:scale-105"
               type="submit"
             >
               {loading ? "Adding..." : "Add"}

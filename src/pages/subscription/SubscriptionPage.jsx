@@ -2,6 +2,8 @@ import React from "react";
 import PlanList from "../../components/plan/PlanList";
 import AddPlanHeader from "../../components/plan/addPlan/AddPlanHeader";
 import PlanHeader from "../../components/plan/PlanHeader";
+import TeacherHeader from "../../components/teachers/TeacherHeader";
+import AddTeacherHeader from "../../components/teachers/addTeacher/AddTeacherHeader";
 
 const SubscriptionPage = () => {
   return (

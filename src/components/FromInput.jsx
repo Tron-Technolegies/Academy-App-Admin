@@ -10,7 +10,9 @@ export default function FormInput({
   return (
     <div>
       {label && (
-        <label className="block text-[#8A8A8A] font-medium mb-1">{label}</label>
+        <label className="block text-[#8A8A8A] font-semibold mb-1">
+          {label}
+        </label>
       )}
       <input
         type={type}

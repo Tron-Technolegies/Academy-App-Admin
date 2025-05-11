@@ -31,7 +31,20 @@ export const navItems = [
     icon: <FaFolderOpen />,
     name: "Course & Category",
     path: "/domain",
+    children: [
+      {
+        id: "4-1",
+        name: "Course", // You will manage Course link inside /domain
+        path: "/course",
+      },
+      {
+        id: "4-2",
+        name: "Module", // Likewise, Module link inside /domain
+        path: "/module",
+      },
+    ],
   },
+
   {
     id: 5,
     icon: <FaUsers />,

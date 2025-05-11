@@ -17,6 +17,11 @@ import VideosPage from "./pages/videos/VideosPage";
 import LoginPage from "./pages/login/LoginPage";
 import AddPlanPage from "./pages/subscription/AddPlanPage";
 import EditPlanPage from "./pages/subscription/EditPlanPage";
+import AddTeacherPage from "./pages/teachers/AddTeacherPage";
+import EditTeacherPage from "./pages/teachers/EditTeacherPage";
+import AddDomainPage from "./pages/domain/AddDomainPage";
+import AddCoursePage from "./pages/course/AddCoursePage";
+import AddModulePage from "./pages/module/AddModulePage";
 
 function App() {
   const router = createBrowserRouter([
@@ -30,6 +35,14 @@ function App() {
         {
           path: "teachers",
           element: <TeachersPage />,
+        },
+        {
+          path: "teachers/new",
+          element: <AddTeacherPage />,
+        },
+        {
+          path: "teachers/:id/edit",
+          element: <EditTeacherPage />,
         },
         {
           path: "students",
@@ -52,12 +65,24 @@ function App() {
           element: <DomainPage />,
         },
         {
+          path: "domain/new",
+          element: <AddDomainPage />,
+        },
+        {
           path: "course",
           element: <CoursePage />,
         },
         {
+          path: "course/new",
+          element: <AddCoursePage />,
+        },
+        {
           path: "module",
           element: <ModulePage />,
+        },
+        {
+          path: "module/new",
+          element: <AddModulePage />,
         },
         {
           path: "community",
