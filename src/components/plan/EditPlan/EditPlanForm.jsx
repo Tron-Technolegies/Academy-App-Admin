@@ -1,24 +1,50 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FormInput from "../../FromInput";
 import useUpdatePlan from "../../../hooks/plan/useUpdatePlan";
 import { useParams } from "react-router-dom";
+import useGetSinglePlan from "../../../hooks/plan/useGetSinglePlan";
+import Loading from "../../Loading";
 
 const EditPlanForm = () => {
+  const { id } = useParams();
+  const { loading: getPlanLoading, plan } = useGetSinglePlan({ id });
+  const { updatePlan, loading: updateLoading } = useUpdatePlan();
+
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
   const [features, setFeatures] = useState("");
 
-  const { id } = useParams();
-  const { updatePlan, loading } = useUpdatePlan();
+  useEffect(() => {
+    if (plan) {
+      setName(plan.planName);
+      setAmount(plan.price);
+      setFeatures(plan.features);
+    }
+  }, [plan]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addPlan({
+
+    if (!name || !amount || !features) {
+      alert("Please fill out all fields");
+      return;
+    }
+
+    await updatePlan({
       planName: name,
       price: amount,
       features,
       id,
     });
   };
+
+  if (getPlanLoading) {
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
+  }
 
   return (
     <div className="flex justify-center p-6">
@@ -33,7 +59,7 @@ const EditPlanForm = () => {
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder=""
+            placeholder="Plan Name"
           />
 
           <FormInput
@@ -41,14 +67,15 @@ const EditPlanForm = () => {
             type="text"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            placeholder=""
+            placeholder="Amount"
           />
+
           <FormInput
             label="Validity"
             type="text"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            placeholder=""
+            placeholder="Validity (e.g., 1 month)"
           />
 
           <div>
@@ -56,16 +83,18 @@ const EditPlanForm = () => {
             <textarea
               value={features}
               onChange={(e) => setFeatures(e.target.value)}
-              placeholder=""
-              className="flex flex-col border border-[#c9bfbf] rounded-md w-1/2 h-30  bg-[#F5F5F5]  focus:outline-none"
+              placeholder="Features"
+              className="flex flex-col border border-[#c9bfbf] rounded-md w-1/2 h-30  bg-[#F5F5F5] focus:outline-none"
             />
           </div>
+
           <div className="flex justify-end mt-4">
             <button
-              className="bg-[#48089F]  py-2 px-4 w-32 rounded-sm text-white hover:scale-105"
+              className="bg-[#48089F] py-2 px-4 w-32 rounded-sm text-white hover:scale-105"
               type="submit"
+              disabled={updateLoading} // Disable button if updating
             >
-              {loading ? "Updating..." : "Update"}
+              {updateLoading ? "Updating..." : "Update"}
             </button>
           </div>
         </form>
@@ -73,4 +102,5 @@ const EditPlanForm = () => {
     </div>
   );
 };
+
 export default EditPlanForm;

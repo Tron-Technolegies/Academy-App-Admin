@@ -4,34 +4,32 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { base_url } from "../../utils/constants";
 
-const useUpdatePlan = async () => {
+const useUpdatePlan = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  // Update plan function
   const updatePlan = async ({ planName, price, features, id }) => {
     setLoading(true);
     try {
       const res = await axios.patch(
-        `${base_url}/plan/${id}`,
-        {
-          planName,
-          price,
-          features,
-        },
+        `${base_url}/plan/${id}`, // Update the endpoint
+        { planName, price, features },
         { withCredentials: true }
       );
       const data = res.data;
       toast.success("Plan updated successfully");
-      navigate("/subscription");
+      navigate("/subscription"); // Redirect to subscription page
     } catch (err) {
-      toast.err(
-        err?.response?.data?.msg || err?.error || "something went wrong"
-      );
+      toast.error(
+        err?.response?.data?.msg || err?.error || "Something went wrong"
+      ); // Corrected error function
     } finally {
       setLoading(false);
     }
   };
-  return { loading, updatePlan };
+
+  return { loading, updatePlan }; // Return loading and the updatePlan function
 };
 
 export default useUpdatePlan;

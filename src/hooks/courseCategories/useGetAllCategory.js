@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-import { base_url } from "../../pages/utils/constants";
+import { base_url } from "../../utils/constants";
 
 const useGetAllCategory = () => {
   const [loading, setLoading] = useState(false);
@@ -14,7 +14,7 @@ const useGetAllCategory = () => {
         withCredentials: true,
       });
       const data = res.data;
-      setCategory(data.category);
+      setCategory(data);
     } catch (err) {
       console.log(
         err?.response?.data?.msg || err?.error || "something went wrong"

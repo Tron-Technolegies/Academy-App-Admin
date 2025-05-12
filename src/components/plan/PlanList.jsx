@@ -1,19 +1,28 @@
 import React, { useState, useEffect } from "react";
 import useGetAllPlan from "../../hooks/plan/useGetAllPlan";
 import AddButton from "../AddButton";
+import { Link } from "react-router-dom";
+import Loading from "../Loading";
 
 const PlanList = () => {
   const { loading, plan: plans, refetch } = useGetAllPlan();
 
+  if (loading)
+    return (
+      <div>
+        {" "}
+        <Loading />
+      </div>
+    );
   return (
-    <div>
+    <div className="mt-4">
       {plans.length === 0 ? (
         <div className="text-[#4b1361]">No plans available at the moment.</div>
       ) : (
         <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 ">
           {plans.map((item) => (
             <div
-              key={item.id}
+              key={item._id}
               className="rounded-2xl shadow-lg p-6 border border-[#605BFF]"
               style={{
                 background: "linear-gradient(to bottom, #F6E7FC, #9B7BBD)",
@@ -40,7 +49,7 @@ const PlanList = () => {
               <div>
                 <h4 className="border-b border-white pb-1">Benefits</h4>
                 <p className="font-semibold mb-1">Features</p>
-                <ul className="text-md">
+                <ul className="text-sm font-semibold">
                   {item.features && item.features.length > 0 ? (
                     item.features.map((feature, index) => (
                       <li key={index}>{feature}</li>
@@ -50,7 +59,12 @@ const PlanList = () => {
                   )}
                 </ul>
               </div>
-              <AddButton route={"/subscription/:id/edit"} title={"update"} />
+              <Link
+                to={`/subscription/${item._id}/edit`}
+                className=" mt-auto text-[#48089F] hover:text-[#ba9fd6] font-semibold"
+              >
+                Edit
+              </Link>
             </div>
           ))}
         </div>
