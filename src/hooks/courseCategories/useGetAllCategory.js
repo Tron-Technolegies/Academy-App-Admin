@@ -28,7 +28,7 @@ const useGetAllCategory = () => {
   }, []);
 
   const refetch = () => {
-    getAllClasses();
+    getAllCategory();
   };
 
   return { loading, category, refetch };

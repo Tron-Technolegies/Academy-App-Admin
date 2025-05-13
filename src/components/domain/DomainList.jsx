@@ -9,6 +9,7 @@ import {
   Paper,
 } from "@mui/material";
 import Loading from "../Loading";
+import { Link } from "react-router-dom";
 
 const DomainList = () => {
   const { loading, category } = useGetAllCategory(); // Call the hook to fetch categories
@@ -22,17 +23,40 @@ const DomainList = () => {
   }
 
   return (
-    <div>
+    <div className="">
       {category.length === 0 ? (
         <div>No categories available at the moment.</div>
       ) : (
         <TableContainer component={Paper}>
           <Table aria-label="category table">
-            <TableBody>
+            <TableBody sx={{ border: "none" }}>
               {category.map((item) => (
-                <TableRow key={item._id}>
-                  <TableCell component="th" scope="row">
+                <TableRow
+                  key={item._id}
+                  sx={{
+                    "&:hover": {
+                      backgroundColor: "#EDE6F5",
+                      cursor: "pointer",
+                    },
+                  }}
+                >
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    sx={{
+                      border: "none",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
                     {item.categoryName}
+                    <Link
+                      to={`/domain/${item._id}/edit`}
+                      className=" mt-auto text-[#5B93FF] hover:text-[#bed1f9] "
+                    >
+                      Edit
+                    </Link>
                   </TableCell>
                 </TableRow>
               ))}

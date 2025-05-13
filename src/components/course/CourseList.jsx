@@ -8,6 +8,7 @@ import {
   Paper,
 } from "@mui/material";
 import Loading from "../Loading";
+import { Link } from "react-router-dom";
 
 const CourseList = () => {
   const { loading, course } = useGetAllCourses(); // Fetch courses
@@ -29,9 +30,32 @@ const CourseList = () => {
           <Table aria-label="course table">
             <TableBody>
               {course.map((item) => (
-                <TableRow key={item._id}>
-                  <TableCell component="th" scope="row">
+                <TableRow
+                  key={item._id}
+                  sx={{
+                    "&:hover": {
+                      backgroundColor: "#EDE6F5",
+                      cursor: "pointer",
+                    },
+                  }}
+                >
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    sx={{
+                      border: "none",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
                     {item.courseName} {/* Displaying course name */}
+                    <Link
+                      to={`/domain/${item._id}/edit`}
+                      className=" mt-auto text-[#5B93FF] hover:text-[#bed1f9] "
+                    >
+                      Edit
+                    </Link>
                   </TableCell>
                 </TableRow>
               ))}

@@ -12,25 +12,40 @@ const useAddCourse = () => {
     courseName,
     courseCategory,
     instructor,
-    courseOverview,
+    courseOverView,
   }) => {
     setLoading(true);
     try {
+      // Log the data that will be sent
+      console.log("Sending data to API:", {
+        courseName,
+        courseCategory,
+        instructor,
+        courseOverView,
+      });
+
       const res = await axios.post(
         `${base_url}/course/addCourse`,
         {
           courseName,
           courseCategory,
           instructor,
-          courseOverview,
+          courseOverView,
         },
         { withCredentials: true }
       );
+
+      // Log the response
+      console.log("Course added successfully:", res.data);
+
       toast.success("Course added successfully");
-      navigate("/course");
+      navigate("/domain/course");
     } catch (err) {
+      // Log the error response
+      console.error("Error while adding course:", err.response?.data);
+
       toast.error(
-        err?.response?.data?.msg || err?.error || "Something went wrong"
+        err?.response?.data?.msg || err?.message || "Something went wrong"
       );
     } finally {
       setLoading(false);

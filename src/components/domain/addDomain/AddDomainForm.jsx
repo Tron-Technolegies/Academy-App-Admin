@@ -1,16 +1,15 @@
 import React, { useState } from "react";
+
 import useAddCategory from "../../../hooks/courseCategories/useAddCategory";
 import FormInput from "../../FromInput";
 
 const AddDomainForm = () => {
   const [name, setName] = useState("");
-  const { addCategory, loading } = useAddCategory;
+  const { addCategory, loading } = useAddCategory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addCategory({
-      categoryName: name,
-    });
+    await addCategory({ categoryName: name });
   };
 
   return (
@@ -23,7 +22,7 @@ const AddDomainForm = () => {
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder=""
+          placeholder="Enter domain name"
         />
       </div>
 

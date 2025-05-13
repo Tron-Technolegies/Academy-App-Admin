@@ -22,6 +22,7 @@ import EditTeacherPage from "./pages/teachers/EditTeacherPage";
 import AddDomainPage from "./pages/domain/AddDomainPage";
 import AddCoursePage from "./pages/course/AddCoursePage";
 import AddModulePage from "./pages/module/AddModulePage";
+import EditDomainPage from "./pages/domain/EditDomainPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -67,6 +68,10 @@ function App() {
         {
           path: "domain/new",
           element: <AddDomainPage />,
+        },
+        {
+          path: "domain/:id/edit",
+          element: <EditDomainPage />,
         },
         {
           path: "domain/course",
