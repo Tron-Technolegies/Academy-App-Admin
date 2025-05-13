@@ -2,9 +2,9 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const links = [
-  { name: "Domain", path: "/domain" },
-  { name: "Course", path: "/course" },
-  { name: "Module", path: "/module" },
+  { name: "Domain", path: "/domain", exact: true },
+  { name: "Course", path: "/domain/course" },
+  { name: "Module", path: "/domain/module" },
 ];
 
 const DomainNavLink = () => {
@@ -16,6 +16,7 @@ const DomainNavLink = () => {
             <li key={link.path} className="flex-1">
               <NavLink
                 to={link.path}
+                end={link.exact}
                 className={({ isActive }) =>
                   `block text-center py-4 transition-colors duration-300 ${
                     isActive

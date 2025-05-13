@@ -69,21 +69,23 @@ function App() {
           element: <AddDomainPage />,
         },
         {
-          path: "course",
+          path: "domain/course",
           element: <CoursePage />,
         },
         {
-          path: "course/new",
+          path: "domain/course/new",
           element: <AddCoursePage />,
         },
+
         {
-          path: "module",
+          path: "domain/module",
           element: <ModulePage />,
         },
         {
-          path: "module/new",
+          path: "domain/module/new",
           element: <AddModulePage />,
         },
+
         {
           path: "community",
           element: <CommunityPage />,

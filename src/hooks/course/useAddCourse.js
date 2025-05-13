@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { base_url } from "../../pages/utils/constants";
+import { base_url } from "../../utils/constants";
 
 const useAddCourse = () => {
   const [loading, setLoading] = useState(false);
@@ -26,18 +26,18 @@ const useAddCourse = () => {
         },
         { withCredentials: true }
       );
-      const data = res.data;
-      toast.success("course added successfully");
+      toast.success("Course added successfully");
       navigate("/course");
     } catch (err) {
-      toast.err(
-        err?.response?.data?.msg || err?.error || "something went wrong"
+      toast.error(
+        err?.response?.data?.msg || err?.error || "Something went wrong"
       );
     } finally {
       setLoading(false);
     }
-    return { loading, addCourse };
   };
+
+  return { addCourse, loading };
 };
 
 export default useAddCourse;

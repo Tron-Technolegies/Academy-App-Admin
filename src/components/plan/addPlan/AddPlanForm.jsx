@@ -3,7 +3,6 @@ import FormInput from "../../FromInput";
 import useAddPlan from "../../../hooks/plan/useAddPlan";
 
 const AddPlanForm = () => {
-  console.log("Rendering AddPlanForm");
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
   const [features, setFeatures] = useState("");

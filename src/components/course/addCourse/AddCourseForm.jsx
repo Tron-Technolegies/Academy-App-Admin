@@ -1,25 +1,24 @@
 import React, { useState } from "react";
-import useAddCategory from "../../../hooks/courseCategories/useAddCategory";
+import useAddCourse from "../../../hooks/course/useAddCourse";
 import FormInput from "../../FromInput";
 
-const AddDomainForm = () => {
+const AddCourseForm = () => {
   const [name, setName] = useState("");
-  const { addCategory, loading } = useAddCategory;
-
+  const { addCourse, loading } = useAddCourse;
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addCategory({
-      categoryName: name,
+    await addCourse({
+      courseName: name,
     });
   };
 
   return (
     <form onSubmit={handleSubmit} className="pt-4">
-      <h4 className="text-[#4F4F4F] text-3xl p-6 font-semibold">Add Domain</h4>
+      <h4 className="text-[#4F4F4F] text-3xl p-6 font-semibold">Add Course</h4>
 
       <div className="max-w-150 h-80 py-6 px-6">
         <FormInput
-          label="Domain Name"
+          label="Course Name"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -39,4 +38,4 @@ const AddDomainForm = () => {
   );
 };
 
-export default AddDomainForm;
+export default AddCourseForm;

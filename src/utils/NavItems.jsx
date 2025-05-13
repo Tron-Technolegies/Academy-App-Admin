@@ -35,12 +35,12 @@ export const navItems = [
       {
         id: "4-1",
         name: "Course", // You will manage Course link inside /domain
-        path: "/course",
+        path: "/domain/course",
       },
       {
         id: "4-2",
         name: "Module", // Likewise, Module link inside /domain
-        path: "/module",
+        path: "/domain/module",
       },
     ],
   },

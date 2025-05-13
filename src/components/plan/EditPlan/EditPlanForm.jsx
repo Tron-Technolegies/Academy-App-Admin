@@ -92,7 +92,7 @@ const EditPlanForm = () => {
             <button
               className="bg-[#48089F] py-2 px-4 w-32 rounded-sm text-white hover:scale-105"
               type="submit"
-              disabled={updateLoading} // Disable button if updating
+              disabled={updateLoading}
             >
               {updateLoading ? "Updating..." : "Update"}
             </button>
