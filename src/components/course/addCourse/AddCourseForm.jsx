@@ -3,6 +3,8 @@ import useAddCourse from "../../../hooks/course/useAddCourse";
 import FormInput from "../../FromInput";
 import useGetAllCategory from "../../../hooks/courseCategories/useGetAllCategory";
 import FormSelect from "../../FormSelect";
+import { Link } from "react-router-dom";
+import GoBack from "../../GoBack";
 
 const AddCourseForm = () => {
   const [name, setName] = useState("");
@@ -26,13 +28,6 @@ const AddCourseForm = () => {
     });
   };
 
-  const resetForm = () => {
-    setName("");
-    setCategory("");
-    setInstructor("");
-    setOverview("");
-  };
-
   return (
     <form onSubmit={handleSubmit} className="pt-4">
       <h4 className="text-[#4F4F4F] text-3xl p-6 font-semibold">Add Course</h4>
@@ -48,12 +43,12 @@ const AddCourseForm = () => {
 
         {/* Render FormSelect for categories */}
         <FormSelect
-          title="Domain" // Title for the select dropdown
-          value={category} // The currently selected category
-          onchange={(e) => setCategory(e.target.value)} // Set the category when changed
-          list={categories} // The list of categories fetched from the API
-          multi={false} // Single selection (false)
-          displayField="categoryName" // Display the category name from the category object
+          title="Domain"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          list={categories}
+          multi={false}
+          displayField="categoryName"
         />
 
         <FormInput
@@ -73,16 +68,15 @@ const AddCourseForm = () => {
         />
       </div>
 
-      <div className="max-w-200 pt-4 px-6 flex justify-end gap-3">
-        <button
-          type="button"
-          onClick={resetForm}
-          className="bg-[#EEEDEE] w-32 text-#858585 rounded-sm px-3 py-2.5 text-sm font-semibold hover:bg-[#c6c2c2] hover:scale-105 transition-transform duration-300"
+      <div className="max-w-200 pt-4 px-6  flex justify-end gap-3">
+        <Link
+          to="/domain"
+          className="bg-[#EEEDEE] text-[#858585] rounded-sm w-32 px-10 py-2.5 text-sm font-semibold hover:bg-[#EEEDEE] hover:scale-105 transition-transform duration-300"
         >
           cancel
-        </button>
+        </Link>
         <button
-          className="bg-[#48089F] w-32 text-white rounded-sm px-3 py-2.5 text-sm font-semibold hover:bg-[#ba9fd6] hover:scale-105 transition-transform duration-300"
+          className="bg-[#48089F] w-31 text-white rounded-sm px-3 py-2.5 text-sm font-semibold hover:bg-[#ba9fd6] hover:scale-105 transition-transform duration-300"
           type="submit"
         >
           {loading ? "Adding..." : "Add"}

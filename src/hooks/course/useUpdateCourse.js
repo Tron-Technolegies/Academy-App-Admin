@@ -1,10 +1,10 @@
 import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { base_url } from "../../pages/utils/constants";
+import { base_url } from "../../utils/constants";
 
-const useUpdateCourse = async () => {
+const useUpdateCourse = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -12,32 +12,47 @@ const useUpdateCourse = async () => {
     courseName,
     courseCategory,
     instructor,
-    courseOverview,
+    courseOverView,
     id,
   }) => {
     setLoading(true);
     try {
-      const res = await axios.patch(
+      // Send the PATCH request to update the course
+      const response = await axios.patch(
         `${base_url}/course/updateCourse/${id}`,
         {
           courseName,
           courseCategory,
           instructor,
-          courseOverview,
+          courseOverView,
         },
-        { withCredentials: true }
+        { withCredentials: true } // For handling cookies or sessions
       );
-      const data = res.data;
-      toast.success("course updated successfully");
-      navigate("/course");
+      console.log("Response:", response);
+      // If successful, show a success message and navigate to another page
+      toast.success("Course updated successfully");
+      navigate("/domain/course");
     } catch (err) {
-      toast.err(
-        err?.response?.data?.msg || err?.error || "something went wrong"
-      );
+      // Handle error response
+      if (err?.response) {
+        // Log full error response to console for debugging
+        console.error("Error response:", err.response);
+
+        // Show the error message from the server if available
+        toast.error(
+          err?.response?.data?.msg ||
+            "Something went wrong with the course update."
+        );
+      } else {
+        // In case of network issues or if no response is received
+        toast.error("Network error or no response from the server.");
+      }
     } finally {
+      // Set loading to false after the request is completed (success or error)
       setLoading(false);
     }
   };
+
   return { loading, updateCourse };
 };
 

@@ -51,7 +51,7 @@ const CourseList = () => {
                   >
                     {item.courseName} {/* Displaying course name */}
                     <Link
-                      to={`/domain/${item._id}/edit`}
+                      to={`/domain/course/${item._id}/edit`}
                       className=" mt-auto text-[#5B93FF] hover:text-[#bed1f9] "
                     >
                       Edit

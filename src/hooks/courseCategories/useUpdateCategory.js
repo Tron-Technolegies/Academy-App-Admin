@@ -1,10 +1,10 @@
 import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { base_url } from "../../pages/utils/constants";
+import { base_url } from "../../utils/constants";
 
-const useUpdateCategory = async () => {
+const useUpdateCategory = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -13,22 +13,20 @@ const useUpdateCategory = async () => {
     try {
       const res = await axios.patch(
         `${base_url}/category/updateCategory/${id}`,
-        {
-          categoryName,
-        },
+        { categoryName },
         { withCredentials: true }
       );
-      const data = res.data;
-      toast.success("category updated successfully");
-      navigate("/category");
+      toast.success("Category updated successfully");
+      navigate("/domain");
     } catch (err) {
-      toast.err(
-        err?.response?.data?.msg || err?.error || "something went wrong"
+      toast.error(
+        err?.response?.data?.msg || err?.message || "Something went wrong"
       );
     } finally {
       setLoading(false);
     }
   };
+
   return { loading, updateCategory };
 };
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import useGetAllCategory from "../../hooks/courseCategories/useGetAllCategory"; // Adjust path based on your folder structure
 import {
   Table,
@@ -10,9 +10,16 @@ import {
 } from "@mui/material";
 import Loading from "../Loading";
 import { Link } from "react-router-dom";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import useDeleteCategory from "../../hooks/courseCategories/useDeleteCategory";
 
 const DomainList = () => {
   const { loading, category } = useGetAllCategory(); // Call the hook to fetch categories
+  const { deleteCategory } = useDeleteCategory;
+
+  const { showDeletePopup, setShowDeletePopup, deleteId, setDeleteId } =
+    useContext(AdminContext);
 
   if (loading) {
     return (
@@ -55,8 +62,17 @@ const DomainList = () => {
                       to={`/domain/${item._id}/edit`}
                       className=" mt-auto text-[#5B93FF] hover:text-[#bed1f9] "
                     >
-                      Edit
+                      <EditIcon />
                     </Link>
+                    <button
+                      onClick={() => {
+                        setShowDeletePopup(true);
+                        setDeleteId(item._id);
+                        setDeleteType("category");
+                      }}
+                    >
+                      <DeleteIcon />
+                    </button>
                   </TableCell>
                 </TableRow>
               ))}

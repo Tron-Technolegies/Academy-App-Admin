@@ -3,7 +3,7 @@ import React from "react";
 export default function FormSelect({
   title,
   value,
-  onchange,
+  onChange,
   list,
   multi,
   displayField,
@@ -21,7 +21,7 @@ export default function FormSelect({
           id={title}
           value={value}
           multiple={multi ? true : false}
-          onChange={onchange}
+          onChange={onChange}
           className={`rounded-sm bg-[#F5F5F5] border border-gray-300 text-[#030229] text-md py-1 px-2 focus:outline-none w-full ${
             multi ? "h-40" : "h-11"
           }`}

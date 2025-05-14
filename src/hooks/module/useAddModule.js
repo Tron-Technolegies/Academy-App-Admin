@@ -20,7 +20,7 @@ const useAddModule = () => {
         { withCredentials: true }
       );
       toast.success("Module added successfully");
-      navigate("/module");
+      navigate("/domain/module");
     } catch (err) {
       toast.error(
         err?.response?.data?.msg || err?.error || "Something went wrong"

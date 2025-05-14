@@ -29,7 +29,7 @@ const AddModuleForm = () => {
         <FormSelect
           title="Domain" // Title for the select dropdown
           value={category} // The currently selected category
-          onchange={(e) => setCategory(e.target.value)} // Set the category when changed
+          onChange={(e) => setCategory(e.target.value)} // Set the category when changed
           list={categories} // The list of categories fetched from the API
           multi={false} // Single selection (false)
           displayField="categoryName" // Display the category name from the category object
@@ -37,7 +37,7 @@ const AddModuleForm = () => {
         <FormSelect
           title="Course Name" // Title for the select dropdown
           value={course} // The currently selected category
-          onchange={(e) => setCourse(e.target.value)} // Set the category when changed
+          onChange={(e) => setCourse(e.target.value)} // Set the category when changed
           list={courses} // The list of categories fetched from the API
           multi={false} // Single selection (false)
           displayField="courseName" // Display the category name from the category object
