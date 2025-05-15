@@ -6,8 +6,8 @@ const TeachersPage = () => {
   const [search, setSearch] = useState("");
   return (
     <div>
-      <TeacherHeader />
-      <TeacherTable />
+      <TeacherHeader search={search} setSearch={setSearch} />
+      <TeacherTable search={search} />
     </div>
   );
 };

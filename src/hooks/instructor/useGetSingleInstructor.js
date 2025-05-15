@@ -1,11 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-
-import { base_url } from "../../pages/utils/constants";
+import { base_url } from "../../utils/constants";
 
 const useGetSingleInstructor = ({ id }) => {
   const [loading, setLoading] = useState(false);
   const [instructor, setInstructor] = useState(null);
+
+  useEffect(() => {
+    if (id) getSingleInstructor();
+  }, [id]);
 
   const getSingleInstructor = async () => {
     setLoading(true);
@@ -16,19 +19,16 @@ const useGetSingleInstructor = ({ id }) => {
           withCredentials: true,
         }
       );
-      const data = res.data;
-      setInstructor(data);
+      setInstructor(res.data);
     } catch (err) {
       console.log(
-        err?.response?.data?.msg || err?.error || "something went wrong"
+        err?.response?.data?.msg || err?.message || "something went wrong"
       );
     } finally {
       setLoading(false);
     }
   };
-  useEffect(() => {
-    getSingleInstructor();
-  }, []);
+
   return { loading, instructor };
 };
 

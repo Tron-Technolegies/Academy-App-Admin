@@ -1,10 +1,12 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
 import { base_url } from "../../utils/constants";
+import { AdminContext } from "../../utils/AdminContext";
 
 const useDeleteCategory = () => {
   const [loading, setLoading] = useState(false);
+  const { setRefetchTrigger } = useContext(AdminContext);
 
   const deleteCategory = async ({ id }) => {
     setLoading(true);
@@ -12,16 +14,19 @@ const useDeleteCategory = () => {
       const res = await axios.delete(
         `${base_url}/category/deleteCategory/${id}/`
       );
-      const data = res.data;
       toast.success("Category Successfully Deleted");
+
+      // ✅ Trigger refetch
+      setRefetchTrigger((prev) => !prev);
     } catch (err) {
-      toast.err(
+      toast.error(
         err?.response?.data?.msg || err?.error || "something went wrong"
       );
     } finally {
       setLoading(false);
     }
   };
+
   return { loading, deleteCategory };
 };
 

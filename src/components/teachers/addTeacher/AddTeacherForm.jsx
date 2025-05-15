@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import FormInput from "../../FromInput";
 import FormSelect from "../../FormSelect";
+import useAddInstructor from "../../../hooks/instructor/useAddInstructor";
+import validateInstructor from "../../../utils/validateInstructor";
+import { Link } from "react-router-dom";
 
 const AddTeacherForm = () => {
   const [name, setName] = useState("");
@@ -8,32 +11,33 @@ const AddTeacherForm = () => {
   const [email, setEmail] = useState("");
   const [designation, setDesignation] = useState("");
   const [gender, setGender] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
+
+  const { addInstructor, loading } = useAddInstructor();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Using mock logic (similar to your "instructor" dummy)
-    const newTeacher = {
+    const newErrors = validateInstructor({
       name,
       email,
       phoneNumber,
       designation,
       gender,
-    };
+      password,
+    });
+    setErrors(newErrors);
 
-    // Reset (optional)
-    setName("");
-    setEmail("");
-    setPhoneNumber("");
-    setDesignation("");
-  };
+    if (Object.keys(newErrors).length > 0) return;
 
-  const handleCancel = () => {
-    // Clear form fields
-    setName("");
-    setEmail("");
-    setPhoneNumber("");
-    setDesignation("");
+    await addInstructor({
+      fullName: name,
+      email,
+      phoneNumber,
+      designation,
+      gender,
+      password,
+    });
   };
 
   return (
@@ -51,6 +55,7 @@ const AddTeacherForm = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder=""
+              error={errors.name}
             />
             <FormInput
               label="Email"
@@ -58,6 +63,7 @@ const AddTeacherForm = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder=""
+              error={errors.email}
             />
             <FormInput
               label="Phone number"
@@ -65,6 +71,7 @@ const AddTeacherForm = () => {
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
               placeholder=""
+              error={errors.phoneNumber}
             />
             <FormInput
               label="Designation"
@@ -72,41 +79,52 @@ const AddTeacherForm = () => {
               value={designation}
               onChange={(e) => setDesignation(e.target.value)}
               placeholder=""
+              error={errors.designation}
             />
-
             <FormSelect
               title="Gender"
               value={gender}
-              onchange={(e) => setGender(e.target.value)}
+              onChange={(e) => setGender(e.target.value)}
               list={["Male", "Female"]}
+              placeholder=""
+            />
+            <FormInput
+              label="Password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder=""
+              error={errors.password}
             />
           </div>
 
-          {/* Right side: Image */}
-          <div className="flex-1 flex justify-center items-center">
+          {/* Right side: (optional image section, safely handled) */}
+          {/* <div className="flex-1 flex justify-center items-center">
             <img
-              src="https://via.placeholder.com/200"
+              src={imageUrl || undefined}
               alt="Teacher"
               className="rounded-md w-48 h-48 object-cover"
             />
-          </div>
+          </div> */}
+        </div>
+
+        {/* Buttons */}
+        <div className="flex justify-end items-end gap-2 pt-4">
+          <Link
+            to="/teachers"
+            className="bg-[#EEEDEE] rounded-sm px-4 py-2 text-sm  text-center font-semibold text-[#858585] w-32"
+          >
+            Cancel
+          </Link>
+          <button
+            type="submit"
+            disabled={loading}
+            className="bg-[#48089F] w-32 text-white rounded-sm px-4 py-2 text-sm font-semibold hover:bg-[#ba9fd6] hover:scale-105 transition-transform duration-300 disabled:opacity-50"
+          >
+            {loading ? "Adding..." : "Add"}
+          </button>
         </div>
       </form>
-      <div className="flex justify-end items-end gap-2 p-4">
-        <button
-          type="button"
-          onClick={handleCancel}
-          className="bg-[#EEEDEE] rounded-sm px-4 py-2 text-sm font-semibold text-[#858585] w-32"
-        >
-          Cancel
-        </button>
-        <button
-          type="submit"
-          className="bg-[#48089F] w-32 text-white rounded-sm px-4 py-2 text-sm font-semibold hover:bg-[#ba9fd6] hover:scale-105 transition-transform duration-300"
-        >
-          Add
-        </button>
-      </div>
     </div>
   );
 };

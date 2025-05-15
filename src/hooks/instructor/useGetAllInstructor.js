@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+
 import { base_url } from "../../utils/constants";
 
-const useGetAllInstructor = () => {
+const useGetAllInstructor = ({ search }) => {
   const [loading, setLoading] = useState(false);
   const [instructor, setInstructor] = useState([]);
 
@@ -11,8 +11,13 @@ const useGetAllInstructor = () => {
     setLoading(true);
     try {
       const res = await axios.get(`${base_url}/instructor/getInstructor`, {
+        params: {
+          search,
+        },
+
         withCredentials: true,
       });
+
       const data = res.data;
       setInstructor(data);
     } catch (err) {
@@ -25,7 +30,7 @@ const useGetAllInstructor = () => {
   };
   useEffect(() => {
     getAllInstructor();
-  }, []);
+  }, [search]);
 
   const refetch = () => {
     getAllInstructor();

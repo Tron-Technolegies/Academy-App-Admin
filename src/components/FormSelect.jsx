@@ -7,6 +7,7 @@ export default function FormSelect({
   list,
   multi,
   displayField,
+  error,
 }) {
   return (
     <div className="form-row pt-2 pb-4">
@@ -42,7 +43,9 @@ export default function FormSelect({
 
             return (
               <option
-                className="border-b p-1 border-gray-300"
+                className={`w-full px-2 py-1 border ${
+                  error ? "border-red-500 bg-red-50" : "border-gray-300"
+                }`}
                 key={item._id || item} // Assuming item is an object, otherwise it’s a simple value
                 value={item._id || item} // Similarly, use _id if it's an object, or item if it's a string/number
               >

@@ -5,7 +5,8 @@ export default function FormInput({
   type,
   placeholder,
   value,
-  onChange, // should be camelCase
+  onChange,
+  error,
 }) {
   return (
     <div>
@@ -16,12 +17,17 @@ export default function FormInput({
       )}
       <input
         type={type}
-        className=" rounded-md bg-[#F5F5F5] border border-gray-300 text-gray-900 py-1 px-2 w-full focus:outline-none"
+        className={`rounded-md w-full py-1 px-2 focus:outline-none 
+          ${
+            error ? "border-red-500 bg-red-50" : "border-gray-300 bg-[#F5F5F5]"
+          } 
+          text-gray-900 border`}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
         required
       />
+      {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
     </div>
   );
 }

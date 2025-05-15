@@ -13,13 +13,19 @@ import { Link } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import useDeleteCategory from "../../hooks/courseCategories/useDeleteCategory";
+import { AdminContext } from "../../utils/AdminContext";
 
 const DomainList = () => {
   const { loading, category } = useGetAllCategory(); // Call the hook to fetch categories
-  const { deleteCategory } = useDeleteCategory;
+  const { deleteCategory } = useDeleteCategory();
 
-  const { showDeletePopup, setShowDeletePopup, deleteId, setDeleteId } =
-    useContext(AdminContext);
+  const {
+    showDeletePopup,
+    setShowDeletePopup,
+    deleteId,
+    setDeleteId,
+    setDeleteType,
+  } = useContext(AdminContext);
 
   if (loading) {
     return (
@@ -66,9 +72,9 @@ const DomainList = () => {
                     </Link>
                     <button
                       onClick={() => {
-                        setShowDeletePopup(true);
-                        setDeleteId(item._id);
+                        deleteCategory({ id: item._id });
                         setDeleteType("category");
+                        setShowDeletePopup(true);
                       }}
                     >
                       <DeleteIcon />

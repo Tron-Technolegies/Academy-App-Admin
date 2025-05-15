@@ -1,35 +1,59 @@
 import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { base_url } from "../../pages/utils/constants";
+import { base_url } from "../../utils/constants";
 
-const useUpdateInstructor = async () => {
+const useUpdateInstructor = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const updateInstructor = async ({ instructorName, instructorRole, id }) => {
+  const updateInstructor = async ({
+    fullName,
+    email,
+    password,
+    phoneNumber,
+    gender,
+    designation,
+    id,
+  }) => {
     setLoading(true);
     try {
+      const payload = {
+        fullName,
+        email,
+        phoneNumber,
+        gender: gender.toLowerCase(),
+        designation,
+      };
+
+      // Only add password if it's non-empty
+      if (password && password.trim() !== "") {
+        payload.password = password;
+      }
       const res = await axios.patch(
         `${base_url}/instructor/updateInstructor/${id}`,
         {
-          instructorName,
-          instructorRole,
+          fullName,
+          email,
+          password,
+          phoneNumber,
+          gender: gender.toLowerCase(),
+          designation,
         },
         { withCredentials: true }
       );
-      const data = res.data;
       toast.success("Instructor updated successfully");
-      navigate("/instructor");
+      navigate("/teachers");
     } catch (err) {
-      toast.err(
-        err?.response?.data?.msg || err?.error || "something went wrong"
+      toast.error(
+        err?.response?.data?.msg || err?.message || "Something went wrong"
       );
     } finally {
       setLoading(false);
     }
   };
+
   return { loading, updateInstructor };
 };
 
