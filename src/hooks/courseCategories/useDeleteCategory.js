@@ -6,18 +6,20 @@ import { AdminContext } from "../../utils/AdminContext";
 
 const useDeleteCategory = () => {
   const [loading, setLoading] = useState(false);
-  const { setRefetchTrigger } = useContext(AdminContext);
+  const { user } = useContext(AdminContext);
 
   const deleteCategory = async ({ id }) => {
     setLoading(true);
     try {
+      console.log("Token used for deletion:", user?.token);
+
       const res = await axios.delete(
-        `${base_url}/category/deleteCategory/${id}/`
+        `${base_url}/category/deleteCategory/${id}/`,
+        {
+          withCredentials: true,
+        }
       );
       toast.success("Category Successfully Deleted");
-
-      // ✅ Trigger refetch
-      setRefetchTrigger((prev) => !prev);
     } catch (err) {
       toast.error(
         err?.response?.data?.msg || err?.error || "something went wrong"

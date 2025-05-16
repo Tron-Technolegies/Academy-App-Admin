@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import useUpdateCourse from "../../../hooks/course/useUpdateCourse";
 import useGetSingleCourse from "../../../hooks/course/useGetSingleCourse";
 import useGetAllCategory from "../../../hooks/courseCategories/useGetAllCategory";
+import useGetAllInstructor from "../../../hooks/instructor/useGetAllInstructor";
 import Loading from "../../Loading";
 
 const EditCourseForm = () => {
@@ -17,7 +18,22 @@ const EditCourseForm = () => {
   const { loading: courseLoading, course } = useGetSingleCourse({ id });
   const { category: categories, loading: categoriesLoading } =
     useGetAllCategory();
+  const { instructor: instructors, loading: instructorsLoading } =
+    useGetAllInstructor();
   const { updateCourse, loading } = useUpdateCourse();
+
+  // Map instructors with fullName safely
+  const instructorsWithNames = instructors.map((inst) => {
+    const hasDetails =
+      Array.isArray(inst.instructorDetails) &&
+      inst.instructorDetails.length > 0;
+    return {
+      ...inst,
+      fullName: hasDetails
+        ? inst.instructorDetails[0].instructorName
+        : `${inst.firstName || ""} ${inst.lastName || ""}`.trim() || "Unknown",
+    };
+  });
 
   useEffect(() => {
     if (course) {
@@ -47,7 +63,7 @@ const EditCourseForm = () => {
     });
   };
 
-  if (courseLoading || categoriesLoading) {
+  if (courseLoading || categoriesLoading || instructorsLoading) {
     return (
       <div>
         <Loading />
@@ -88,13 +104,18 @@ const EditCourseForm = () => {
       </select>
 
       <label className="block mb-1 font-medium">Instructor</label>
-      <input
-        type="text"
+      <select
         value={instructor}
         onChange={(e) => setInstructor(e.target.value)}
         className="w-full border border-gray-300 px-3 py-2 mb-4 rounded"
-        placeholder="Enter instructor name"
-      />
+      >
+        <option value="">Select an instructor</option>
+        {instructorsWithNames.map((inst) => (
+          <option key={inst._id} value={inst._id}>
+            {inst.fullName}
+          </option>
+        ))}
+      </select>
 
       <label className="block mb-1 font-medium">Overview</label>
       <textarea

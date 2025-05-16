@@ -1,9 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-
 import { base_url } from "../../utils/constants";
 
-const useGetAllInstructor = ({ search }) => {
+const useGetAllInstructor = ({ search } = {}) => {
   const [loading, setLoading] = useState(false);
   const [instructor, setInstructor] = useState([]);
 
@@ -14,12 +13,10 @@ const useGetAllInstructor = ({ search }) => {
         params: {
           search,
         },
-
         withCredentials: true,
       });
 
-      const data = res.data;
-      setInstructor(data);
+      setInstructor(res.data);
     } catch (err) {
       console.log(
         err?.response?.data?.msg || err?.error || "something went wrong"
@@ -28,6 +25,7 @@ const useGetAllInstructor = ({ search }) => {
       setLoading(false);
     }
   };
+
   useEffect(() => {
     getAllInstructor();
   }, [search]);

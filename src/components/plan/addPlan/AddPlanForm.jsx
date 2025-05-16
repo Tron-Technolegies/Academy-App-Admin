@@ -40,13 +40,6 @@ const AddPlanForm = () => {
             onChange={(e) => setAmount(e.target.value)}
             placeholder=""
           />
-          <FormInput
-            label="Validity"
-            type="text"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            placeholder=""
-          />
 
           <div>
             <label className="text-[#8A8A8A] font-medium">Features</label>

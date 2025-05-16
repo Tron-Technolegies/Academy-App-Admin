@@ -5,6 +5,7 @@ import useGetAllCategory from "../../../hooks/courseCategories/useGetAllCategory
 import FormSelect from "../../FormSelect";
 import { Link } from "react-router-dom";
 import GoBack from "../../GoBack";
+import useGetAllInstructor from "../../../hooks/instructor/useGetAllInstructor";
 
 const AddCourseForm = () => {
   const [name, setName] = useState("");
@@ -16,9 +17,23 @@ const AddCourseForm = () => {
   const { category: categories, loading: loadingCategories } =
     useGetAllCategory();
 
+  const { instructor: instructors, loadingInstructors } = useGetAllInstructor();
+  console.log("Instructors list:", instructors);
+
+  const instructorsWithNames = instructors.map((inst) => {
+    const hasDetails =
+      Array.isArray(inst.instructorDetails) &&
+      inst.instructorDetails.length > 0;
+    return {
+      ...inst,
+      fullName: hasDetails
+        ? inst.instructorDetails[0].instructorName
+        : `${inst.firstName || ""} ${inst.lastName || ""}`.trim() || "Unknown",
+    };
+  });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ name, category }); // ✅ Debug here
 
     await addCourse({
       courseName: name,
@@ -27,6 +42,10 @@ const AddCourseForm = () => {
       courseOverView: overview,
     });
   };
+
+  if (loadingCategories || loadingInstructors) {
+    return <p className="text-center py-8">Loading form data...</p>;
+  }
 
   return (
     <form onSubmit={handleSubmit} className="pt-4">
@@ -51,12 +70,13 @@ const AddCourseForm = () => {
           displayField="categoryName"
         />
 
-        <FormInput
-          label="Instructor"
-          type="text"
+        <FormSelect
+          title="Instructor"
           value={instructor}
           onChange={(e) => setInstructor(e.target.value)}
-          placeholder=""
+          list={instructorsWithNames}
+          multi={false}
+          displayField="fullName"
         />
 
         <FormInput

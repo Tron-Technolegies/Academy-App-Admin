@@ -70,21 +70,13 @@ const EditPlanForm = () => {
             placeholder="Amount"
           />
 
-          <FormInput
-            label="Validity"
-            type="text"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            placeholder="Validity (e.g., 1 month)"
-          />
-
           <div>
             <label className="text-[#8A8A8A] font-medium">Features</label>
             <textarea
               value={features}
               onChange={(e) => setFeatures(e.target.value)}
               placeholder="Features"
-              className="flex flex-col border border-[#c9bfbf] rounded-md w-1/2 h-30  bg-[#F5F5F5] focus:outline-none"
+              className="flex flex-col border border-[#c9bfbf] rounded-md w-full h-30  bg-[#F5F5F5] focus:outline-none"
             />
           </div>
 
