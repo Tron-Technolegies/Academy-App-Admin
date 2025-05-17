@@ -3,6 +3,9 @@ import { AdminContext } from "../utils/AdminContext";
 import useDeleteCategory from "../hooks/courseCategories/useDeleteCategory";
 import Loading from "./Loading";
 import { motion } from "framer-motion";
+import useDeleteCourse from "../hooks/course/useDeleteCourse";
+import useDeletePlan from "../hooks/plan/useDeletePlan";
+import useDeleteInstructor from "../hooks/instructor/useDeleteInstructor";
 
 const DeletePopup = () => {
   const {
@@ -16,11 +19,39 @@ const DeletePopup = () => {
     setShowDeletePopup,
   } = useContext(AdminContext);
 
-  const { loading, deleteCategory } = useDeleteCategory();
+  const { loading: categoryLoading, deleteCategory } = useDeleteCategory();
+  const { loading: courseLoading, deleteCourse } = useDeleteCourse();
+  const { loading: planLoading, deletePlan } = useDeletePlan();
+  const { loading: instructorLoading, deleteInstructor } =
+    useDeleteInstructor();
+
+  const loading =
+    categoryLoading || courseLoading || planLoading || instructorLoading;
 
   async function handleDelete() {
     if (deleteType === "category") {
       await deleteCategory({ id: deleteId });
+      setDeleteId("");
+      setShowDeletePopup(false); // Close popup on delete
+      setRefetchTrigger(!refetchTrigger);
+      setDeleteType("");
+    }
+    if (deleteType === "course") {
+      await deleteCourse({ id: deleteId });
+      setDeleteId("");
+      setShowDeletePopup(false); // Close popup on delete
+      setRefetchTrigger(!refetchTrigger);
+      setDeleteType("");
+    }
+    if (deleteType === "plan") {
+      await deletePlan({ id: deleteId });
+      setDeleteId("");
+      setShowDeletePopup(false); // Close popup on delete
+      setRefetchTrigger(!refetchTrigger);
+      setDeleteType("");
+    }
+    if (deleteType === "instructor") {
+      await deleteInstructor({ id: deleteId });
       setDeleteId("");
       setShowDeletePopup(false); // Close popup on delete
       setRefetchTrigger(!refetchTrigger);

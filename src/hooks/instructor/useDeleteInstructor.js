@@ -10,18 +10,23 @@ const useDeleteInstructor = () => {
     setLoading(true);
     try {
       const res = await axios.delete(
-        `${base_url}/instructor/deleteInstructor/${id}/`
+        `${base_url}/instructor/deleteInstructor/${id}/`,
+        {
+          withCredentials: true,
+        }
       );
-      const data = res.data;
       toast.success("Instructor Successfully Deleted");
+      return { success: true, data: res.data };
     } catch (err) {
-      toast.err(
-        err?.response?.data?.msg || err?.error || "something went wrong"
+      toast.error(
+        err?.response?.data?.msg || err?.message || "Something went wrong"
       );
+      return { success: false };
     } finally {
       setLoading(false);
     }
   };
+
   return { loading, deleteInstructor };
 };
 

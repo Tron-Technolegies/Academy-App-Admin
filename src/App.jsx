@@ -25,6 +25,9 @@ import AddModulePage from "./pages/module/AddModulePage";
 import EditDomainPage from "./pages/domain/EditDomainPage";
 import EditCoursePage from "./pages/course/EditCoursePage";
 import EditModulePage from "./pages/module/EditModulePage";
+import AddCommunityPage from "./pages/community/AddCommunityPage";
+import AddSubCommunityPage from "./pages/subCommunity/AddSubCommunityPage";
+import AddChatRoomPage from "./pages/chatroom/AddChatRoomPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -106,12 +109,24 @@ function App() {
           element: <CommunityPage />,
         },
         {
-          path: "subCommunity",
+          path: "community/new",
+          element: <AddCommunityPage />,
+        },
+        {
+          path: "community/subCommunity",
           element: <SubCommunityPage />,
         },
         {
-          path: "chatroom",
+          path: "community/subCommunity/new",
+          element: <AddSubCommunityPage />,
+        },
+        {
+          path: "community/chatroom",
           element: <ChatRoomPage />,
+        },
+        {
+          path: "community/chatroom/new",
+          element: <AddChatRoomPage />,
         },
         {
           path: "videos",

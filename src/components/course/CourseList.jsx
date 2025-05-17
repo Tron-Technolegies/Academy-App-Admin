@@ -1,5 +1,5 @@
-import React from "react";
-import useGetAllCourses from "../../hooks/course/useGetAllCourses"; // your hook
+import React, { useContext, useEffect } from "react";
+import useGetAllCourses from "../../hooks/course/useGetAllCourses";
 import {
   Table,
   TableBody,
@@ -12,14 +12,31 @@ import {
 import Loading from "../Loading";
 import { Link } from "react-router-dom";
 import { CiEdit } from "react-icons/ci";
+import useDeleteCourse from "../../hooks/course/useDeleteCourse";
+import { AdminContext } from "../../utils/AdminContext";
+import { MdDeleteOutline } from "react-icons/md";
 
 const CourseList = () => {
-  const { loading, course } = useGetAllCourses();
-  const { deleteCourse } = useDe;
+  const { loading, course, refetch } = useGetAllCourses();
+  const { deleteCourse } = useDeleteCourse();
+  const {
+    showDeletePopup,
+    setShowDeletePopup,
+    deleteId,
+    setDeleteId,
+    setDeleteType,
+    refetchTrigger,
+  } = useContext(AdminContext);
+
+  useEffect(() => {
+    refetch && refetch();
+  }, [refetchTrigger]);
+
   if (loading) return <Loading />;
 
-  if (!course || course.length === 0)
+  if (!course || course.length === 0) {
     return <div>No courses available at the moment.</div>;
+  }
 
   return (
     <TableContainer component={Paper}>
@@ -48,21 +65,27 @@ const CourseList = () => {
               <TableCell sx={{ border: "none" }}>
                 {item.courseCategory?.categoryName || "Unknown Category"}
               </TableCell>
-              <TableCell
-                sx={{
-                  border: "none",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                {item.courseName}
-                <Link
-                  to={`/domain/course/${item._id}/edit`}
-                  className="mt-auto text-[#5B93FF] hover:text-[#bed1f9]"
-                >
-                  <CiEdit className="text-blue-600 text-[18px] hover:text-blue-800" />
-                </Link>
+              <TableCell sx={{ border: "none" }}>
+                <div className="flex justify-between items-center w-full">
+                  <span>{item.courseName}</span>
+                  <div className="flex gap-3">
+                    <Link
+                      to={`/domain/course/${item._id}/edit`}
+                      className="text-[#5B93FF] hover:text-[#bed1f9]"
+                    >
+                      <CiEdit className="text-blue-600 text-[18px] hover:text-blue-800" />
+                    </Link>
+                    <button
+                      onClick={() => {
+                        setShowDeletePopup(true);
+                        setDeleteId(item._id);
+                        setDeleteType("course");
+                      }}
+                    >
+                      <MdDeleteOutline className="text-red-500 text-[18px] hover:text-red-700" />
+                    </button>
+                  </div>
+                </div>
               </TableCell>
             </TableRow>
           ))}

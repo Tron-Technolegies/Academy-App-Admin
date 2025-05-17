@@ -50,7 +50,20 @@ export const navItems = [
     icon: <FaUsers />,
     name: "Community & Sub",
     path: "/community",
+    // children: [
+    //   {
+    //     id: "5-1",
+    //     name: "Course",
+    //     path: "/domain/course",
+    //   },
+    //   {
+    //     id: "5-2",
+    //     name: "Module",
+    //     path: "/domain/module",
+    //   },
+    // ],
   },
+
   {
     id: 6,
     icon: <FaVideo />,

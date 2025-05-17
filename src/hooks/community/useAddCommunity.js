@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { base_url } from "../../pages/utils/constants";
+import { base_url } from "../../utils/constants";
 
 const useAddCommunity = () => {
   const [loading, setLoading] = useState(false);
@@ -22,7 +22,7 @@ const useAddCommunity = () => {
       toast.success("community added successfully");
       navigate("/community");
     } catch (err) {
-      toast.err(
+      toast.error(
         err?.response?.data?.msg || err?.error || "something went wrong"
       );
     } finally {

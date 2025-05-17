@@ -7,19 +7,28 @@ const useDeleteCourse = () => {
   const [loading, setLoading] = useState(false);
 
   const deleteCourse = async ({ id }) => {
+    if (!id) {
+      toast.error("Invalid course ID");
+      return { success: false };
+    }
+
     setLoading(true);
     try {
-      const res = await axios.delete(`${base_url}/course/deleteCourse/${id}`);
-      const data = res.data;
-      toast.success("course deleted successfully");
+      const res = await axios.delete(`${base_url}/course/deleteCourse/${id}`, {
+        withCredentials: true,
+      });
+      toast.success("Course deleted successfully");
+      return { success: true, data: res.data };
     } catch (err) {
-      toast.err(
-        err?.response?.data?.msg || err?.error || "something went wrong"
+      toast.error(
+        err?.response?.data?.msg || err?.message || "Something went wrong"
       );
+      return { success: false };
     } finally {
       setLoading(false);
     }
   };
+
   return { loading, deleteCourse };
 };
 

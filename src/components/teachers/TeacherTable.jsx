@@ -11,97 +11,99 @@ import useGetAllInstructor from "../../hooks/instructor/useGetAllInstructor";
 import { Link } from "react-router-dom";
 import { AdminContext } from "../../utils/AdminContext";
 import Loading from "../Loading";
+import useDeleteInstructor from "../../hooks/instructor/useDeleteInstructor";
+import { MdDeleteOutline } from "react-icons/md";
+import { CiEdit } from "react-icons/ci";
 
 const TeacherTable = () => {
   const [search, setSearch] = useState("");
   const { instructor, loading, refetch } = useGetAllInstructor({ search });
-
+  const { deleteInstructor } = useDeleteInstructor();
   const { setShowDeletePopup, setDeleteId, setDeleteType, refetchTrigger } =
     useContext(AdminContext);
 
   useEffect(() => {
     refetch();
   }, [refetchTrigger]);
+
   return loading ? (
     <Loading />
   ) : (
     <TableContainer component={Paper}>
-      {loading ? (
-        <div className="flex justify-center p-8">
-          <CircularProgress />
-        </div>
-      ) : (
-        <Table sx={{ minWidth: 650 }} aria-label="teacher table">
-          <TableHead>
+      <Table sx={{ minWidth: 650 }} aria-label="teacher table">
+        <TableHead>
+          <TableRow>
+            <TableCell sx={{ fontWeight: "bold", color: "#030229" }}>
+              Name
+            </TableCell>
+            <TableCell sx={{ fontWeight: "bold", color: "#030229" }}>
+              Email
+            </TableCell>
+            <TableCell sx={{ fontWeight: "bold", color: "#030229" }}>
+              Phone Number
+            </TableCell>
+            <TableCell sx={{ fontWeight: "bold", color: "#030229" }}>
+              Gender
+            </TableCell>
+            <TableCell sx={{ fontWeight: "bold", color: "#030229" }}>
+              Designation
+            </TableCell>
+            <TableCell sx={{ fontWeight: "bold", color: "#030229" }}>
+              Actions
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {instructor?.map((x) => (
             <TableRow
-              sx={{ fontWeight: "bold", border: "none", color: "#030229" }}
+              key={x._id}
+              sx={{
+                "&:hover": {
+                  backgroundColor: "#EDE6F5",
+                  cursor: "pointer",
+                },
+              }}
             >
-              <TableCell
-                sx={{ fontWeight: "bold", border: "none", color: "#030229" }}
-              >
-                Name
+              <TableCell sx={{ color: "#030229", border: "none" }}>
+                {x.instructorDetails?.[0]?.instructorName}
+              </TableCell>
+              <TableCell sx={{ color: "#030229", border: "none" }}>
+                {x.email}
+              </TableCell>
+              <TableCell sx={{ color: "#030229", border: "none" }}>
+                {x.phoneNumber}
+              </TableCell>
+              <TableCell sx={{ color: "#030229", border: "none" }}>
+                {x.gender}
+              </TableCell>
+              <TableCell sx={{ color: "#030229", border: "none" }}>
+                {x.instructorDetails?.[0]?.instructorRole}
               </TableCell>
               <TableCell
-                sx={{ fontWeight: "bold", border: "none", color: "#030229" }}
-              >
-                Email
-              </TableCell>
-              <TableCell
-                sx={{ fontWeight: "bold", border: "none", color: "#030229" }}
-              >
-                Phone Number
-              </TableCell>
-              <TableCell
-                sx={{ fontWeight: "bold", border: "none", color: "#030229" }}
-              >
-                Gender
-              </TableCell>
-              <TableCell
-                sx={{ fontWeight: "bold", border: "none", color: "#030229" }}
-              >
-                Designation
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {instructor?.map((x) => (
-              <TableRow
-                key={x._id}
                 sx={{
-                  "&:hover": {
-                    backgroundColor: "#EDE6F5",
-                    cursor: "pointer",
-                  },
+                  color: "#030229",
+                  display: "flex",
+                  gap: "10px",
+                  border: "none",
                 }}
               >
-                <TableCell sx={{ border: "none", color: "#030229" }}>
-                  {x.instructorDetails?.[0]?.instructorName}
-                </TableCell>
-                <TableCell sx={{ border: "none", color: "#030229" }}>
-                  {x.email}
-                </TableCell>
-                <TableCell sx={{ border: "none", color: "#030229" }}>
-                  {x.phoneNumber}
-                </TableCell>
-                <TableCell sx={{ border: "none", color: "#030229" }}>
-                  {x.gender}
-                </TableCell>
-                <TableCell sx={{ border: "none", color: "#030229" }}>
-                  {x.instructorDetails?.[0]?.instructorRole}
-                </TableCell>
-                <TableCell sx={{ border: "none", color: "#030229" }}>
-                  <Link
-                    to={`/teachers/${x._id}/edit`}
-                    className=" mt-auto text-[#48089F] hover:text-[#ba9fd6] font-semibold"
-                  >
-                    Edit
-                  </Link>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      )}
+                <Link to={`/teachers/${x._id}/edit`}>
+                  <CiEdit className="text-blue-600 text-[18px] hover:text-blue-800" />
+                </Link>
+                <button
+                  onClick={() => {
+                    setShowDeletePopup(true);
+                    setDeleteId(x._id);
+                    setDeleteType("instructor");
+                  }}
+                >
+                  <MdDeleteOutline className="text-red-500 text-[18px] hover:text-red-700" />
+                </button>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
     </TableContainer>
   );
 };

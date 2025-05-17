@@ -1,20 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import useGetAllPlan from "../../hooks/plan/useGetAllPlan";
 import AddButton from "../AddButton";
 import { Link } from "react-router-dom";
 import Loading from "../Loading";
+import useDeletePlan from "../../hooks/plan/useDeletePlan";
+import { AdminContext } from "../../utils/AdminContext";
+import { MdDeleteOutline } from "react-icons/md";
 
 const PlanList = () => {
   const { loading, plan: plans, refetch } = useGetAllPlan();
+  const { deletePlan } = useDeletePlan();
 
-  if (loading)
-    return (
-      <div>
-        {" "}
-        <Loading />
-      </div>
-    );
-  return (
+  const {
+    showDeletePopup,
+    setShowDeletePopup,
+    deleteId,
+    setDeleteId,
+    setDeleteType,
+    refetchTrigger,
+  } = useContext(AdminContext);
+
+  useEffect(() => {
+    refetch();
+  }, [refetchTrigger]);
+  return loading ? (
+    <Loading />
+  ) : (
     <div className="mt-4">
       {plans.length === 0 ? (
         <div className="text-[#4b1361]">No plans available at the moment.</div>
@@ -59,12 +70,24 @@ const PlanList = () => {
                   )}
                 </ul>
               </div>
-              <Link
-                to={`/subscription/${item._id}/edit`}
-                className=" mt-auto text-[#48089F] hover:text-[#ba9fd6] font-semibold"
-              >
-                Edit
-              </Link>
+              <div className="flex gap-4 mt-4">
+                <Link
+                  to={`/subscription/${item._id}/edit`}
+                  className="text-[#48089F] hover:text-[#ba9fd6] font-semibold"
+                >
+                  Edit
+                </Link>
+                <button
+                  className="text-[#48089F] hover:text-[#ba9fd6] font-semibold"
+                  onClick={() => {
+                    setShowDeletePopup(true);
+                    setDeleteId(item._id);
+                    setDeleteType("plan");
+                  }}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           ))}
         </div>
