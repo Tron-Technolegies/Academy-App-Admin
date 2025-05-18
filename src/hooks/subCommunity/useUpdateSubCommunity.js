@@ -1,10 +1,10 @@
 import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { base_url } from "../../pages/utils/constants";
+import { base_url } from "../../utils/constants";
 
-const useUpdateSubCommunity = async () => {
+const useUpdateSubCommunity = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -23,17 +23,17 @@ const useUpdateSubCommunity = async () => {
         },
         { withCredentials: true }
       );
-      const data = res.data;
-      toast.success("SubCommunity  updated successfully");
-      navigate("/subCommunity ");
+      toast.success("Sub Community updated successfully");
+      navigate("/community/subCommunity");
     } catch (err) {
-      toast.err(
-        err?.response?.data?.msg || err?.error || "something went wrong"
+      toast.error(
+        err?.response?.data?.msg || err?.message || "Something went wrong"
       );
     } finally {
       setLoading(false);
     }
   };
+
   return { loading, updateSubCommunity };
 };
 

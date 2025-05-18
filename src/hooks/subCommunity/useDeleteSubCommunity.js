@@ -13,7 +13,7 @@ const useDeleteSubCommunity = () => {
         `${base_url}/subCommunity/deleteSubCommunity/${id}/`
       );
       const data = res.data;
-      toast.success("SubCommunity Successfully Deleted");
+      toast.success("Sub Community Successfully Deleted");
     } catch (err) {
       toast.err(
         err?.response?.data?.msg || err?.error || "something went wrong"

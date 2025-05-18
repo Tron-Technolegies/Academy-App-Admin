@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { base_url } from "../../pages/utils/constants";
+import { base_url } from "../../utils/constants";
 
 const useGetSingleCommunity = ({ id }) => {
   const [loading, setLoading] = useState(false);
@@ -10,12 +10,9 @@ const useGetSingleCommunity = ({ id }) => {
   const getSingleCommunity = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(
-        `${base_url}/community/getSingleClass/${id}/`,
-        {
-          withCredentials: true,
-        }
-      );
+      const res = await axios.get(`${base_url}/community/getCommunity/${id}/`, {
+        withCredentials: true,
+      });
       const data = res.data;
       setCommunity(data);
     } catch (err) {

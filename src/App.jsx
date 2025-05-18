@@ -28,6 +28,9 @@ import EditModulePage from "./pages/module/EditModulePage";
 import AddCommunityPage from "./pages/community/AddCommunityPage";
 import AddSubCommunityPage from "./pages/subCommunity/AddSubCommunityPage";
 import AddChatRoomPage from "./pages/chatroom/AddChatRoomPage";
+import EditCommunityPage from "./pages/community/EditCommunityPage";
+import EditSubCommunityPage from "./pages/subCommunity/EditSubCommunityPage";
+import EditChatRoomPage from "./pages/chatroom/EditChatRoomPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -113,6 +116,10 @@ function App() {
           element: <AddCommunityPage />,
         },
         {
+          path: "community/:id/edit",
+          element: <EditCommunityPage />,
+        },
+        {
           path: "community/subCommunity",
           element: <SubCommunityPage />,
         },
@@ -121,12 +128,20 @@ function App() {
           element: <AddSubCommunityPage />,
         },
         {
+          path: "community/subCommunity/:id/edit",
+          element: <EditSubCommunityPage />,
+        },
+        {
           path: "community/chatroom",
           element: <ChatRoomPage />,
         },
         {
           path: "community/chatroom/new",
           element: <AddChatRoomPage />,
+        },
+        {
+          path: "community/chatroom/:id/edit",
+          element: <EditChatRoomPage />,
         },
         {
           path: "videos",

@@ -1,10 +1,12 @@
 import React from "react";
-import AddSubCommunityHeader from "../../components/subcommunity/addSubCommunity/AddSubCommunity";
+import AddSubCommunityForm from "../../components/subcommunity/addSubCommunity/AddSubCommunityForm";
+import AddSubCommunityHeader from "../../components/subcommunity/addSubCommunity/AddSubCommunityHeader";
 
 const AddSubCommunityPage = () => {
   return (
     <div>
       <AddSubCommunityHeader />
+      <AddSubCommunityForm />
     </div>
   );
 };

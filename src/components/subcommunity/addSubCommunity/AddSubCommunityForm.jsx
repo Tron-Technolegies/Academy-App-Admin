@@ -4,26 +4,20 @@ import useAddSubCommunity from "../../../hooks/subCommunity/useAddSubCommunity";
 import useGetAllCommunity from "../../../hooks/community/useGetAllCommunities";
 import FormInput from "../../FromInput";
 import FormSelect from "../../FormSelect";
-import useGetAllSubCommunity from "../../../hooks/subCommunity/useGetAllSubCommunity";
-import useAddChatRoom from "../../../hooks/chatRoom/useAddChatRoom";
 
-const AddChatRoomForm = () => {
+const AddSubCommunityForm = () => {
   const [name, setName] = useState("");
   const [community, setCommunity] = useState("");
-  const [subCommunity, setSubCommunity] = useState("");
 
+  const { addSubCommunity, loading: addingLoading } = useAddSubCommunity();
   const { community: communities, loading: loadingCommunities } =
     useGetAllCommunity();
-  const { subCommunity: subCommunities, loading: loadingSubCommunities } =
-    useGetAllSubCommunity();
-  const { addChatRoom, loading } = useAddChatRoom();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addChatRoom({
-      chatRoomName: name,
+    await addSubCommunity({
+      subCommunityName: name,
       relatedCommunity: community,
-      relatedSubCommunity: subCommunity,
     });
   };
 
@@ -42,16 +36,8 @@ const AddChatRoomForm = () => {
           multi={false}
           displayField="communityName"
         />
-        <FormSelect
-          title="sub community"
-          value={subCommunity}
-          onChange={(e) => setSubCommunity(e.target.value)}
-          list={subCommunities}
-          multi={false}
-          displayField="subCommunityName"
-        />
         <FormInput
-          label="chat room name"
+          label="sub community name"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -63,13 +49,13 @@ const AddChatRoomForm = () => {
         <button
           className="bg-[#48089F] w-32 text-white rounded-sm px-3 py-2.5 text-sm font-semibold hover:bg-[#ba9fd6] hover:scale-105 transition-transform duration-300"
           type="submit"
-          disabled={loading || loadingCommunities || loadingSubCommunities}
+          disabled={addingLoading || loadingCommunities}
         >
-          {loading ? "Adding..." : "Add"}
+          {addingLoading ? "Adding..." : "Add"}
         </button>
       </div>
     </form>
   );
 };
 
-export default AddChatRoomForm;
+export default AddSubCommunityForm;

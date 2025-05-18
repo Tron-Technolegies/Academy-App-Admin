@@ -1,10 +1,11 @@
+import { useState } from "react";
 import axios from "axios";
-import React, { useState } from "react";
+
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { base_url } from "../../pages/utils/constants";
+import { base_url } from "../../utils/constants";
 
-const useUpdateChatRoom = async () => {
+const useUpdateChatRoom = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -17,7 +18,7 @@ const useUpdateChatRoom = async () => {
     setLoading(true);
     try {
       const res = await axios.patch(
-        `${base_url}/chatRoom /updateChatRoom /${id}`,
+        `${base_url}/chatRoom/updateAllChatRoom/${id}`,
         {
           chatRoomName,
           relatedCommunity,
@@ -25,17 +26,17 @@ const useUpdateChatRoom = async () => {
         },
         { withCredentials: true }
       );
-      const data = res.data;
-      toast.success("chat Room updated successfully");
-      navigate("/class");
+      toast.success("Chat room updated successfully");
+      navigate("/community/chatRoom");
     } catch (err) {
-      toast.err(
-        err?.response?.data?.msg || err?.error || "something went wrong"
+      toast.error(
+        err?.response?.data?.msg || err?.error || "Something went wrong"
       );
     } finally {
       setLoading(false);
     }
   };
+
   return { loading, updateChatRoom };
 };
 

@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { base_url } from "../../utils/constants";
 
-const useAddChatRoom = async ({}) => {
+const useAddChatRoom = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -24,17 +24,17 @@ const useAddChatRoom = async ({}) => {
         },
         { withCredentials: true }
       );
-      const data = res.data;
-      toast.success("ChatRoom  added successfully");
-      navigate("/chatRoom ");
+      toast.success("Chat Room added successfully");
+      navigate("/community/chatRoom");
     } catch (err) {
-      toast.err(
-        err?.response?.data?.msg || err?.error || "something went wrong"
+      toast.error(
+        err?.response?.data?.msg || err?.error || "Something went wrong"
       );
     } finally {
       setLoading(false);
     }
   };
+
   return { loading, addChatRoom };
 };
 

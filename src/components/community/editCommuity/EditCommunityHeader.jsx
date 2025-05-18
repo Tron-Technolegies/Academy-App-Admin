@@ -1,7 +1,8 @@
 import React from "react";
+import GoBack from "../../GoBack";
 
 const EditCommunityHeader = () => {
-  return <div>hii</div>;
+  return <GoBack route={"/community"} />;
 };
 
 export default EditCommunityHeader;

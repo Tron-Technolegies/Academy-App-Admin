@@ -1,9 +1,10 @@
+import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { base_url } from "../../utils/constants";
 
-const useUpdateModule = async () => {
+const useUpdateModule = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -18,17 +19,17 @@ const useUpdateModule = async () => {
         },
         { withCredentials: true }
       );
-      const data = res.data;
-      toast.success("Module  updated successfully");
-      navigate("/module");
+      toast.success("Module updated successfully");
+      navigate("/domain/module");
     } catch (err) {
-      toast.err(
-        err?.response?.data?.msg || err?.error || "something went wrong"
+      toast.error(
+        err?.response?.data?.msg || err?.error || "Something went wrong"
       );
     } finally {
       setLoading(false);
     }
   };
+
   return { loading, updateModule };
 };
 

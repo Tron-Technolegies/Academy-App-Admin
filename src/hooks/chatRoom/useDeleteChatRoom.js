@@ -13,7 +13,7 @@ const useDeleteChatRoom = () => {
         `${base_url}/chatRoom/deleteChatRoom/${id}/`
       );
       const data = res.data;
-      toast.success("ChatRoom Successfully Deleted");
+      toast.success("Chat Room Successfully Deleted");
     } catch (err) {
       toast.err(
         err?.response?.data?.msg || err?.error || "something went wrong"

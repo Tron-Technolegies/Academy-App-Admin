@@ -16,13 +16,15 @@ const useGetAllCommunity = () => {
       const data = res.data;
       setCommunity(data);
     } catch (err) {
-      console.log(
-        err?.response?.data?.msg || err?.error || "something went wrong"
-      );
+      const errorMsg =
+        err?.response?.data?.msg || err?.error || "Something went wrong";
+
+      toast.error(errorMsg); // error toast
     } finally {
       setLoading(false);
     }
   };
+
   useEffect(() => {
     getAllCommunity();
   }, []);

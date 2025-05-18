@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { base_url } from "../../pages/utils/constants";
+import { base_url } from "../../utils/constants";
 
 const useGetSingleChatRoom = ({ id }) => {
   const [loading, setLoading] = useState(false);
@@ -11,24 +11,28 @@ const useGetSingleChatRoom = ({ id }) => {
     setLoading(true);
     try {
       const res = await axios.get(
-        `${base_url}/chatRoom /getSingleChatRoom/${id}/`,
+        `${base_url}/chatRoom/getSingleChatRoom/${id}`,
         {
           withCredentials: true,
         }
       );
-      const data = res.data;
-      setChatRoom(data);
+      setChatRoom(res.data);
     } catch (err) {
-      console.log(
-        err?.response?.data?.msg || err?.error || "something went wrong"
+      console.error(err);
+      toast.error(
+        err?.response?.data?.msg || err?.error || "Something went wrong"
       );
     } finally {
       setLoading(false);
     }
   };
+
   useEffect(() => {
-    getSingleChatRoom();
-  }, []);
+    if (id) {
+      getSingleChatRoom();
+    }
+  }, [id]);
+
   return { loading, chatRoom };
 };
 

@@ -1,34 +1,30 @@
 import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { base_url } from "../../pages/utils/constants";
+import { base_url } from "../../utils/constants";
 
-const useUpdateCommunity = async () => {
+const useUpdateCommunity = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const updateCommunity = async ({ communityName, id }) => {
     setLoading(true);
     try {
-      const res = await axios.patch(
+      await axios.patch(
         `${base_url}/community/updateCommunity/${id}`,
-        {
-          communityName,
-        },
+        { communityName },
         { withCredentials: true }
       );
-      const data = res.data;
-      toast.success("community updated successfully");
+      toast.success("Community updated successfully");
       navigate("/community");
     } catch (err) {
-      toast.err(
-        err?.response?.data?.msg || err?.error || "something went wrong"
-      );
+      toast.error(err?.response?.data?.msg || "Something went wrong");
     } finally {
       setLoading(false);
     }
   };
+
   return { loading, updateCommunity };
 };
 
