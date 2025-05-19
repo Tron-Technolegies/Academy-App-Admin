@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import { base_url } from "../../pages/utils/constants";
+import { base_url } from "../../utils/constants";
 
 const useDeleteSubCommunity = () => {
   const [loading, setLoading] = useState(false);
@@ -10,18 +10,23 @@ const useDeleteSubCommunity = () => {
     setLoading(true);
     try {
       const res = await axios.delete(
-        `${base_url}/subCommunity/deleteSubCommunity/${id}/`
+        `${base_url}/subCommunity/deleteSubCommunity/${id}/`,
+        {
+          withCredentials: true,
+        }
       );
-      const data = res.data;
       toast.success("Sub Community Successfully Deleted");
+      return res.data; // return something to signal success
     } catch (err) {
-      toast.err(
+      toast.error(
         err?.response?.data?.msg || err?.error || "something went wrong"
       );
+      return null;
     } finally {
       setLoading(false);
     }
   };
+
   return { loading, deleteSubCommunity };
 };
 

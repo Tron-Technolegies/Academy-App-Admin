@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import useGetAllChatRoom from "../../hooks/chatRoom/useGetAllChatRoom";
 import {
   Table,
@@ -13,16 +13,27 @@ import Loading from "../Loading";
 import { Link } from "react-router-dom";
 import { CiEdit } from "react-icons/ci";
 import { MdDeleteOutline } from "react-icons/md";
+import useDeleteChatRoom from "../../hooks/chatRoom/useDeleteChatRoom";
+import { AdminContext } from "../../utils/AdminContext";
 
 const ChatRoomList = () => {
-  const { loading, chatRoom } = useGetAllChatRoom();
+  const { loading, chatRoom, refetch } = useGetAllChatRoom();
+  const { deleteChatRoom } = useDeleteChatRoom();
+  const {
+    showDeletePopup,
+    setShowDeletePopup,
+    deleteId,
+    setDeleteId,
+    setDeleteType,
+    refetchTrigger,
+  } = useContext(AdminContext);
 
-  if (loading) return <Loading />;
-
-  if (!chatRoom || chatRoom.length === 0)
-    return <div>No chat rooms available at the moment.</div>;
-
-  return (
+  useEffect(() => {
+    refetch();
+  }, [refetchTrigger]);
+  return loading ? (
+    <Loading />
+  ) : (
     <TableContainer component={Paper}>
       <Table aria-label="chat room table">
         <TableHead>
@@ -85,7 +96,7 @@ const ChatRoomList = () => {
                   onClick={() => {
                     setShowDeletePopup(true);
                     setDeleteId(item._id);
-                    setDeleteType("course");
+                    setDeleteType("chatRoom");
                   }}
                   style={{
                     background: "none",

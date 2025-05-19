@@ -6,6 +6,7 @@ import FormInput from "../../FromInput";
 import FormSelect from "../../FormSelect";
 import useGetAllSubCommunity from "../../../hooks/subCommunity/useGetAllSubCommunity";
 import useAddChatRoom from "../../../hooks/chatRoom/useAddChatRoom";
+import { toast } from "react-toastify";
 
 const AddChatRoomForm = () => {
   const [name, setName] = useState("");
@@ -20,6 +21,10 @@ const AddChatRoomForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!name.trim() || !community || !subCommunity) {
+      toast.error("Please fill out all fields.");
+      return;
+    }
     await addChatRoom({
       chatRoomName: name,
       relatedCommunity: community,
@@ -30,7 +35,7 @@ const AddChatRoomForm = () => {
   return (
     <form onSubmit={handleSubmit} className="pt-4">
       <h4 className="text-[#4F4F4F] text-3xl p-6 font-semibold">
-        Add Sub Community
+        Add Chat Room
       </h4>
 
       <div className="max-w-150 h-80 py-6 px-6">

@@ -16,10 +16,11 @@ import useDeleteCourse from "../../hooks/course/useDeleteCourse";
 import { AdminContext } from "../../utils/AdminContext";
 import { MdDeleteOutline } from "react-icons/md";
 import useGetAllSubCommunity from "../../hooks/subCommunity/useGetAllSubCommunity";
+import useDeleteSubCommunity from "../../hooks/subCommunity/useDeleteSubCommunity";
 
 const SubCommunityList = () => {
   const { loading, subCommunity, refetch } = useGetAllSubCommunity();
-  const { deleteCourse } = useDeleteCourse();
+  const { deleteSubCommunity } = useDeleteSubCommunity();
   const {
     showDeletePopup,
     setShowDeletePopup,

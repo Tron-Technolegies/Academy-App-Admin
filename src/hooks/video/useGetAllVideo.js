@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { base_url } from "../../pages/utils/constants";
+import { base_url } from "../../utils/constants";
 
 const useGetAllVideo = () => {
   const [loading, setLoading] = useState(false);
@@ -14,15 +14,20 @@ const useGetAllVideo = () => {
         withCredentials: true,
       });
       const data = res.data;
-      setVideo(data.video);
+      console.log("API response data:", data); // Debug line
+      // If data is an object with a key, like data.videos or data.video, adjust here:
+      // setVideo(data.videos || data.video || data);
+      setVideo(data);
     } catch (err) {
-      console.log(
-        err?.response?.data?.msg || err?.error || "something went wrong"
-      );
+      const message =
+        err?.response?.data?.msg || err?.message || "Something went wrong";
+      console.error(message);
+      toast.error(message);
     } finally {
       setLoading(false);
     }
   };
+
   useEffect(() => {
     getAllVideo();
   }, []);

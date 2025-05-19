@@ -6,6 +6,8 @@ import FormSelect from "../../FormSelect";
 import { Link } from "react-router-dom";
 import GoBack from "../../GoBack";
 import useGetAllInstructor from "../../../hooks/instructor/useGetAllInstructor";
+import { toast } from "react-toastify";
+import Loading from "../../Loading";
 
 const AddCourseForm = () => {
   const [name, setName] = useState("");
@@ -35,6 +37,16 @@ const AddCourseForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (
+      !name.trim() ||
+      !category.trim() ||
+      !instructor.trim() ||
+      !overview.trim()
+    ) {
+      toast.error("Please fill all required fields", {});
+      return;
+    }
+
     await addCourse({
       courseName: name,
       courseCategory: category,
@@ -44,7 +56,7 @@ const AddCourseForm = () => {
   };
 
   if (loadingCategories || loadingInstructors) {
-    return <p className="text-center py-8">Loading form data...</p>;
+    return <Loading />;
   }
 
   return (

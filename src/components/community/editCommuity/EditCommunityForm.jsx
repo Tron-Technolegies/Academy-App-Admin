@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
+import { toast } from "react-toastify";
 import FormInput from "../../FromInput";
 import Loading from "../../Loading";
 import useGetSingleCommunity from "../../../hooks/community/useGetSingleCommunity";
@@ -8,7 +8,7 @@ import useUpdateCommunity from "../../../hooks/community/useUpdateCommunity";
 
 const EditCommunityForm = () => {
   const [name, setName] = useState("");
-  const [error, setError] = useState("");
+
   const { id } = useParams();
 
   const { community, loading: communityLoading } = useGetSingleCommunity({
@@ -24,10 +24,8 @@ const EditCommunityForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
-
-    if (!name) {
-      setError("Please fill out all fields.");
+    if (!name.trim()) {
+      toast.error("Community name is required.");
       return;
     }
 
@@ -60,7 +58,6 @@ const EditCommunityForm = () => {
           onChange={(e) => setName(e.target.value)}
           placeholder="Enter community name"
         />
-        {error && <p className="text-red-500 mt-2">{error}</p>}
       </div>
 
       <div className="max-w-190 px-6 flex justify-end">

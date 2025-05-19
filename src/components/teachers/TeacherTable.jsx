@@ -14,6 +14,7 @@ import Loading from "../Loading";
 import useDeleteInstructor from "../../hooks/instructor/useDeleteInstructor";
 import { MdDeleteOutline } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
+import { Box } from "@mui/material";
 
 const TeacherTable = () => {
   const [search, setSearch] = useState("");
@@ -73,8 +74,36 @@ const TeacherTable = () => {
               <TableCell sx={{ color: "#030229", border: "none" }}>
                 {x.phoneNumber}
               </TableCell>
-              <TableCell sx={{ color: "#030229", border: "none" }}>
-                {x.gender}
+
+              <TableCell sx={{ border: "none" }}>
+                <Box
+                  sx={{
+                    backgroundColor:
+                      x.gender === "male"
+                        ? "#D6E4FF"
+                        : x.gender === "female"
+                        ? "#FFEAE4"
+                        : "#F0F0F0",
+                    color:
+                      x.gender === "male"
+                        ? "#5B93FF"
+                        : x.gender === "female"
+                        ? "#FF8F6B"
+                        : "#333",
+                    fontWeight: 500,
+                    borderRadius: "20px",
+                    width: "70px",
+                    height: "30px",
+                    padding: "10px 6px",
+                    textTransform: "capitalize",
+                    textAlign: "center",
+                    display: "inline-block",
+
+                    mx: "auto", // horizontally center within TableCell
+                  }}
+                >
+                  {x.gender}
+                </Box>
               </TableCell>
               <TableCell sx={{ color: "#030229", border: "none" }}>
                 {x.instructorDetails?.[0]?.instructorRole}

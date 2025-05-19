@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import useGetAllModule from "../../hooks/module/useGetAllModule";
 import {
   Table,
@@ -13,16 +13,27 @@ import Loading from "../Loading";
 import { Link } from "react-router-dom";
 import { CiEdit } from "react-icons/ci";
 import { MdDeleteOutline } from "react-icons/md";
+import { AdminContext } from "../../utils/AdminContext";
+import useDeleteModule from "../../hooks/module/useDeleteModule";
 
 const ModuleList = () => {
-  const { loading, module } = useGetAllModule();
+  const { loading, module, refetch } = useGetAllModule();
+  const { deleteModule } = useDeleteModule();
+  const {
+    showDeletePopup,
+    setShowDeletePopup,
+    deleteId,
+    setDeleteId,
+    setDeleteType,
+    refetchTrigger,
+  } = useContext(AdminContext);
 
-  if (loading) return <Loading />;
-
-  if (!module || module.length === 0)
-    return <div>No modules available at the moment.</div>;
-
-  return (
+  useEffect(() => {
+    refetch();
+  }, [refetchTrigger]);
+  return loading ? (
+    <Loading />
+  ) : (
     <TableContainer component={Paper}>
       <Table aria-label="module table">
         <TableHead>
@@ -76,7 +87,7 @@ const ModuleList = () => {
                       onClick={() => {
                         setShowDeletePopup(true);
                         setDeleteId(item._id);
-                        setDeleteType("course");
+                        setDeleteType("module");
                       }}
                       style={{
                         background: "none",

@@ -13,9 +13,11 @@ import useGetAllCommunity from "../../hooks/community/useGetAllCommunities";
 import { AdminContext } from "../../utils/AdminContext";
 import { MdDeleteOutline } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
+import useDeleteCommunity from "../../hooks/community/useDeleteCommunity";
 
 const CommunityList = () => {
   const { loading, community, refetch } = useGetAllCommunity();
+  const { deleteCommunity } = useDeleteCommunity();
   const {
     showDeletePopup,
     setShowDeletePopup,

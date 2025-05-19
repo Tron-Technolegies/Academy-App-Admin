@@ -29,7 +29,10 @@ const EditTeacherForm = () => {
       setEmail(instructor.email || "");
       setPhoneNumber(instructor.phoneNumber || "");
       setDesignation(instructor.instructorDetails?.[0]?.instructorRole || "");
-      setGender(instructor.gender || "");
+      setGender(
+        instructor.gender?.charAt(0).toUpperCase() +
+          instructor.gender?.slice(1).toLowerCase() || ""
+      );
       setPassword("");
     }
   }, [instructor]);

@@ -4,6 +4,7 @@ import useAddSubCommunity from "../../../hooks/subCommunity/useAddSubCommunity";
 import useGetAllCommunity from "../../../hooks/community/useGetAllCommunities";
 import FormInput from "../../FromInput";
 import FormSelect from "../../FormSelect";
+import { toast } from "react-toastify";
 
 const AddSubCommunityForm = () => {
   const [name, setName] = useState("");
@@ -15,6 +16,10 @@ const AddSubCommunityForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!name.trim() || !community) {
+      toast.error("Please fill out all fields.");
+      return;
+    }
     await addSubCommunity({
       subCommunityName: name,
       relatedCommunity: community,

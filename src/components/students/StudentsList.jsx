@@ -6,22 +6,17 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Link } from "react-router-dom";
-import { AdminContext } from "../../utils/AdminContext";
 import Loading from "../Loading";
-import { MdDeleteOutline } from "react-icons/md";
-import { CiEdit } from "react-icons/ci";
+import { Box } from "@mui/material";
 import useGetAllUser from "../../hooks/auth/useGetAllUser";
 
 const StudentsList = () => {
   const [search, setSearch] = useState("");
   const { loading, user, refetch } = useGetAllUser();
-  const { setShowDeletePopup, setDeleteId, setDeleteType, refetchTrigger } =
-    useContext(AdminContext);
 
   useEffect(() => {
     refetch();
-  }, [refetchTrigger]);
+  }, []);
 
   return loading ? (
     <Loading />
@@ -42,10 +37,6 @@ const StudentsList = () => {
               </TableCell>
               <TableCell sx={{ fontWeight: "bold", color: "#030229" }}>
                 Gender
-              </TableCell>
-
-              <TableCell sx={{ fontWeight: "bold", color: "#030229" }}>
-                Actions
               </TableCell>
             </TableRow>
           </TableHead>
@@ -69,8 +60,35 @@ const StudentsList = () => {
                 <TableCell sx={{ color: "#030229", border: "none" }}>
                   {x.phoneNumber}
                 </TableCell>
-                <TableCell sx={{ color: "#030229", border: "none" }}>
-                  {x.gender}
+                <TableCell sx={{ border: "none" }}>
+                  <Box
+                    sx={{
+                      backgroundColor:
+                        x.gender === "male"
+                          ? "#D6E4FF"
+                          : x.gender === "female"
+                          ? "#FFE0D6"
+                          : "#F0F0F0",
+                      color:
+                        x.gender === "male"
+                          ? "#5B93FF"
+                          : x.gender === "female"
+                          ? "#FF8F6B"
+                          : "#333",
+                      fontWeight: 500,
+                      borderRadius: "20px",
+                      width: "70px",
+                      height: "30px",
+                      padding: "10px 6px",
+                      textTransform: "capitalize",
+                      textAlign: "center",
+                      display: "inline-block",
+
+                      mx: "auto", // horizontally center within TableCell
+                    }}
+                  >
+                    {x.gender}
+                  </Box>
                 </TableCell>
 
                 <TableCell
@@ -80,20 +98,7 @@ const StudentsList = () => {
                     gap: "10px",
                     border: "none",
                   }}
-                >
-                  <Link to={`/students/${x._id}/edit`}>
-                    <CiEdit className="text-blue-600 text-[18px] hover:text-blue-800" />
-                  </Link>
-                  <button
-                    onClick={() => {
-                      setShowDeletePopup(true);
-                      setDeleteId(x._id);
-                      setDeleteType("user");
-                    }}
-                  >
-                    <MdDeleteOutline className="text-red-500 text-[18px] hover:text-red-700" />
-                  </button>
-                </TableCell>
+                ></TableCell>
               </TableRow>
             ))}
           </TableBody>

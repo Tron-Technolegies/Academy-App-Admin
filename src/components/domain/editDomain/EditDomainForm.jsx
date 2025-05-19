@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
+import { toast } from "react-toastify";
 import useGetSingleCategory from "../../../hooks/courseCategories/useGetSingleCategory";
 import useUpdateCategory from "../../../hooks/courseCategories/useUpdateCategory";
 import FormInput from "../../FromInput";
@@ -8,7 +8,7 @@ import Loading from "../../Loading";
 
 const EditDomainForm = () => {
   const [name, setName] = useState("");
-  const [error, setError] = useState("");
+
   const { id } = useParams();
 
   const { category, loading: categoryLoading } = useGetSingleCategory({ id });
@@ -22,10 +22,9 @@ const EditDomainForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
 
-    if (!name) {
-      setError("Please fill out all fields.");
+    if (!name.trim()) {
+      toast.error("Please fill out all fields");
       return;
     }
 
@@ -56,11 +55,11 @@ const EditDomainForm = () => {
           onChange={(e) => setName(e.target.value)}
           placeholder="Enter domain name"
         />
-        {error && <p className="text-red-500 mt-2">{error}</p>}
       </div>
 
       <div className="max-w-190 px-6 flex justify-end">
         <button
+          disabled={loading}
           className="bg-[#48089F] w-32 text-white rounded-sm px-3 py-2.5 text-sm font-semibold hover:bg-[#ba9fd6] hover:scale-105 transition-transform duration-300"
           type="submit"
         >

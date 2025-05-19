@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import SearchBox from "../SearchBox";
-import AddButton from "../AddButton";
+
 import { AdminContext } from "../../utils/AdminContext";
 
 const StudentHeader = ({ search, setSearch }) => {
@@ -10,7 +10,6 @@ const StudentHeader = ({ search, setSearch }) => {
     <div>
       <div className="flex items-center justify-between p-4">
         <h4 className="text-[#1D0B30] font-semibold text-3xl">Students List</h4>
-        <AddButton route="/students/new" title="Add" />
       </div>
 
       <div className="w-full p-4">

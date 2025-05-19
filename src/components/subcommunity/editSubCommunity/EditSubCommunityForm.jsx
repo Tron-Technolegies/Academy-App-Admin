@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
+import { toast } from "react-toastify";
 import useGetSingleSubCommunity from "../../../hooks/subCommunity/useGetSingleSubCommunity";
 import useUpdateSubCommunity from "../../../hooks/subCommunity/useUpdateSubCommunity";
 import useGetAllCommunity from "../../../hooks/community/useGetAllCommunities";
@@ -29,7 +29,10 @@ const EditSubCommunityForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!name || !community) return;
+    if (!name.trim() || !community) {
+      toast.error("Please fill out all fields.");
+      return;
+    }
 
     await updateSubCommunity({
       subCommunityName: name,

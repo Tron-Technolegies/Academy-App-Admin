@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import FormInput from "../../FromInput";
 import useAddPlan from "../../../hooks/plan/useAddPlan";
-
+import { toast } from "react-toastify";
 const AddPlanForm = () => {
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
@@ -10,6 +10,11 @@ const AddPlanForm = () => {
   const { addPlan, loading } = useAddPlan();
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!name || !amount || !features) {
+      toast.error("Please fill all fields", {});
+      return;
+    }
     await addPlan({
       planName: name,
       price: amount,

@@ -6,6 +6,10 @@ import { motion } from "framer-motion";
 import useDeleteCourse from "../hooks/course/useDeleteCourse";
 import useDeletePlan from "../hooks/plan/useDeletePlan";
 import useDeleteInstructor from "../hooks/instructor/useDeleteInstructor";
+import useDeleteModule from "../hooks/module/useDeleteModule";
+import useDeleteCommunity from "../hooks/community/useDeleteCommunity";
+import useDeleteSubCommunity from "../hooks/subCommunity/useDeleteSubCommunity";
+import useDeleteChatRoom from "../hooks/chatRoom/useDeleteChatRoom";
 
 const DeletePopup = () => {
   const {
@@ -24,9 +28,20 @@ const DeletePopup = () => {
   const { loading: planLoading, deletePlan } = useDeletePlan();
   const { loading: instructorLoading, deleteInstructor } =
     useDeleteInstructor();
-
+  const { loading: moduleLoading, deleteModule } = useDeleteModule();
+  const { loading: communityLoading, deleteCommunity } = useDeleteCommunity();
+  const { loading: subCommunityLoading, deleteSubCommunity } =
+    useDeleteSubCommunity();
+  const { loading: chatRoomLoading, deleteChatRoom } = useDeleteChatRoom();
   const loading =
-    categoryLoading || courseLoading || planLoading || instructorLoading;
+    categoryLoading ||
+    courseLoading ||
+    planLoading ||
+    instructorLoading ||
+    moduleLoading ||
+    subCommunityLoading ||
+    chatRoomLoading ||
+    communityLoading;
 
   async function handleDelete() {
     if (deleteType === "category") {
@@ -52,6 +67,34 @@ const DeletePopup = () => {
     }
     if (deleteType === "instructor") {
       await deleteInstructor({ id: deleteId });
+      setDeleteId("");
+      setShowDeletePopup(false); // Close popup on delete
+      setRefetchTrigger(!refetchTrigger);
+      setDeleteType("");
+    }
+    if (deleteType === "module") {
+      await deleteModule({ id: deleteId });
+      setDeleteId("");
+      setShowDeletePopup(false); // Close popup on delete
+      setRefetchTrigger(!refetchTrigger);
+      setDeleteType("");
+    }
+    if (deleteType === "community") {
+      await deleteCommunity({ id: deleteId });
+      setDeleteId("");
+      setShowDeletePopup(false); // Close popup on delete
+      setRefetchTrigger(!refetchTrigger);
+      setDeleteType("");
+    }
+    if (deleteType === "subCommunity") {
+      await deleteSubCommunity({ id: deleteId });
+      setDeleteId("");
+      setShowDeletePopup(false); // Close popup on delete
+      setRefetchTrigger(!refetchTrigger);
+      setDeleteType("");
+    }
+    if (deleteType === "chatRoom") {
+      await deleteChatRoom({ id: deleteId });
       setDeleteId("");
       setShowDeletePopup(false); // Close popup on delete
       setRefetchTrigger(!refetchTrigger);

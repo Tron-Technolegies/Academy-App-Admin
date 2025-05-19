@@ -5,6 +5,9 @@ import useGetSingleCourse from "../../../hooks/course/useGetSingleCourse";
 import useGetAllCategory from "../../../hooks/courseCategories/useGetAllCategory";
 import useGetAllInstructor from "../../../hooks/instructor/useGetAllInstructor";
 import Loading from "../../Loading";
+import FormSelect from "../../FormSelect";
+import FormInput from "../../FromInput";
+import { toast } from "react-toastify";
 
 const EditCourseForm = () => {
   const [name, setName] = useState("");
@@ -36,21 +39,28 @@ const EditCourseForm = () => {
   });
 
   useEffect(() => {
-    if (course) {
+    if (course && instructors.length > 0) {
       const { courseName, courseCategory, instructor, courseOverView } = course;
+
       setName(courseName || "");
       setCategory(courseCategory || "");
-      setInstructor(instructor || "");
+
+      const instructorId =
+        typeof instructor === "string"
+          ? instructor
+          : instructor && typeof instructor === "object" && instructor._id
+          ? instructor._id
+          : "";
+
+      setInstructor(instructorId);
       setOverView(courseOverView || "");
     }
-  }, [course]);
+  }, [course, instructors]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
-
-    if (!name || !category || !instructor || !overView) {
-      setError("Please fill out all fields.");
+    if (!name.trim() || !category || !instructor || !overView.trim()) {
+      toast.error("Please fill all the fields.");
       return;
     }
 
@@ -71,71 +81,68 @@ const EditCourseForm = () => {
     );
   }
 
-  if (!course) return <p>Course not found.</p>;
-  if (categories.length === 0) return <p>Loading categories...</p>;
-
   return (
     <form onSubmit={handleSubmit} className="p-6 max-w-xl mx-auto">
-      <h2 className="text-2xl font-semibold mb-4">Edit Course</h2>
-
+      <h4 className="text-[#4F4F4F] text-3xl p-6 font-semibold">Edit Course</h4>
       {error && <p className="text-red-500 mb-2">{error}</p>}
 
-      <label className="block mb-1 font-medium">Course Name</label>
-      <input
+      <FormInput
+        label="Course Name"
         type="text"
+        placeholder="Enter course name"
         value={name}
         onChange={(e) => setName(e.target.value)}
-        className="w-full border border-gray-300 px-3 py-2 mb-4 rounded"
-        placeholder="Enter course name"
+        error={false} // Or pass a string message like "Course name is required"
+        disabled={loading} // You’ll need to add this to the component (see below)
       />
 
-      <label className="block mb-1 font-medium">Domain</label>
-      <select
+      <FormSelect
+        title="Domain"
         value={category}
         onChange={(e) => setCategory(e.target.value)}
-        className="w-full border border-gray-300 px-3 py-2 mb-4 rounded"
-      >
-        <option value="">Select a category</option>
-        {categories.map((cat) => (
-          <option key={cat._id} value={cat._id}>
-            {cat.categoryName}
-          </option>
-        ))}
-      </select>
+        list={categories}
+        multi={false}
+        displayField="categoryName"
+        error={false}
+        disabled={loading}
+      />
 
-      <label className="block mb-1 font-medium">Instructor</label>
-      <select
+      <FormSelect
+        title="Instructor"
         value={instructor}
         onChange={(e) => setInstructor(e.target.value)}
-        className="w-full border border-gray-300 px-3 py-2 mb-4 rounded"
-      >
-        <option value="">Select an instructor</option>
-        {instructorsWithNames.map((inst) => (
-          <option key={inst._id} value={inst._id}>
-            {inst.fullName}
-          </option>
-        ))}
-      </select>
+        list={instructorsWithNames}
+        multi={false}
+        displayField="fullName"
+        error={false} // You can set true if there's an error to show red borders
+      />
 
-      <label className="block mb-1 font-medium">Overview</label>
+      <label
+        htmlFor="overview"
+        className="block mb-1 font-medium  text-[#8A8A8A]"
+      >
+        Overview
+      </label>
       <textarea
+        id="overview"
         value={overView}
         onChange={(e) => setOverView(e.target.value)}
-        className="w-full border border-gray-300 px-3 py-2 mb-4 rounded"
+        disabled={loading}
+        className="rounded-sm bg-[#F5F5F5] border border-gray-300 text-[#030229] text-md py-1 px-2 focus:outline-none w-full"
         placeholder="Enter course overview"
       />
 
-      <div className="flex justify-end gap-4">
+      <div className="flex justify-end gap-4 pt-4">
         <Link
-          to="/domain"
-          className="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400"
+          to="/domain/course"
+          className="bg-[#EEEDEE] text-[#858585] rounded-sm w-32 px-10 py-2.5 text-sm font-semibold hover:bg-[#EEEDEE] hover:scale-105 transition-transform duration-300"
         >
           Cancel
         </Link>
         <button
           type="submit"
           disabled={loading}
-          className="bg-purple-700 text-white px-4 py-2 rounded hover:bg-purple-800"
+          className="bg-[#48089F] w-31 text-white rounded-sm px-3 py-2.5 text-sm font-semibold hover:bg-[#ba9fd6] hover:scale-105 transition-transform duration-300"
         >
           {loading ? "Updating..." : "Update"}
         </button>

@@ -5,7 +5,7 @@ import useGetAllCategory from "../../../hooks/courseCategories/useGetAllCategory
 import useGetAllCourses from "../../../hooks/course/useGetAllCourses";
 import useGetSingleModule from "../../../hooks/module/useGetSingleModule";
 import useUpdateModule from "../../../hooks/module/useUpdateModule";
-
+import { toast } from "react-toastify";
 import FormInput from "../../FromInput";
 import FormSelect from "../../FormSelect";
 import Loading from "../../Loading";
@@ -32,8 +32,10 @@ const EditModuleForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!name || !category || !course) return;
-
+    if (!name.trim() || !category || !course) {
+      toast.error("Please fill out all fields.");
+      return;
+    }
     await updateModule({
       moduleName: name,
       courseCategory: category, // Updated key here
