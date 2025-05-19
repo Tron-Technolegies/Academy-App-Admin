@@ -31,6 +31,7 @@ import AddChatRoomPage from "./pages/chatroom/AddChatRoomPage";
 import EditCommunityPage from "./pages/community/EditCommunityPage";
 import EditSubCommunityPage from "./pages/subCommunity/EditSubCommunityPage";
 import EditChatRoomPage from "./pages/chatroom/EditChatRoomPage";
+import AddStudentsPage from "./pages/students/AddStudentsPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -56,6 +57,10 @@ function App() {
         {
           path: "students",
           element: <StudentsPage />,
+        },
+        {
+          path: "students/new",
+          element: <AddStudentsPage />,
         },
         {
           path: "subscription",

@@ -3,14 +3,14 @@ import SearchBox from "../SearchBox";
 import AddButton from "../AddButton";
 import { AdminContext } from "../../utils/AdminContext";
 
-const TeacherHeader = ({ search, setSearch }) => {
+const StudentHeader = ({ search, setSearch }) => {
   const { setRefetchTrigger, refetchTrigger } = useContext(AdminContext);
 
   return (
     <div>
       <div className="flex items-center justify-between p-4">
-        <h4 className="text-[#1D0B30] font-semibold text-3xl">Teachers List</h4>
-        <AddButton route="/teachers/new" title="Add" />
+        <h4 className="text-[#1D0B30] font-semibold text-3xl">Students List</h4>
+        <AddButton route="/students/new" title="Add" />
       </div>
 
       <div className="w-full p-4">
@@ -25,4 +25,4 @@ const TeacherHeader = ({ search, setSearch }) => {
   );
 };
 
-export default TeacherHeader;
+export default StudentHeader;
