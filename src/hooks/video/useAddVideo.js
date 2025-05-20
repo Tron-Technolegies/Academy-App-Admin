@@ -1,42 +1,45 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { toast } from "react-toastify";
+// useAddVideo.js
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import axios from "axios";
 import { base_url } from "../../utils/constants";
 
-const useAddVideo = async ({}) => {
+const useAddVideo = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const addVideo = async ({
     videoName,
-    videoURL,
-    relatedModule,
+    videoUrl,
     relatedCourse,
+    relatedModule,
+    relatedCategory,
   }) => {
     setLoading(true);
     try {
-      const res = await axios.post(
+      await axios.post(
         `${base_url}/video/addVideo`,
         {
           videoName,
-          videoURL,
-          relatedModule,
+          videoURL: videoUrl, // note: videoURL is case-sensitive and must match what your backend expects
           relatedCourse,
+          relatedModule,
+          relatedCategory,
         },
         { withCredentials: true }
       );
-      const data = res.data;
       toast.success("Video added successfully");
-      navigate("/video");
+      navigate("/videos");
     } catch (err) {
-      toast.err(
-        err?.response?.data?.msg || err?.error || "something went wrong"
+      toast.error(
+        err?.response?.data?.msg || err?.message || "Something went wrong"
       );
     } finally {
       setLoading(false);
     }
   };
+
   return { loading, addVideo };
 };
 

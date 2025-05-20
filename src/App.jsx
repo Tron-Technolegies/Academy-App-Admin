@@ -32,6 +32,7 @@ import EditCommunityPage from "./pages/community/EditCommunityPage";
 import EditSubCommunityPage from "./pages/subCommunity/EditSubCommunityPage";
 import EditChatRoomPage from "./pages/chatroom/EditChatRoomPage";
 import AddVideoPage from "./pages/videos/AddVideoPage";
+import EditVideoPage from "./pages/videos/EditVideoPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -152,6 +153,10 @@ function App() {
         {
           path: "videos/new",
           element: <AddVideoPage />,
+        },
+        {
+          path: "videos/:id/edit",
+          element: <EditVideoPage />,
         },
       ],
     },

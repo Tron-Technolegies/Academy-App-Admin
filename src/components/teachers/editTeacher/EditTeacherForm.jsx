@@ -5,7 +5,6 @@ import useUpdateInstructor from "../../../hooks/instructor/useUpdateInstructor";
 import { Link, useParams } from "react-router-dom";
 import useGetSingleInstructor from "../../../hooks/instructor/useGetSingleInstructor";
 import Loading from "../../Loading";
-import validateInstructor from "../../../utils/validateInstructor";
 
 const EditTeacherForm = () => {
   const { id } = useParams();
@@ -20,7 +19,6 @@ const EditTeacherForm = () => {
   const [designation, setDesignation] = useState("");
   const [gender, setGender] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (instructor) {
@@ -39,18 +37,6 @@ const EditTeacherForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const newErrors = validateInstructor({
-      name,
-      email,
-      phoneNumber,
-      designation,
-      gender,
-      password,
-    });
-    setErrors(newErrors);
-
-    if (Object.keys(newErrors).length > 0) return;
 
     await updateInstructor({
       fullName: name,
@@ -93,7 +79,6 @@ const EditTeacherForm = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder=""
-              error={errors.name}
             />
             <FormInput
               label="Email"
@@ -101,7 +86,6 @@ const EditTeacherForm = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder=""
-              error={errors.email}
             />
             <FormInput
               label="Phone number"
@@ -109,7 +93,6 @@ const EditTeacherForm = () => {
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
               placeholder=""
-              error={errors.phoneNumber}
             />
             <FormInput
               label="Designation"
@@ -117,7 +100,6 @@ const EditTeacherForm = () => {
               value={designation}
               onChange={(e) => setDesignation(e.target.value)}
               placeholder=""
-              error={errors.designation}
             />
 
             <FormSelect
@@ -132,7 +114,6 @@ const EditTeacherForm = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder=""
-              error={errors.password}
             />
           </div>
         </div>

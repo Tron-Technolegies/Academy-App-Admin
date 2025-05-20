@@ -34,6 +34,7 @@ const useAddInstructor = () => {
       toast.success("Instructor added successfully");
       navigate("/teachers");
     } catch (err) {
+      console.log(err);
       toast.error(
         err?.response?.data?.msg || err?.message || "Something went wrong"
       );

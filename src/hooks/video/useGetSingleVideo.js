@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { base_url } from "../../pages/utils/constants";
+import { base_url } from "../../utils/constants";
 
 const useGetSingleVideo = ({ id }) => {
   const [loading, setLoading] = useState(false);
@@ -24,7 +24,7 @@ const useGetSingleVideo = ({ id }) => {
   };
   useEffect(() => {
     getSingleVideo();
-  }, []);
+  }, [id]);
   return { loading, video };
 };
 

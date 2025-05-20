@@ -19,7 +19,7 @@ const useLogin = () => {
 
       toast.success(res.data.message || "Logged in successfully");
 
-      navigate("/teachers"); // or any protected route
+      navigate("/"); // or any protected route
     } catch (err) {
       toast.error(
         err?.response?.data?.message ||
