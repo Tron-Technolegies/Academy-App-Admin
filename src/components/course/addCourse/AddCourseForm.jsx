@@ -37,16 +37,6 @@ const AddCourseForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (
-      !name.trim() ||
-      !category.trim() ||
-      !instructor.trim() ||
-      !overview.trim()
-    ) {
-      toast.error("Please fill all required fields", {});
-      return;
-    }
-
     await addCourse({
       courseName: name,
       courseCategory: category,

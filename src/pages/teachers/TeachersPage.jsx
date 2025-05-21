@@ -1,14 +1,18 @@
-import React, { useState } from "react";
-import TeacherTable from "../../components/teachers/TeacherTable";
+import React, { useState, useContext } from "react";
+
+import { AdminContext } from "../../utils/AdminContext";
 import TeacherHeader from "../../components/teachers/TeacherHeader";
+import TeacherTable from "../../components/teachers/TeacherTable";
 
 const TeachersPage = () => {
   const [search, setSearch] = useState("");
+  const { refetchTrigger } = useContext(AdminContext);
+
   return (
-    <div>
+    <>
       <TeacherHeader search={search} setSearch={setSearch} />
-      <TeacherTable search={search} />
-    </div>
+      <TeacherTable search={search} refetchTrigger={refetchTrigger} />
+    </>
   );
 };
 

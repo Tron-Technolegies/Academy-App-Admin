@@ -19,7 +19,7 @@ const useDeleteSubCommunity = () => {
       return res.data; // return something to signal success
     } catch (err) {
       toast.error(
-        err?.response?.data?.msg || err?.error || "something went wrong"
+        err?.response?.data?.message || err?.error || "something went wrong"
       );
       return null;
     } finally {

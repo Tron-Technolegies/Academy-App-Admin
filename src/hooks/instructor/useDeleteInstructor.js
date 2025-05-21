@@ -19,7 +19,7 @@ const useDeleteInstructor = () => {
       return { success: true, data: res.data };
     } catch (err) {
       toast.error(
-        err?.response?.data?.msg || err?.message || "Something went wrong"
+        err?.response?.data?.message || err?.error || "something went wrong"
       );
       return { success: false };
     } finally {

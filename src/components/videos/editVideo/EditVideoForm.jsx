@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useGetAllCourses from "../../../hooks/course/useGetAllCourses";
 import useGetAllModule from "../../../hooks/module/useGetAllModule";
 import useGetAllCategory from "../../../hooks/courseCategories/useGetAllCategory";
@@ -67,7 +67,7 @@ const EditVideoForm = () => {
     >
       <h4 className="text-[#4F4F4F] text-3xl font-semibold mb-6">Edit Video</h4>
 
-      <div className="flex-grow space-y-4">
+      <div className="w-xl space-y-4">
         <FormSelect
           title="Course"
           value={course}
@@ -108,7 +108,14 @@ const EditVideoForm = () => {
         />
       </div>
 
-      <div className="flex justify-end mt-6">
+      {/* Button sticks to bottom right */}
+      <div className="mt-auto flex justify-end pt-6 gap-4">
+        <Link
+          to="/videos"
+          className="bg-[#EEEDEE] text-[#858585] rounded-sm w-32 px-10 py-2.5 text-sm font-semibold hover:bg-[#EEEDEE] hover:scale-105 transition-transform duration-300"
+        >
+          Cancel
+        </Link>
         <button
           className="bg-[#48089F] w-32 text-white rounded-sm px-3 py-2.5 text-sm font-semibold hover:bg-[#ba9fd6] hover:scale-105 transition-transform duration-300"
           type="submit"

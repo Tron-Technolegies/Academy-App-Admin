@@ -29,16 +29,11 @@ const CourseList = () => {
   } = useContext(AdminContext);
 
   useEffect(() => {
-    refetch && refetch();
+    refetch();
   }, [refetchTrigger]);
-
-  if (loading) return <Loading />;
-
-  if (!course || course.length === 0) {
-    return <div>No courses available at the moment.</div>;
-  }
-
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <TableContainer component={Paper}>
       <Table aria-label="course table">
         <TableHead>

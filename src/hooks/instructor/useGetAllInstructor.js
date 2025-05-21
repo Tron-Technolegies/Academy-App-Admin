@@ -1,8 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { base_url } from "../../utils/constants";
+import { toast } from "react-toastify"; // You forgot to import toast
 
-const useGetAllInstructor = ({ search } = {}) => {
+const useGetAllInstructor = ({ search = "" } = {}) => {
   const [loading, setLoading] = useState(false);
   const [instructor, setInstructor] = useState([]);
 
@@ -10,16 +11,14 @@ const useGetAllInstructor = ({ search } = {}) => {
     setLoading(true);
     try {
       const res = await axios.get(`${base_url}/instructor/getInstructor`, {
-        params: {
-          search,
-        },
+        params: { search },
         withCredentials: true,
       });
-
+      console.log("received data:", res.data);
       setInstructor(res.data);
     } catch (err) {
-      console.log(
-        err?.response?.data?.msg || err?.error || "something went wrong"
+      toast.error(
+        err?.response?.data?.message || err?.message || "Something went wrong"
       );
     } finally {
       setLoading(false);

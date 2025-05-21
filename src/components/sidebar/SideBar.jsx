@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import NavItem from "./NavItem";
 import { navItems } from "../../utils/NavItems";
@@ -8,11 +8,19 @@ import { useLocation } from "react-router-dom";
 
 import { AdminContext } from "../../utils/AdminContext";
 import useLogout from "../../hooks/auth/useLogout";
+import LogoutPopup from "../LogoutPopup";
 
 export default function SideBar() {
   const location = useLocation();
   const { setUser } = useContext(AdminContext);
   const { logout, loading } = useLogout();
+  const [LogoutPopUp, setLogoutPopUp] = useState(false);
+
+  const handleLogout = async () => {
+    await logout();
+    setUser(null);
+    setLogoutPopUp(false);
+  };
   return (
     <div className="w-[350px] h-screen p-7 flex flex-col bg-[#1D0B30]">
       <div className="flex gap-5 mt-4 p-7">
@@ -43,20 +51,17 @@ export default function SideBar() {
           />
         ))}
         <button
-          onClick={async () => {
-            const confirmLogout = window.confirm(
-              "Are you sure you want to logout?"
-            );
-            if (confirmLogout) {
-              await logout();
-              setUser(null);
-            }
-          }}
+          onClick={() => setLogoutPopUp(true)}
           className="flex items-center gap-2 px-3 py-2 text-white rounded-sm hover:outline hover:outline-[#FAEBEB] hover:text-[#c7b1e6] ease-in-out duration-500"
         >
           <IoIosLogOut /> Logout
         </button>
       </div>
+      <LogoutPopup
+        isOpen={LogoutPopUp}
+        onConfirm={handleLogout}
+        onCancel={() => setLogoutPopUp(false)}
+      />
     </div>
   );
 }

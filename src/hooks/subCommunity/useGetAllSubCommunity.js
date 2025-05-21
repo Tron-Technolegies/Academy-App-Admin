@@ -16,10 +16,12 @@ const useGetAllSubCommunity = () => {
       const data = res.data;
       setSubCommunity(data); // <-- fix here: set data, not previous state
     } catch (err) {
-      console.log(
-        err?.response?.data?.msg || err?.error || "something went wrong"
+      toast.error(
+        err?.response?.data?.message || err?.error || "something went wrong"
       );
-      toast.error(err?.response?.data?.msg || "Failed to load sub communities");
+      toast.error(
+        err?.response?.data?.message || "Failed to load sub communities"
+      );
     } finally {
       setLoading(false);
     }

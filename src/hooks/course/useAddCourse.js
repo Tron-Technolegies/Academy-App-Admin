@@ -42,10 +42,8 @@ const useAddCourse = () => {
       navigate("/domain/course");
     } catch (err) {
       // Log the error response
-      console.error("Error while adding course:", err.response?.data);
-
       toast.error(
-        err?.response?.data?.msg || err?.message || "Something went wrong"
+        err?.response?.data?.message || err?.error || "something went wrong"
       );
     } finally {
       setLoading(false);

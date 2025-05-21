@@ -19,7 +19,9 @@ const useUpdateCommunity = () => {
       toast.success("Community updated successfully");
       navigate("/community");
     } catch (err) {
-      toast.error(err?.response?.data?.msg || "Something went wrong");
+      toast.error(
+        err?.response?.data?.message || err?.error || "something went wrong"
+      );
     } finally {
       setLoading(false);
     }

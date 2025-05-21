@@ -16,10 +16,9 @@ const useGetAllCommunity = () => {
       const data = res.data;
       setCommunity(data);
     } catch (err) {
-      const errorMsg =
-        err?.response?.data?.msg || err?.error || "Something went wrong";
-
-      toast.error(errorMsg); // error toast
+      toast.error(
+        err?.response?.data?.message || err?.error || "something went wrong"
+      );
     } finally {
       setLoading(false);
     }

@@ -21,10 +21,7 @@ const AddChatRoomForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!name.trim() || !community || !subCommunity) {
-      toast.error("Please fill out all fields.");
-      return;
-    }
+
     await addChatRoom({
       chatRoomName: name,
       relatedCommunity: community,

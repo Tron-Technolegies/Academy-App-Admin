@@ -29,10 +29,6 @@ const EditSubCommunityForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!name.trim() || !community) {
-      toast.error("Please fill out all fields.");
-      return;
-    }
 
     await updateSubCommunity({
       subCommunityName: name,

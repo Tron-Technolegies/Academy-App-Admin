@@ -23,7 +23,7 @@ const useUpdateModule = () => {
       navigate("/domain/module");
     } catch (err) {
       toast.error(
-        err?.response?.data?.msg || err?.error || "Something went wrong"
+        err?.response?.data?.message || err?.error || "something went wrong"
       );
     } finally {
       setLoading(false);

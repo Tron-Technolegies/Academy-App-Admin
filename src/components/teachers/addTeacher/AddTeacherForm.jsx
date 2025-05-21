@@ -81,7 +81,6 @@ const AddTeacherForm = () => {
             />
           </div>
 
-          {/* Right side: (optional image section, safely handled) */}
           {/* <div className="flex-1 flex justify-center items-center">
             <img
               src={imageUrl || undefined}

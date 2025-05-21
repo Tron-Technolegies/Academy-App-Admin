@@ -21,7 +21,7 @@ const useDeleteCourse = () => {
       return { success: true, data: res.data };
     } catch (err) {
       toast.error(
-        err?.response?.data?.msg || err?.message || "Something went wrong"
+        err?.response?.data?.message || err?.message || "Something went wrong"
       );
       return { success: false };
     } finally {

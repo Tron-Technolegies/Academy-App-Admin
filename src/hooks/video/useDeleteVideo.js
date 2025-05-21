@@ -15,8 +15,8 @@ const useDeleteVideo = () => {
       const data = res.data;
       toast.success("Video Successfully Deleted");
     } catch (err) {
-      toast.err(
-        err?.response?.data?.msg || err?.error || "something went wrong"
+      toast.error(
+        err?.response?.data?.message || err?.error || "something went wrong"
       );
     } finally {
       setLoading(false);

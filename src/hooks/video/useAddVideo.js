@@ -33,7 +33,7 @@ const useAddVideo = () => {
       navigate("/videos");
     } catch (err) {
       toast.error(
-        err?.response?.data?.msg || err?.message || "Something went wrong"
+        err?.response?.data?.message || err?.error || "something went wrong"
       );
     } finally {
       setLoading(false);

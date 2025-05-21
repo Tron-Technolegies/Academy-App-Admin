@@ -22,8 +22,8 @@ const useUpdatePlan = () => {
       navigate("/subscription"); // Redirect to subscription page
     } catch (err) {
       toast.error(
-        err?.response?.data?.msg || err?.error || "Something went wrong"
-      ); // Corrected error function
+        err?.response?.data?.message || err?.error || "something went wrong"
+      );
     } finally {
       setLoading(false);
     }

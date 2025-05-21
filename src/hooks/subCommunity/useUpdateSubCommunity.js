@@ -27,7 +27,7 @@ const useUpdateSubCommunity = () => {
       navigate("/community/subCommunity");
     } catch (err) {
       toast.error(
-        err?.response?.data?.msg || err?.message || "Something went wrong"
+        err?.response?.data?.message || err?.message || "Something went wrong"
       );
     } finally {
       setLoading(false);

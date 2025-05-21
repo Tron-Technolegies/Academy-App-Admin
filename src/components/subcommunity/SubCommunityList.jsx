@@ -12,7 +12,7 @@ import {
 import Loading from "../Loading";
 import { Link } from "react-router-dom";
 import { CiEdit } from "react-icons/ci";
-import useDeleteCourse from "../../hooks/course/useDeleteCourse";
+
 import { AdminContext } from "../../utils/AdminContext";
 import { MdDeleteOutline } from "react-icons/md";
 import useGetAllSubCommunity from "../../hooks/subCommunity/useGetAllSubCommunity";
@@ -35,10 +35,6 @@ const SubCommunityList = () => {
   }, [refetchTrigger]);
 
   if (loading) return <Loading />;
-
-  if (!subCommunity || subCommunity.length === 0) {
-    return <div>No Sub Community available at the moment.</div>;
-  }
 
   return (
     <TableContainer component={Paper}>

@@ -20,7 +20,7 @@ const useAddCategory = () => {
       navigate("/domain"); // Redirect after success
     } catch (err) {
       toast.error(
-        err?.response?.data?.msg || err?.message || "Something went wrong"
+        err?.response?.data?.message || err?.message || "Something went wrong"
       );
     } finally {
       setLoading(false);

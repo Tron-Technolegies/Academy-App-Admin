@@ -15,8 +15,8 @@ const useGetSingleCourse = ({ id }) => {
       const data = res.data;
       setCourse(data);
     } catch (err) {
-      console.log(
-        err?.response?.data?.msg || err?.error || "something went wrong"
+      toast.error(
+        err?.response?.data?.message || err?.error || "something went wrong"
       );
     } finally {
       setLoading(false);

@@ -27,9 +27,8 @@ const useDeletePlan = () => {
       toast.success("Plan deleted successfully");
       return { success: true, data: res.data };
     } catch (err) {
-      console.error("Delete plan error:", err.response || err.message || err);
       toast.error(
-        err?.response?.data?.msg || err?.message || "Something went wrong"
+        err?.response?.data?.message || err?.error || "something went wrong"
       );
       return { success: false };
     } finally {

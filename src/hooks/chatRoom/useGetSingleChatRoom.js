@@ -20,7 +20,7 @@ const useGetSingleChatRoom = ({ id }) => {
     } catch (err) {
       console.error(err);
       toast.error(
-        err?.response?.data?.msg || err?.error || "Something went wrong"
+        err?.response?.data?.message || err?.error || "Something went wrong"
       );
     } finally {
       setLoading(false);

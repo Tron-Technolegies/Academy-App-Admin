@@ -23,7 +23,7 @@ const useAddCommunity = () => {
       navigate("/community");
     } catch (err) {
       toast.error(
-        err?.response?.data?.msg || err?.error || "something went wrong"
+        err?.response?.data?.message || err?.error || "something went wrong"
       );
     } finally {
       setLoading(false);

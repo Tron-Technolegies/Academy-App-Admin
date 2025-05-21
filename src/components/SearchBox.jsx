@@ -14,7 +14,7 @@ export default function SearchBox({ value, onChange, submit }) {
         value={value}
         onChange={onChange}
         className="py-2 text-[#8A8A8A] text-md bg-[#FCFAFA] focus:outline-none w-full"
-      ></input>
+      />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -6,30 +6,26 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import CircularProgress from "@mui/material/CircularProgress";
-import useGetAllInstructor from "../../hooks/instructor/useGetAllInstructor";
 import { Link } from "react-router-dom";
 import { AdminContext } from "../../utils/AdminContext";
 import Loading from "../Loading";
-import useDeleteInstructor from "../../hooks/instructor/useDeleteInstructor";
+import useGetAllInstructor from "../../hooks/instructor/useGetAllInstructor";
 import { MdDeleteOutline } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
 import { Box } from "@mui/material";
 
-const TeacherTable = () => {
-  const [search, setSearch] = useState("");
+const TeacherTable = ({ search, refetchTrigger }) => {
   const { instructor, loading, refetch } = useGetAllInstructor({ search });
-  const { deleteInstructor } = useDeleteInstructor();
-  const { setShowDeletePopup, setDeleteId, setDeleteType, refetchTrigger } =
+  const { setShowDeletePopup, setDeleteId, setDeleteType } =
     useContext(AdminContext);
 
   useEffect(() => {
     refetch();
-  }, [refetchTrigger]);
+  }, [refetchTrigger, search]);
 
-  return loading ? (
-    <Loading />
-  ) : (
+  if (loading) return <Loading />;
+
+  return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="teacher table">
         <TableHead>
@@ -74,7 +70,6 @@ const TeacherTable = () => {
               <TableCell sx={{ color: "#030229", border: "none" }}>
                 {x.phoneNumber}
               </TableCell>
-
               <TableCell sx={{ border: "none" }}>
                 <Box
                   sx={{
@@ -98,8 +93,7 @@ const TeacherTable = () => {
                     textTransform: "capitalize",
                     textAlign: "center",
                     display: "inline-block",
-
-                    mx: "auto", // horizontally center within TableCell
+                    mx: "auto",
                   }}
                 >
                   {x.gender}

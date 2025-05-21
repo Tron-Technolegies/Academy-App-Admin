@@ -14,9 +14,7 @@ const useGetAllVideo = () => {
         withCredentials: true,
       });
       const data = res.data;
-      console.log("API response data:", data); // Debug line
-      // If data is an object with a key, like data.videos or data.video, adjust here:
-      // setVideo(data.videos || data.video || data);
+
       setVideo(data);
     } catch (err) {
       const message =

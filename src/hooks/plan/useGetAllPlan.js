@@ -16,8 +16,8 @@ const useGetAllPlan = () => {
       const data = res.data;
       setPlan(data);
     } catch (err) {
-      console.log(
-        err?.response?.data?.msg || err?.error || "something went wrong"
+      toast.error(
+        err?.response?.data?.message || err?.error || "something went wrong"
       );
     } finally {
       setLoading(false);
