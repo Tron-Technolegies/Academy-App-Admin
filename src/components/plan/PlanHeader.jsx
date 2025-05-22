@@ -4,7 +4,7 @@ import AddButton from "../AddButton";
 const PlanHeader = () => {
   return (
     <div className="flex justify-between items-center">
-      <h4 className="text-[#1D0B30] font-semibold text-3xl">
+      <h4 className="text-xl sm:text-3xl text-[#1D0B30] font-semibold pl-5 sm:pl-0">
         Subscription list
       </h4>
       <AddButton route={"/subscription/new"} title={"Add"} />

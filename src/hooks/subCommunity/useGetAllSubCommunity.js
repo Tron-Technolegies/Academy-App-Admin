@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { base_url } from "../../utils/constants";
 
-const useGetAllSubCommunity = () => {
+const useGetAllSubCommunity = ({ search = "" } = {}) => {
   const [loading, setLoading] = useState(false);
   const [subCommunity, setSubCommunity] = useState([]);
 
@@ -11,10 +11,11 @@ const useGetAllSubCommunity = () => {
     setLoading(true);
     try {
       const res = await axios.get(`${base_url}/subCommunity/getSubCommunity`, {
+        params: { search },
         withCredentials: true,
       });
       const data = res.data;
-      setSubCommunity(data); // <-- fix here: set data, not previous state
+      setSubCommunity(data);
     } catch (err) {
       toast.error(
         err?.response?.data?.message || err?.error || "something went wrong"
@@ -29,7 +30,7 @@ const useGetAllSubCommunity = () => {
 
   useEffect(() => {
     getAllSubCommunity();
-  }, []);
+  }, [search]);
 
   const refetch = () => {
     getAllSubCommunity();

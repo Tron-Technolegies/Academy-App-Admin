@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { base_url } from "../../utils/constants";
 
-const useGetAllVideo = () => {
+const useGetAllVideo = ({ search = "" } = {}) => {
+  // <-- add default parameter here
   const [loading, setLoading] = useState(false);
   const [video, setVideo] = useState([]);
 
@@ -12,9 +13,9 @@ const useGetAllVideo = () => {
     try {
       const res = await axios.get(`${base_url}/video/getAllVideo`, {
         withCredentials: true,
+        params: { search },
       });
       const data = res.data;
-
       setVideo(data);
     } catch (err) {
       const message =
@@ -28,7 +29,7 @@ const useGetAllVideo = () => {
 
   useEffect(() => {
     getAllVideo();
-  }, []);
+  }, [search]);
 
   const refetch = () => {
     getAllVideo();

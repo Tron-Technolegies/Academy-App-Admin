@@ -9,7 +9,9 @@ const StudentHeader = ({ search, setSearch }) => {
   return (
     <div>
       <div className="flex items-center justify-between p-4">
-        <h4 className="text-[#1D0B30] font-semibold text-3xl">Students List</h4>
+        <h4 className="text-xl sm:text-3xl text-[#1D0B30] font-semibold pl-5 sm:pl-0">
+          Students List
+        </h4>
       </div>
 
       <div className="w-full p-4">
@@ -17,7 +19,7 @@ const StudentHeader = ({ search, setSearch }) => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           submit={() => setRefetchTrigger(!refetchTrigger)}
-          // no submit prop needed if refetch runs on typing
+          placeholder="search by student name or email"
         />
       </div>
     </div>

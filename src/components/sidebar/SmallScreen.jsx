@@ -28,10 +28,10 @@ export default function SmallScreen() {
   };
 
   return (
-    <div className="md:hidden">
+    <div>
       {/* Toggle Button */}
       <button
-        className={`p-3 fixed top-3 left-0 z-50 ${
+        className={`p-3 fixed top-1 left-0 z-50 ${
           open ? "text-white" : "text-black"
         }`}
         onClick={() => setOpen(!open)}

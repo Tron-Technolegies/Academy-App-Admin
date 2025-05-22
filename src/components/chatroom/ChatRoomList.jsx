@@ -16,8 +16,8 @@ import { MdDeleteOutline } from "react-icons/md";
 import useDeleteChatRoom from "../../hooks/chatRoom/useDeleteChatRoom";
 import { AdminContext } from "../../utils/AdminContext";
 
-const ChatRoomList = () => {
-  const { loading, chatRoom, refetch } = useGetAllChatRoom();
+const ChatRoomList = ({ search, refetchTrigger }) => {
+  const { loading, chatRoom, refetch } = useGetAllChatRoom({ search });
   const { deleteChatRoom } = useDeleteChatRoom();
   const {
     showDeletePopup,
@@ -25,7 +25,6 @@ const ChatRoomList = () => {
     deleteId,
     setDeleteId,
     setDeleteType,
-    refetchTrigger,
   } = useContext(AdminContext);
 
   useEffect(() => {

@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import VideoList from "../../components/videos/VideoList";
 import VideoHeader from "../../components/videos/videoHeader";
+import { useContext } from "react";
+import { AdminContext } from "../../utils/AdminContext";
 
 const VideosPage = () => {
+  const [search, setSearch] = useState("");
+  const { refetchTrigger } = useContext(AdminContext);
   return (
     <div>
-      <VideoHeader />
-      <VideoList />
+      <VideoHeader search={search} setSearch={setSearch} />
+      <VideoList search={search} refetchTrigger={refetchTrigger} />
     </div>
   );
 };

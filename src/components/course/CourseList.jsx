@@ -13,11 +13,12 @@ import Loading from "../Loading";
 import { Link } from "react-router-dom";
 import { CiEdit } from "react-icons/ci";
 import useDeleteCourse from "../../hooks/course/useDeleteCourse";
-import { AdminContext } from "../../utils/AdminContext";
-import { MdDeleteOutline } from "react-icons/md";
 
-const CourseList = () => {
-  const { loading, course, refetch } = useGetAllCourses();
+import { MdDeleteOutline } from "react-icons/md";
+import { AdminContext } from "../../utils/AdminContext";
+
+const CourseList = ({ search, refetchTrigger }) => {
+  const { loading, course, refetch } = useGetAllCourses({ search });
   const { deleteCourse } = useDeleteCourse();
   const {
     showDeletePopup,
@@ -25,12 +26,11 @@ const CourseList = () => {
     deleteId,
     setDeleteId,
     setDeleteType,
-    refetchTrigger,
   } = useContext(AdminContext);
 
   useEffect(() => {
     refetch();
-  }, [refetchTrigger]);
+  }, [refetchTrigger, search]);
   return loading ? (
     <Loading />
   ) : (

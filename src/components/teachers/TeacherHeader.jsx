@@ -9,7 +9,7 @@ const TeacherHeader = ({ search, setSearch }) => {
   return (
     <div>
       <div className="flex items-center justify-between p-4">
-        <h4 className="text-[#1D0B30] font-semibold text-3xl pl-5 sm:pl-0">
+        <h4 className="text-xl sm:text-3xl text-[#1D0B30] font-semibold pl-5 sm:pl-0">
           Teachers List
         </h4>
         <AddButton route="/teachers/new" title="Add" />
@@ -20,6 +20,7 @@ const TeacherHeader = ({ search, setSearch }) => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           submit={() => setRefetchTrigger(!refetchTrigger)}
+          placeholder="Search for teachers by name or email"
         />
       </div>
     </div>

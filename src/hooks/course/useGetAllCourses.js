@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { base_url } from "../../utils/constants";
 
-const useGetAllCourses = () => {
+const useGetAllCourses = ({ search = "" } = {}) => {
   const [loading, setLoading] = useState(false);
   const [course, setCourse] = useState([]);
 
@@ -11,6 +11,7 @@ const useGetAllCourses = () => {
     setLoading(true);
     try {
       const res = await axios.get(`${base_url}/course/getCourse`, {
+        params: { search },
         withCredentials: true,
       });
       const data = res.data;
@@ -25,7 +26,7 @@ const useGetAllCourses = () => {
   };
   useEffect(() => {
     getAllCourses();
-  }, []);
+  }, [search]);
 
   const refetch = () => {
     getAllCourses();

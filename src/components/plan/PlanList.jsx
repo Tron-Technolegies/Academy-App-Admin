@@ -7,6 +7,11 @@ import useDeletePlan from "../../hooks/plan/useDeletePlan";
 import { AdminContext } from "../../utils/AdminContext";
 import { MdDeleteOutline } from "react-icons/md";
 
+const cardColors = [
+  "linear-gradient(to bottom, #F6E7FC, #9B7BBD)", // light purple
+  "linear-gradient(to bottom, #D0E7FA, #6FA8DC)", // light blue
+];
+
 const PlanList = () => {
   const { loading, plan: plans, refetch } = useGetAllPlan();
   const { deletePlan } = useDeletePlan();
@@ -23,17 +28,18 @@ const PlanList = () => {
   useEffect(() => {
     refetch();
   }, [refetchTrigger]);
+
   return loading ? (
     <Loading />
   ) : (
     <div className="mt-4">
-      <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 ">
-        {plans.map((item) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {plans.map((item, index) => (
           <div
             key={item._id}
             className="rounded-2xl shadow-lg p-6 border border-[#605BFF]"
             style={{
-              background: "linear-gradient(to bottom, #F6E7FC, #9B7BBD)",
+              background: cardColors[index % cardColors.length],
             }}
           >
             {/* Plan Name */}

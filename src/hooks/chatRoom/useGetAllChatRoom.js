@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { base_url } from "../../utils/constants";
 
-const useGetAllChatRoom = () => {
+const useGetAllChatRoom = ({ search = "" } = {}) => {
   const [loading, setLoading] = useState(false);
   const [chatRoom, setChatRoom] = useState([]);
 
@@ -11,10 +11,11 @@ const useGetAllChatRoom = () => {
     setLoading(true);
     try {
       const res = await axios.get(`${base_url}/chatRoom/getAllChatRoom`, {
+        params: { search },
         withCredentials: true,
       });
       const data = res.data;
-      console.log("API response data:", data);
+
       setChatRoom(data);
     } catch (err) {
       toast.error(
@@ -24,9 +25,10 @@ const useGetAllChatRoom = () => {
       setLoading(false);
     }
   };
+
   useEffect(() => {
     getAllChatRoom();
-  }, []);
+  }, [search]);
 
   const refetch = () => {
     getAllChatRoom();

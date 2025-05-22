@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import useGetAllModule from "../../hooks/module/useGetAllModule";
 import {
   Table,
@@ -16,8 +16,8 @@ import { MdDeleteOutline } from "react-icons/md";
 import { AdminContext } from "../../utils/AdminContext";
 import useDeleteModule from "../../hooks/module/useDeleteModule";
 
-const ModuleList = () => {
-  const { loading, module, refetch } = useGetAllModule();
+const ModuleList = ({ search, refetchTrigger }) => {
+  const { loading, module, refetch } = useGetAllModule({ search });
   const { deleteModule } = useDeleteModule();
   const {
     showDeletePopup,
@@ -25,12 +25,11 @@ const ModuleList = () => {
     deleteId,
     setDeleteId,
     setDeleteType,
-    refetchTrigger,
   } = useContext(AdminContext);
 
   useEffect(() => {
     refetch();
-  }, [refetchTrigger]);
+  }, [refetchTrigger, search]);
   return loading ? (
     <Loading />
   ) : (

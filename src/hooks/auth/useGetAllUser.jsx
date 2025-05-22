@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { base_url } from "../../utils/constants";
 
-const useGetAllUser = () => {
+const useGetAllUser = ({ search = "" } = {}) => {
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState([]);
 
@@ -11,6 +11,7 @@ const useGetAllUser = () => {
     setLoading(true);
     try {
       const res = await axios.get(`${base_url}/user/getAllUser`, {
+        params: { search },
         withCredentials: true,
       });
       const data = res.data;
@@ -26,7 +27,7 @@ const useGetAllUser = () => {
   };
   useEffect(() => {
     getAllUser();
-  }, []);
+  }, [search]);
 
   const refetch = () => {
     getAllUser();

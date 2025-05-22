@@ -18,8 +18,8 @@ import { MdDeleteOutline } from "react-icons/md";
 import useGetAllSubCommunity from "../../hooks/subCommunity/useGetAllSubCommunity";
 import useDeleteSubCommunity from "../../hooks/subCommunity/useDeleteSubCommunity";
 
-const SubCommunityList = () => {
-  const { loading, subCommunity, refetch } = useGetAllSubCommunity();
+const SubCommunityList = ({ search, refetchTrigger }) => {
+  const { loading, subCommunity, refetch } = useGetAllSubCommunity({ search });
   const { deleteSubCommunity } = useDeleteSubCommunity();
   const {
     showDeletePopup,
@@ -27,7 +27,6 @@ const SubCommunityList = () => {
     deleteId,
     setDeleteId,
     setDeleteType,
-    refetchTrigger,
   } = useContext(AdminContext);
 
   useEffect(() => {
@@ -42,10 +41,10 @@ const SubCommunityList = () => {
         <TableHead>
           <TableRow>
             <TableCell>
-              <strong>Sub Community</strong>
+              <strong>Community</strong>
             </TableCell>
             <TableCell>
-              <strong>Community</strong>
+              <strong> Sub Community</strong>
             </TableCell>
           </TableRow>
         </TableHead>

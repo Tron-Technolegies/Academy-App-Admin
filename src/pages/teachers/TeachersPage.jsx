@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-
 import { AdminContext } from "../../utils/AdminContext";
 import TeacherHeader from "../../components/teachers/TeacherHeader";
 import TeacherTable from "../../components/teachers/TeacherTable";

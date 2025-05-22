@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+import { AdminContext } from "../../utils/AdminContext";
 import CourseHeader from "../../components/course/CourseHeader";
 import DomainNavLink from "../../components/domain/DomainNavLink";
 import CourseList from "../../components/course/CourseList";
-import EditCoursePage from "./EditCoursePage";
 
 const CoursePage = () => {
+  const [search, setSearch] = useState("");
+  const { refetchTrigger } = useContext(AdminContext);
   return (
     <div>
-      <CourseHeader />
+      <CourseHeader search={search} setSearch={setSearch} />
       <DomainNavLink />
-      <CourseList />
+      <CourseList search={search} refetchTrigger={refetchTrigger} />
     </div>
   );
 };
