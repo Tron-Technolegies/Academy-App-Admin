@@ -1,24 +1,25 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { base_url } from "../../constants";
-import { AdminContext } from "../../AdminContext";
-import { useNavigate } from "react-router-dom";
+import { base_url } from "../../utils/constants";
+
+import { AdminContext } from "../../utils/AdminContext";
 
 const useGetUserInfo = () => {
   const [loading, setLoading] = useState(false);
   const { user, setUser } = useContext(AdminContext);
-  const navigate = useNavigate();
+
   const getUserInfo = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`${base_url}/Admin_Profile`, {
+      const res = await axios.get(`${base_url}/user/userInfo`, {
         withCredentials: true,
       });
       const data = res.data;
-      setUser(data);
+
+      // IMPORTANT: setUser to the nested user object directly
+      setUser(data.user);
     } catch (error) {
       console.log(error);
-      // navigate("/login");
     } finally {
       setLoading(false);
     }

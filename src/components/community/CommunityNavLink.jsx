@@ -11,7 +11,7 @@ const CommunityNavLink = () => {
   return (
     <div className="w-full bg-white pt-4">
       <nav className="border-b-2 border-[#EDE6F5] w-full">
-        <ul className="flex text-[#8A8A8A] font-semibold text-xl">
+        <ul className="text-sm sm:text-xl flex text-[#8A8A8A] font-semibold">
           {links.map((link) => (
             <li key={link.path} className="flex-1">
               <NavLink

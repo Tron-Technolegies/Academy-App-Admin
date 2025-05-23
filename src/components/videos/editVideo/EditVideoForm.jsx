@@ -65,9 +65,11 @@ const EditVideoForm = () => {
       onSubmit={handleSubmit}
       className="pt-4 max-w-full sm:max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col min-h-[600px]"
     >
-      <h4 className="text-[#4F4F4F] text-3xl font-semibold mb-6">Edit Video</h4>
+      <h4 className="text-[#4F4F4F] text-2xl sm:text-3xl font-semibold mb-6 text-center sm:text-left">
+        Edit Video
+      </h4>
 
-      <div className="w-xl space-y-4">
+      <div className="w-full space-y-4 sm:w-3/4 mx-auto">
         <FormSelect
           title="Course"
           value={course}
@@ -75,6 +77,7 @@ const EditVideoForm = () => {
           list={courses}
           multi={false}
           displayField="courseName"
+          className="w-full"
         />
         <FormSelect
           title="Category"
@@ -83,6 +86,7 @@ const EditVideoForm = () => {
           list={categories}
           multi={false}
           displayField="categoryName"
+          className="w-full"
         />
         <FormSelect
           title="Module"
@@ -91,6 +95,7 @@ const EditVideoForm = () => {
           list={modules}
           multi={false}
           displayField="moduleName"
+          className="w-full"
         />
         <FormInput
           label="Video Name"
@@ -98,6 +103,7 @@ const EditVideoForm = () => {
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder=""
+          className="w-full"
         />
         <FormInput
           label="Video URL"
@@ -105,19 +111,20 @@ const EditVideoForm = () => {
           value={videoUrl}
           onChange={(e) => setVideoUrl(e.target.value)}
           placeholder=""
+          className="w-full"
         />
       </div>
 
       {/* Button sticks to bottom right */}
-      <div className="mt-auto flex justify-end pt-6 gap-4">
+      <div className="mt-auto flex flex-col sm:flex-row justify-center sm:justify-end gap-4 pt-6">
         <Link
           to="/videos"
-          className="bg-[#EEEDEE] text-[#858585] rounded-sm w-32 px-10 py-2.5 text-sm font-semibold hover:bg-[#EEEDEE] hover:scale-105 transition-transform duration-300"
+          className="bg-[#EEEDEE] text-[#858585] rounded-sm w-full sm:w-32 px-10 py-2.5 text-sm font-semibold hover:bg-[#EEEDEE] hover:scale-105 transition-transform duration-300 text-center"
         >
           Cancel
         </Link>
         <button
-          className="bg-[#48089F] w-32 text-white rounded-sm px-3 py-2.5 text-sm font-semibold hover:bg-[#ba9fd6] hover:scale-105 transition-transform duration-300"
+          className="bg-[#48089F] w-full sm:w-32 text-white rounded-sm px-3 py-2.5 text-sm font-semibold hover:bg-[#ba9fd6] hover:scale-105 transition-transform duration-300"
           type="submit"
           disabled={updateLoading}
         >

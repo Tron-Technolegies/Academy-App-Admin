@@ -4,8 +4,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { MdDashboard } from "react-icons/md";
 import { IoIosLogOut } from "react-icons/io";
 import { HiOutlineX } from "react-icons/hi";
-import { HiMenuAlt4 } from "react-icons/hi";
-import { TbMenu2 } from "react-icons/tb";
+import { HiOutlineMenuAlt4 } from "react-icons/hi";
 
 import NavItem from "./NavItem";
 import { navItems } from "../../utils/NavItems";
@@ -36,7 +35,7 @@ export default function SmallScreen() {
         }`}
         onClick={() => setOpen(!open)}
       >
-        {open ? <HiOutlineX size={28} /> : <TbMenu2 size={28} />}
+        {open ? <HiOutlineX size={28} /> : <HiOutlineMenuAlt4 size={28} />}
       </button>
 
       {/* Overlay Sidebar */}

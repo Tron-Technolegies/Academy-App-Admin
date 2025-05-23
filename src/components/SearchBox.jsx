@@ -13,9 +13,12 @@ export default function SearchBox({ value, onChange, submit, placeholder }) {
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        className="w-full text-[#8A8A8A] bg-[#FCFAFA] focus:outline-none 
-                   text-md py-2 px-3
-                   sm:text-sm sm:py-1 sm:px-2"
+        className="
+    w-32 sm:w-48 md:w-64 lg:w-80
+    text-[#8A8A8A] bg-[#FCFAFA] focus:outline-none
+    text-md py-2 px-3
+    sm:text-sm sm:py-1 sm:px-2
+  "
       />
     </div>
   );

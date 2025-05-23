@@ -8,7 +8,7 @@ const useLogin = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const login = async (email, password) => {
+  const login = async ({ email, password }) => {
     setLoading(true);
     try {
       const res = await axios.post(

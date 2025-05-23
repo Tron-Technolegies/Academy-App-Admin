@@ -5,10 +5,20 @@ import SideBar from "../components/sidebar/SideBar";
 import { AdminContext } from "../utils/AdminContext";
 import DeletePopup from "../components/DeletePopup";
 import SmallScreen from "../components/sidebar/SmallScreen";
+import useGetUserInfo from "../hooks/auth/useGetUserInfo";
+import Loading from "../components/Loading";
 
 function Layout() {
   const { showDeletePopup, setShowDeletePopup } = useContext(AdminContext);
+  const { loading, user, refetch } = useGetUserInfo();
 
+  if (loading) {
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
+  }
   return (
     <div className="flex h-screen">
       <div className="hidden lg:block">

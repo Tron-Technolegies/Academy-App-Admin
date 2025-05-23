@@ -6,13 +6,6 @@ import { cardStyles } from "../../utils/CardStyles";
 const UserStats = () => {
   const { stats, loading } = useGetUserStats();
 
-  if (loading)
-    return (
-      <div className="text-center p-4">
-        <Loading />
-      </div>
-    );
-
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-7 p-6">
       {cardStyles.map((card) => (
