@@ -13,7 +13,7 @@ const LoginPage = () => {
       <div className="text-center">
         <div className="flex justify-center">
           <img
-            src="src/assets/Tron2.png"
+            src="public/Tron2.png"
             alt="Logo"
             className="w-[100px] h-[120px]"
           />
