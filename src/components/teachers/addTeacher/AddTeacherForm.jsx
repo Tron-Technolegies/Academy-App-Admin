@@ -32,7 +32,10 @@ const AddTeacherForm = () => {
     <div>
       <h4 className="text-[#4F4F4F] text-3xl font-semibold p-6">Add Teacher</h4>
 
-      <form onSubmit={handleSubmit} className="space-y-7 p-6 bg-white ">
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-7 p-6 bg-white w-full md:w-1/2 sm:3/4  "
+      >
         {/* Flex container for form and image */}
         <div className="flex flex-col md:flex-row gap-6">
           {/* Left side: Inputs */}
@@ -91,7 +94,7 @@ const AddTeacherForm = () => {
         </div>
 
         {/* Buttons */}
-        <div className="flex justify-end items-end gap-2 pt-4">
+        <div className="flex justify-end items-end gap-5 pt-4">
           <Link
             to="/teachers"
             className="bg-[#EEEDEE] rounded-sm px-4 py-2 text-sm  text-center font-semibold text-[#858585] w-32"

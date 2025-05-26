@@ -92,7 +92,7 @@ const AddCourseForm = () => {
 
       <div className="max-w-200 pt-4 px-6  flex justify-end gap-3">
         <Link
-          to="/domain"
+          to="/domain/course"
           className="bg-[#EEEDEE] text-[#858585] rounded-sm w-32 px-10 py-2.5 text-sm font-semibold hover:bg-[#EEEDEE] hover:scale-105 transition-transform duration-300"
         >
           cancel

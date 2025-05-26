@@ -40,13 +40,10 @@ const AddVideoForm = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="pt-4 max-w-full sm:max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col min-h-[600px]"
-    >
+    <form onSubmit={handleSubmit} className="pt-4">
       <h4 className="text-[#4F4F4F] text-3xl p-6 font-semibold">Add Video</h4>
 
-      <div className="w-xl space-y-4">
+      <div className="max-w-150 h-auto py-6 px-6">
         <FormSelect
           title="Course"
           value={course}
@@ -54,6 +51,7 @@ const AddVideoForm = () => {
           list={courses}
           multi={false}
           displayField="courseName"
+          className="w-full"
         />
         <FormSelect
           title="Category"
@@ -62,6 +60,7 @@ const AddVideoForm = () => {
           list={categories}
           multi={false}
           displayField="categoryName"
+          className="w-full"
         />
         <FormSelect
           title="Module"
@@ -70,22 +69,25 @@ const AddVideoForm = () => {
           list={modules}
           multi={false}
           displayField="moduleName"
+          className="w-full"
         />
         <FormInput
           label="Video Name"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          className="w-full"
         />
         <FormInput
           label="Video URL"
           type="text"
           value={videoUrl}
           onChange={(e) => setVideoUrl(e.target.value)}
+          className="w-full"
         />
       </div>
 
-      <div className="mt-auto flex justify-end pt-6 gap-4">
+      <div className="max-w-190 px-6 flex justify-end gap-5">
         <Link
           to="/videos"
           className="bg-[#EEEDEE] text-[#858585] rounded-sm w-32 px-10 py-2.5 text-sm font-semibold hover:bg-[#EEEDEE] hover:scale-105 transition-transform duration-300"
@@ -93,7 +95,7 @@ const AddVideoForm = () => {
           Cancel
         </Link>
         <button
-          className="bg-[#48089F] w-32 text-white rounded-sm px-3 py-2.5 text-sm font-semibold hover:bg-[#ba9fd6] hover:scale-105 transition-transform duration-300"
+          className="bg-[#48089F] w-32 text-white rounded-sm px-4 py-2 text-sm font-semibold hover:bg-[#ba9fd6] hover:scale-105 transition-transform duration-300 disabled:opacity-50"
           type="submit"
           disabled={addingLoading}
         >

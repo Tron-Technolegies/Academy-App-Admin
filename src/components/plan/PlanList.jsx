@@ -9,7 +9,8 @@ import { MdDeleteOutline } from "react-icons/md";
 
 const cardColors = [
   "linear-gradient(to bottom, #F6E7FC, #9B7BBD)", // light purple
-  "linear-gradient(to bottom, #D0E7FA, #6FA8DC)", // light blue
+
+  " linear-gradient(to bottom, #B3D4FC, #D8B4F8)",
 ];
 
 const PlanList = () => {
@@ -66,7 +67,9 @@ const PlanList = () => {
               <ul className="text-sm font-semibold">
                 {item.features && item.features.length > 0 ? (
                   item.features.map((feature, index) => (
-                    <li key={index}>{feature}</li>
+                    <li key={index} style={{ whiteSpace: "pre-line" }}>
+                      {feature}
+                    </li>
                   ))
                 ) : (
                   <li>No features listed.</li>

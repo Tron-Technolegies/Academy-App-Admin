@@ -12,6 +12,7 @@ const DashboardPage = () => {
       <DashBoardHeader />
       <WelcomeUser />
       <UserStats />
+
       <NewUsersTable />
     </div>
   );

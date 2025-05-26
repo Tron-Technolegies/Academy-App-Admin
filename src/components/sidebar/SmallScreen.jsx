@@ -44,30 +44,25 @@ export default function SmallScreen() {
           open ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="flex gap-5 mb-10">
-          <img
-            src="src/assets/Tron2.png"
-            className="w-[40px] h-[50px]"
-            alt=""
-          />
-          <img
-            src="src/assets/Tron3.png"
-            className="w-[90px] h-[40px]"
-            alt=""
-          />
+        <div className="flex gap-5 m-7">
+          <img src="/Tron2.png" className="w-[40px] h-[50px]" alt="" />
+          <img src="/Tron3.png" className="w-[90px] h-[40px]" alt="" />
         </div>
 
         <NavLink
           to="/"
           onClick={() => setOpen(false)}
-          className={`flex items-center gap-3 px-3 py-2 rounded-sm hover:outline hover:outline-[#FAEBEB] ease-in-out duration-500 ${
-            location.pathname === "/" && "bg-[#48089F] text-white"
-          }`}
+          className={({ isActive }) =>
+            `flex items-center gap-3 px-3 py-2 rounded-sm transition duration-300
+     ${
+       isActive
+         ? "bg-[#48089F] text-white"
+         : "text-white hover:text-[#c7b1e6] hover:outline hover:outline-[#FAEBEB]"
+     }`
+          }
         >
-          <p className="text-white">
-            <MdDashboard />
-          </p>
-          <p className="text-white hover:text-[#c7b1e6]">Dashboard</p>
+          <MdDashboard size={20} />
+          <span>Dashboard</span>
         </NavLink>
 
         {navItems.map((item) => (

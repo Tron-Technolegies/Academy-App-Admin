@@ -6,12 +6,14 @@ const WelcomeUser = () => {
   const { user, loading, error } = useGetUserInfo();
 
   return (
-    <div>
-      <h1>
+    <div className="m-4 max-w-md">
+      <h1 className="text-xl sm:text-2xl  font-semibold text-[#1D0B30]">
         Welcome,{" "}
-        {user && (user.firstName || user.lastName)
-          ? `${user.firstName || ""} ${user.lastName || ""}`.trim()
-          : user?.email || "User"}
+        <span className="text-[#48089F]">
+          {user && (user.firstName || user.lastName)
+            ? `${user.firstName || ""}`.trim()
+            : user?.email || "User"}
+        </span>
         !
       </h1>
     </div>

@@ -1,7 +1,9 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import useGetUserInfo from "../hooks/auth/useGetUserInfo";
 
 export default function LogoutPopup({ isOpen, onConfirm, onCancel }) {
+  const { user, loading } = useGetUserInfo();
   return (
     <AnimatePresence>
       {isOpen && (
@@ -20,8 +22,10 @@ export default function LogoutPopup({ isOpen, onConfirm, onCancel }) {
           >
             <h2 className="text-xl font-semibold mb-2">Confirm Logout</h2>
             <p className="text-sm text-white mb-6">
-              Are you sure you want to log out?
+              Are you sure you want to log out,{" "}
+              {user?.firstName || user?.email || "User"}?
             </p>
+
             <div className="flex justify-between gap-3">
               <button
                 onClick={onConfirm}

@@ -18,7 +18,6 @@ const EditTeacherForm = () => {
   const [email, setEmail] = useState("");
   const [designation, setDesignation] = useState("");
   const [gender, setGender] = useState("");
-  const [password, setPassword] = useState("");
 
   useEffect(() => {
     if (instructor) {
@@ -31,7 +30,6 @@ const EditTeacherForm = () => {
         instructor.gender?.charAt(0).toUpperCase() +
           instructor.gender?.slice(1).toLowerCase() || ""
       );
-      setPassword("");
     }
   }, [instructor]);
 
@@ -44,7 +42,6 @@ const EditTeacherForm = () => {
       phoneNumber,
       designation,
       gender,
-      password,
       id,
     });
   };
@@ -64,77 +61,65 @@ const EditTeacherForm = () => {
   }
 
   return (
-    <div>
-      <h4 className="text-[#4F4F4F] text-3xl font-semibold p-6">
+    <form onSubmit={handleSubmit} className="pt-4">
+      <h4 className="text-[#4F4F4F] text-3xl p-6 font-semibold">
         Edit Teacher
       </h4>
 
-      <form onSubmit={handleSubmit} className="space-y-7 p-6 bg-white ">
-        <div className="flex flex-col md:flex-row gap-6">
-          {/* Left side: Inputs */}
-          <div className="flex-1 space-y-3">
-            <FormInput
-              label="Name"
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder=""
-            />
-            <FormInput
-              label="Email"
-              type="text"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder=""
-            />
-            <FormInput
-              label="Phone number"
-              type="text"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              placeholder=""
-            />
-            <FormInput
-              label="Designation"
-              type="text"
-              value={designation}
-              onChange={(e) => setDesignation(e.target.value)}
-              placeholder=""
-            />
+      <div className="max-w-150 h-auto py-6 px-6 space-y-4">
+        <FormInput
+          label="Name"
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder=""
+        />
+        <FormInput
+          label="Email"
+          type="text"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder=""
+        />
+        <FormInput
+          label="Phone number"
+          type="text"
+          value={phoneNumber}
+          onChange={(e) => setPhoneNumber(e.target.value)}
+          placeholder=""
+        />
+        <FormInput
+          label="Designation"
+          type="text"
+          value={designation}
+          onChange={(e) => setDesignation(e.target.value)}
+          placeholder=""
+        />
 
-            <FormSelect
-              title="Gender"
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
-              list={["Male", "Female"]}
-            />
-            <FormInput
-              label="Password"
-              type="text"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder=""
-            />
-          </div>
-        </div>
+        <FormSelect
+          title="Gender"
+          value={gender}
+          onChange={(e) => setGender(e.target.value)}
+          list={["Male", "Female"]}
+        />
+      </div>
 
-        <div className="flex justify-end items-end gap-2 p-4">
-          <Link
-            to="/teachers"
-            className="bg-[#EEEDEE] rounded-sm px-4 py-2 text-sm  text-center font-semibold text-[#858585] w-32"
-          >
-            Cancel
-          </Link>
-          <button
-            type="submit"
-            disabled={loading}
-            className="bg-[#48089F] w-32 text-white rounded-sm px-4 py-2 text-sm font-semibold hover:bg-[#ba9fd6] hover:scale-105 transition-transform duration-300 disabled:opacity-50"
-          >
-            {loading ? "Updating..." : "Update"}
-          </button>
-        </div>
-      </form>
-    </div>
+      <div className="max-w-190 px-6 flex justify-end gap-5">
+        <Link
+          to="/teachers"
+          className="bg-[#EEEDEE] rounded-sm px-4 py-2 text-sm  text-center font-semibold text-[#858585] w-32"
+        >
+          Cancel
+        </Link>
+        <button
+          type="submit"
+          disabled={loading}
+          className="bg-[#48089F] w-32 text-white rounded-sm px-4 py-2 text-sm font-semibold hover:bg-[#ba9fd6] hover:scale-105 transition-transform duration-300 disabled:opacity-50"
+        >
+          {loading ? "Updating..." : "Update"}
+        </button>
+      </div>
+    </form>
   );
 };
 

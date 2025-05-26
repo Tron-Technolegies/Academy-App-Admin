@@ -61,15 +61,10 @@ const EditVideoForm = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="pt-4 max-w-full sm:max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col min-h-[600px]"
-    >
-      <h4 className="text-[#4F4F4F] text-2xl sm:text-3xl font-semibold mb-6 text-center sm:text-left">
-        Edit Video
-      </h4>
+    <form onSubmit={handleSubmit} className="pt-4">
+      <h4 className="text-[#4F4F4F] text-3xl p-6 font-semibold">Edit Video</h4>
 
-      <div className="w-full space-y-4 sm:w-3/4 mx-auto">
+      <div className="max-w-150 h-auto py-6 px-6">
         <FormSelect
           title="Course"
           value={course}
@@ -116,15 +111,15 @@ const EditVideoForm = () => {
       </div>
 
       {/* Button sticks to bottom right */}
-      <div className="mt-auto flex flex-col sm:flex-row justify-center sm:justify-end gap-4 pt-6">
+      <div className="max-w-190 px-6 flex justify-end gap-5">
         <Link
           to="/videos"
-          className="bg-[#EEEDEE] text-[#858585] rounded-sm w-full sm:w-32 px-10 py-2.5 text-sm font-semibold hover:bg-[#EEEDEE] hover:scale-105 transition-transform duration-300 text-center"
+          className="bg-[#EEEDEE] text-[#858585] rounded-sm w-32 sm:w-32 px-10 py-2.5 text-sm font-semibold hover:bg-[#EEEDEE] hover:scale-105 transition-transform duration-300 text-center"
         >
           Cancel
         </Link>
         <button
-          className="bg-[#48089F] w-full sm:w-32 text-white rounded-sm px-3 py-2.5 text-sm font-semibold hover:bg-[#ba9fd6] hover:scale-105 transition-transform duration-300"
+          className="bg-[#48089F] w-32 sm:w-32 text-white rounded-sm px-3 py-2.5 text-sm font-semibold hover:bg-[#ba9fd6] hover:scale-105 transition-transform duration-300"
           type="submit"
           disabled={updateLoading}
         >

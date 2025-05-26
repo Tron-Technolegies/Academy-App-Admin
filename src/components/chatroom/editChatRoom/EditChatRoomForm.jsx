@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import useGetAllCommunity from "../../../hooks/community/useGetAllCommunities";
 import useGetAllSubCommunity from "../../../hooks/subCommunity/useGetAllSubCommunity";
@@ -83,7 +83,13 @@ const EditChatRoomForm = () => {
         />
       </div>
 
-      <div className="max-w-190 px-6 flex justify-end">
+      <div className="max-w-190 px-6 flex justify-end gap-5">
+        <Link
+          to="/community/chatroom"
+          className="bg-[#EEEDEE] text-[#858585] rounded-sm w-32 px-10 py-2.5 text-sm font-semibold hover:bg-[#EEEDEE] hover:scale-105 transition-transform duration-300"
+        >
+          Cancel
+        </Link>
         <button
           className="bg-[#48089F] w-32 text-white rounded-sm px-3 py-2.5 text-sm font-semibold hover:bg-[#ba9fd6] hover:scale-105 transition-transform duration-300"
           type="submit"
