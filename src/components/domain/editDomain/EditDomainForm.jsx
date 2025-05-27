@@ -41,7 +41,6 @@ const EditDomainForm = () => {
       </div>
     );
   }
-  if (!category) return <p>Category not found.</p>;
 
   return (
     <form onSubmit={handleSubmit} className="pt-4">

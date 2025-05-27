@@ -28,17 +28,12 @@ const useUpdateCourse = () => {
         },
         { withCredentials: true } // For handling cookies or sessions
       );
-      console.log("Response:", response);
-      // If successful, show a success message and navigate to another page
+
       toast.success("Course updated successfully");
       navigate("/domain/course");
     } catch (err) {
       // Handle error response
       if (err?.response) {
-        // Log full error response to console for debugging
-        console.error("Error response:", err.response);
-
-        // Show the error message from the server if available
         toast.error(
           err?.response?.data?.msg ||
             "Something went wrong with the course update."

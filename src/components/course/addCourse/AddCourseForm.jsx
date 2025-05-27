@@ -20,7 +20,6 @@ const AddCourseForm = () => {
     useGetAllCategory();
 
   const { instructor: instructors, loadingInstructors } = useGetAllInstructor();
-  console.log("Instructors list:", instructors);
 
   const instructorsWithNames = instructors.map((inst) => {
     const hasDetails =

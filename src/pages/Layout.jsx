@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import SideBar from "../components/sidebar/SideBar";
 
 import { AdminContext } from "../utils/AdminContext";
@@ -11,6 +11,7 @@ import Loading from "../components/Loading";
 function Layout() {
   const { showDeletePopup, setShowDeletePopup } = useContext(AdminContext);
   const { loading, user, refetch } = useGetUserInfo();
+  const navigate = useNavigate();
 
   if (loading) {
     return (
@@ -18,6 +19,11 @@ function Layout() {
         <Loading />
       </div>
     );
+  }
+
+  if (!user) {
+    navigate("/login");
+    return null;
   }
   return (
     <div className="flex h-screen">

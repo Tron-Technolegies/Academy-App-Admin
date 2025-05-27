@@ -14,7 +14,7 @@ const useGetAllInstructor = ({ search = "" } = {}) => {
         params: { search },
         withCredentials: true,
       });
-      console.log("received data:", res.data);
+
       setInstructor(res.data);
     } catch (err) {
       toast.error(

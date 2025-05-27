@@ -18,10 +18,9 @@ const useGetAllVideo = ({ search = "" } = {}) => {
       const data = res.data;
       setVideo(data);
     } catch (err) {
-      const message =
-        err?.response?.data?.msg || err?.message || "Something went wrong";
-      console.error(message);
-      toast.error(message);
+      toast.error(
+        err?.response?.data?.message || err?.error || "something went wrong"
+      );
     } finally {
       setLoading(false);
     }

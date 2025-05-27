@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-
 import useGetAllCommunity from "../../../hooks/community/useGetAllCommunities";
 import useGetAllSubCommunity from "../../../hooks/subCommunity/useGetAllSubCommunity";
 import useGetSingleChatRoom from "../../../hooks/chatRoom/useGetSingleChatRoom";

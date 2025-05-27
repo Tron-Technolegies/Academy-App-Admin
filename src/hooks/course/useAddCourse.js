@@ -16,14 +16,6 @@ const useAddCourse = () => {
   }) => {
     setLoading(true);
     try {
-      // Log the data that will be sent
-      console.log("Sending data to API:", {
-        courseName,
-        courseCategory,
-        instructor,
-        courseOverView,
-      });
-
       const res = await axios.post(
         `${base_url}/course/addCourse`,
         {
@@ -35,13 +27,9 @@ const useAddCourse = () => {
         { withCredentials: true }
       );
 
-      // Log the response
-      console.log("Course added successfully:", res.data);
-
       toast.success("Course added successfully");
       navigate("/domain/course");
     } catch (err) {
-      // Log the error response
       toast.error(
         err?.response?.data?.message || err?.error || "something went wrong"
       );

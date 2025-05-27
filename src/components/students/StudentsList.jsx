@@ -9,7 +9,6 @@ import Paper from "@mui/material/Paper";
 import Loading from "../Loading";
 import { Box } from "@mui/material";
 import useGetAllUser from "../../hooks/auth/useGetAllUser";
-import { AdminContext } from "../../utils/AdminContext";
 
 const StudentsList = ({ search, refetchTrigger }) => {
   const { loading, user, refetch } = useGetAllUser({ search });

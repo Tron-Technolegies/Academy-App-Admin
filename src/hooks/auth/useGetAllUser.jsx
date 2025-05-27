@@ -18,7 +18,7 @@ const useGetAllUser = ({ search = "" } = {}) => {
 
       setUser(data);
     } catch (err) {
-      console.log(
+      toast.error(
         err?.response?.data?.msg || err?.error || "something went wrong"
       );
     } finally {

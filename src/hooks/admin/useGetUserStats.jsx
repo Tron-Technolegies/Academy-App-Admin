@@ -12,17 +12,14 @@ const useGetUserStats = () => {
       const res = await axios.get(`${base_url}/admin/getUsers`, {
         withCredentials: true,
       });
-      console.log("API response data:", res.data);
 
       setStats(res.data);
-      console.log("Stats updated:", res.data);
     } catch (err) {
       console.error(
         err?.response?.data?.msg || err?.message || "something went wrong"
       );
     } finally {
       setLoading(false);
-      console.log("Loading finished");
     }
   };
 

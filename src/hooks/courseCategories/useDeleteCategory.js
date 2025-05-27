@@ -11,8 +11,6 @@ const useDeleteCategory = () => {
   const deleteCategory = async ({ id }) => {
     setLoading(true);
     try {
-      console.log("Token used for deletion:", user?.token);
-
       const res = await axios.delete(
         `${base_url}/category/deleteCategory/${id}/`,
         {
