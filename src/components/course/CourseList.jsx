@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useMemo } from "react";
 import useGetAllCourses from "../../hooks/course/useGetAllCourses";
 import {
   Table,
@@ -13,11 +13,12 @@ import Loading from "../Loading";
 import { Link } from "react-router-dom";
 import { CiEdit } from "react-icons/ci";
 import useDeleteCourse from "../../hooks/course/useDeleteCourse";
-
+import { debounce } from "lodash";
 import { MdDeleteOutline } from "react-icons/md";
 import { AdminContext } from "../../utils/AdminContext";
 
 const CourseList = ({ search, refetchTrigger }) => {
+  // Pass `search` directly to the hook to fetch filtered data
   const { loading, course, refetch } = useGetAllCourses({ search });
   const { deleteCourse } = useDeleteCourse();
   const {
@@ -28,9 +29,24 @@ const CourseList = ({ search, refetchTrigger }) => {
     setDeleteType,
   } = useContext(AdminContext);
 
+  // Debounce the refetch function (only recreated when 'refetch' changes)
+  const debouncedRefetch = useMemo(
+    () =>
+      debounce(() => {
+        console.log("Debounced refetch called with search:", search);
+        refetch();
+      }, 500),
+    [refetch, search] // add search here to log current search value
+  );
+
   useEffect(() => {
-    refetch();
-  }, [refetchTrigger, search]);
+    debouncedRefetch();
+
+    // Cleanup on unmount or dependency change
+    return () => {
+      debouncedRefetch.cancel();
+    };
+  }, [search, refetchTrigger, debouncedRefetch]);
   return loading ? (
     <Loading />
   ) : (

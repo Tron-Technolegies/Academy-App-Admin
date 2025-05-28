@@ -15,7 +15,13 @@ const AddModuleForm = () => {
   const { addModule, loading } = useAddModule();
   const { category: categories, loading: loadingCategories } =
     useGetAllCategory();
-  const { course: courses, loading: loadingCourses } = useGetAllCourses();
+  const { course: courses, loading: loadingCourses } = useGetAllCourses({
+    categoryId: category,
+  });
+
+  const filteredCourses = courses.filter(
+    (c) => c.courseCategory?._id === category
+  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,7 +37,10 @@ const AddModuleForm = () => {
         <FormSelect
           title="Domain" // Title for the select dropdown
           value={category} // The currently selected category
-          onChange={(e) => setCategory(e.target.value)} // Set the category when changed
+          onChange={(e) => {
+            setCategory(e.target.value);
+            setCourse(""); // reset course when category changes
+          }}
           list={categories} // The list of categories fetched from the API
           multi={false} // Single selection (false)
           displayField="categoryName" // Display the category name from the category object
@@ -40,7 +49,7 @@ const AddModuleForm = () => {
           title="Course Name" // Title for the select dropdown
           value={course} // The currently selected category
           onChange={(e) => setCourse(e.target.value)} // Set the category when changed
-          list={courses} // The list of categories fetched from the API
+          list={filteredCourses} // filtered list here
           multi={false} // Single selection (false)
           displayField="courseName" // Display the category name from the category object
         />
