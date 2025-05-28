@@ -18,6 +18,10 @@ const AddChatRoomForm = () => {
     useGetAllSubCommunity();
   const { addChatRoom, loading } = useAddChatRoom();
 
+  const filteredSubCommunities = subCommunities.filter(
+    (sub) => sub.relatedCommunity?._id === community
+  );
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -38,7 +42,10 @@ const AddChatRoomForm = () => {
         <FormSelect
           title="Community"
           value={community}
-          onChange={(e) => setCommunity(e.target.value)}
+          onChange={(e) => {
+            setCommunity(e.target.value);
+            setSubCommunity(""); // Reset subCommunity when community changes
+          }}
           list={communities}
           multi={false}
           displayField="communityName"
@@ -47,7 +54,7 @@ const AddChatRoomForm = () => {
           title="sub community"
           value={subCommunity}
           onChange={(e) => setSubCommunity(e.target.value)}
-          list={subCommunities}
+          list={filteredSubCommunities}
           multi={false}
           displayField="subCommunityName"
         />
