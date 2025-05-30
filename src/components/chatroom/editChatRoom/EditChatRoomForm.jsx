@@ -4,7 +4,7 @@ import useGetAllCommunity from "../../../hooks/community/useGetAllCommunities";
 import useGetAllSubCommunity from "../../../hooks/subCommunity/useGetAllSubCommunity";
 import useGetSingleChatRoom from "../../../hooks/chatRoom/useGetSingleChatRoom";
 import useUpdateChatRoom from "../../../hooks/chatRoom/useUpdateChatRoom";
-
+import { toast } from "react-toastify";
 import FormInput from "../../FromInput";
 import FormSelect from "../../FormSelect";
 import Loading from "../../Loading";
@@ -33,7 +33,11 @@ const EditChatRoomForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!name || !community || !subCommunity) return;
+
+    if (!name.trim() || !community || !subCommunity.trim()) {
+      toast.error("Please fill all the fields.");
+      return;
+    }
 
     await updateChatRoom({
       chatRoomName: name,
@@ -59,7 +63,7 @@ const EditChatRoomForm = () => {
       <div className="max-w-150 h-80 py-6 px-6">
         <FormSelect
           title="Community"
-          defaultValue={community}
+          value={community}
           onChange={(e) => setCommunity(e.target.value)}
           list={communities}
           multi={false}
@@ -67,7 +71,7 @@ const EditChatRoomForm = () => {
         />
         <FormSelect
           title="Sub Community"
-          defaultValue={chatRoom.relatedSubCommunity?._id}
+          value={subCommunity}
           onChange={(e) => setSubCommunity(e.target.value)}
           list={subCommunities}
           multi={false}
