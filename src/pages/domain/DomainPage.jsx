@@ -1,5 +1,5 @@
 import React from "react";
-import DomainHeader from "../../components/domain/domainHeader";
+import DomainHeader from "../../components/domain/DomainHeader";
 
 import DomainNavLink from "../../components/domain/DomainNavLink";
 import DomainList from "../../components/domain/DomainList";
