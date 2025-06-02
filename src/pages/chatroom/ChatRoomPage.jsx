@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import ChatRoomHeader from "../../components/chatroom/ChatRoomHeader";
 import CommunityNavLink from "../../components/community/CommunityNavLink";
-import ChatRoomList from "../../components/chatroom/chatRoomList";
+import ChatRoomList from "../../components/chatroom/ChatRoomList";
 import { AdminContext } from "../../utils/AdminContext";
 
 const ChatRoomPage = () => {
