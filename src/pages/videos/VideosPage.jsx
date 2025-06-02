@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import VideoList from "../../components/videos/VideoList";
-import VideoHeader from "../../components/videos/videoHeader";
+import VideoHeader from "../../components/videos/VideoHeader";
 import { useContext } from "react";
 import { AdminContext } from "../../utils/AdminContext";
 
