@@ -1,6 +1,6 @@
 import React from "react";
-import AddDomainHeader from "../../components/domain/addDomain/addDomainHeader";
-import AddDomainForm from "../../components/domain/addDomain/addDomainForm";
+import AddDomainHeader from "../../components/domain/addDomain/AddDomainHeader";
+import AddDomainForm from "../../components/domain/addDomain/AddDomainForm";
 
 const AddDomainPage = () => {
   return (

@@ -4,7 +4,7 @@ import DeletePopup from "../../components/DeletePopup";
 import UserStats from "../../components/dashboard/UserStats";
 import DashBoardHeader from "../../components/dashboard/DashBoardHeader";
 import WelcomeUser from "../../components/dashboard/WelcomeUser";
-import NewUsersTable from "../../components/dashboard/dashboardList";
+import NewUsersTable from "../../components/dashboard/NewUsersTable";
 
 const DashboardPage = () => {
   return (
