@@ -10,7 +10,7 @@ import CoursePage from "./pages/course/CoursePage";
 import ModulePage from "./pages/module/ModulePage";
 import CommunityPage from "./pages/community/CommunityPage";
 import SubCommunityPage from "./pages/subCommunity/SubCommunityPage";
-import ChatRoomPage from "./pages/chatRoom/ChatRoomPage";
+import ChatRoomPage from "./pages/chatroom/ChatRoomPage";
 import DashboardPage from "./pages/dashboard/DashboardPage";
 import StudentsPage from "./pages/students/StudentsPage";
 import VideosPage from "./pages/videos/VideosPage";
