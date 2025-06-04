@@ -35,7 +35,7 @@ const CourseList = ({ search, refetchTrigger }) => {
       debounce(() => {
         console.log("Debounced refetch called with search:", search);
         refetch();
-      }, 500),
+      }, 900),
     [refetch, search] // add search here to log current search value
   );
 

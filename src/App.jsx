@@ -10,7 +10,7 @@ import CoursePage from "./pages/course/CoursePage";
 import ModulePage from "./pages/module/ModulePage";
 import CommunityPage from "./pages/community/CommunityPage";
 import SubCommunityPage from "./pages/subCommunity/SubCommunityPage";
-import ChatRoomPage from "./pages/chatroom/ChatRoomPage";
+
 import DashboardPage from "./pages/dashboard/DashboardPage";
 import StudentsPage from "./pages/students/StudentsPage";
 import VideosPage from "./pages/videos/VideosPage";
@@ -33,6 +33,7 @@ import EditSubCommunityPage from "./pages/subCommunity/EditSubCommunityPage";
 import EditChatRoomPage from "./pages/chatroom/EditChatRoomPage";
 import AddVideoPage from "./pages/videos/AddVideoPage";
 import EditVideoPage from "./pages/videos/EditVideoPage";
+import ChatRoomPage from "./pages/chatRoom/ChatRoomPage";
 
 function App() {
   const router = createBrowserRouter([
