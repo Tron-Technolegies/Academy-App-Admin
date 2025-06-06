@@ -33,7 +33,7 @@ import EditSubCommunityPage from "./pages/subCommunity/EditSubCommunityPage";
 import EditChatRoomPage from "./pages/chatroom/EditChatRoomPage";
 import AddVideoPage from "./pages/videos/AddVideoPage";
 import EditVideoPage from "./pages/videos/EditVideoPage";
-import ChatRoomPage from "./pages/chatRoom/ChatRoomPage";
+import ChatRoomPage from "./pages/chatroom/ChatRoomPage";
 
 function App() {
   const router = createBrowserRouter([
