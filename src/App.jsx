@@ -34,6 +34,8 @@ import EditChatRoomPage from "./pages/chatroom/EditChatRoomPage";
 import AddVideoPage from "./pages/videos/AddVideoPage";
 import EditVideoPage from "./pages/videos/EditVideoPage";
 import ChatRoomPage from "./pages/chatRoom/ChatRoomPage";
+import QuizPage from "./pages/quiz/QuizPage";
+import AddQuizPage from "./pages/quiz/AddQuizPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -158,6 +160,18 @@ function App() {
         {
           path: "videos/:id/edit",
           element: <EditVideoPage />,
+        },
+        {
+          path: "quiz",
+          element: <QuizPage />,
+        },
+        {
+          path: "quiz/new",
+          element: <AddQuizPage />,
+        },
+        {
+          path: "quiz/:id/edit",
+          element: <QuizPage />,
         },
       ],
     },

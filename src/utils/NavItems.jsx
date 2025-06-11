@@ -70,4 +70,10 @@ export const navItems = [
     name: "Videos",
     path: "/videos",
   },
+  {
+    id: 7,
+    icon: <FaVideo />,
+    name: "Quiz",
+    path: "/quiz",
+  },
 ];
