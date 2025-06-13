@@ -2,10 +2,10 @@ import { FaChalkboardTeacher } from "react-icons/fa";
 import {
   FaUserGraduate,
   FaRegCreditCard,
-  FaFolderOpen,
   FaUsers,
   FaVideo,
 } from "react-icons/fa";
+import { MdQuiz } from "react-icons/md";
 
 export const navItems = [
   {
@@ -28,7 +28,7 @@ export const navItems = [
   },
   {
     id: 4,
-    icon: <FaFolderOpen />,
+    icon: <FaUserGraduate />,
     name: "Course & Category",
     path: "/domain",
     children: [
@@ -50,18 +50,6 @@ export const navItems = [
     icon: <FaUsers />,
     name: "Community & Sub",
     path: "/community",
-    // children: [
-    //   {
-    //     id: "5-1",
-    //     name: "Course",
-    //     path: "/domain/course",
-    //   },
-    //   {
-    //     id: "5-2",
-    //     name: "Module",
-    //     path: "/domain/module",
-    //   },
-    // ],
   },
 
   {
@@ -72,7 +60,7 @@ export const navItems = [
   },
   {
     id: 7,
-    icon: <FaVideo />,
+    icon: <MdQuiz />,
     name: "Quiz",
     path: "/quiz",
   },

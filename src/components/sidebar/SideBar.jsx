@@ -2,12 +2,12 @@ import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import NavItem from "./NavItem";
 import { navItems } from "../../utils/NavItems";
-import { IoIosLogOut } from "react-icons/io";
 import { MdDashboard } from "react-icons/md";
 import { useLocation } from "react-router-dom";
 import { AdminContext } from "../../utils/AdminContext";
 import useLogout from "../../hooks/auth/useLogout";
 import LogoutPopup from "../LogoutPopup";
+import { HiLogout } from "react-icons/hi";
 
 export default function SideBar() {
   const location = useLocation();
@@ -57,7 +57,7 @@ export default function SideBar() {
           onClick={() => setLogoutPopUp(true)}
           className="flex items-center gap-2 px-3 py-2 text-white rounded-sm hover:outline hover:outline-[#FAEBEB] hover:text-[#c7b1e6] ease-in-out duration-500"
         >
-          <IoIosLogOut /> Logout
+          <HiLogout /> Logout
         </button>
       </div>
       <LogoutPopup
