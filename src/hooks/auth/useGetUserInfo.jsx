@@ -22,7 +22,7 @@ const useGetUserInfo = () => {
       setUser(data.user);
     } catch (error) {
       toast.error(
-        err?.response?.data?.msg || err?.error || "something went wrong"
+        error?.response?.data?.msg || error?.message || "Something went wrong"
       );
     } finally {
       setLoading(false);
