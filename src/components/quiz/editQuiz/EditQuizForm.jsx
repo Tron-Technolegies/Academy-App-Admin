@@ -45,6 +45,22 @@ const EditQuizForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <FormSelect
+        title="quiz name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        list={name}
+        multi={false}
+        displayField="categoryName"
+      />
+      <FormSelect
+        title="Time"
+        value={Time}
+        onChange={(e) => setName(e.target.value)}
+        list={name}
+        multi={false}
+        displayField="categoryName"
+      />
+      <FormSelect
         title="category"
         value={category}
         onChange={(e) => setCategory(e.target.value)}
@@ -73,3 +89,4 @@ const EditQuizForm = () => {
 };
 
 export default EditQuizForm;
+//quiz
