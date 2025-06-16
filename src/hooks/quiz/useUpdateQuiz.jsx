@@ -21,7 +21,7 @@ const useUpdateQuiz = () => {
     setLoading(true);
     try {
       const res = await axios.patch(
-        `${base_url}/quiz/${id}`, // Update the endpoint
+        `${base_url}/quiz/updateQuiz/${id}`, // Update the endpoint
         { name, time, courseCategory, relatedCourse, relatedModule, questions },
         { withCredentials: true }
       );

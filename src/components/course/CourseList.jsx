@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo } from "react";
+import React, { useContext } from "react";
 import useGetAllCourses from "../../hooks/course/useGetAllCourses";
 import {
   Table,
@@ -12,44 +12,17 @@ import {
 import Loading from "../Loading";
 import { Link } from "react-router-dom";
 import { CiEdit } from "react-icons/ci";
-import useDeleteCourse from "../../hooks/course/useDeleteCourse";
-import { debounce } from "lodash";
 import { MdDeleteOutline } from "react-icons/md";
 import { AdminContext } from "../../utils/AdminContext";
 
-const CourseList = ({ search, refetchTrigger }) => {
-  // Pass `search` directly to the hook to fetch filtered data
-  const { loading, course, refetch } = useGetAllCourses({ search });
-  const { deleteCourse } = useDeleteCourse();
-  const {
-    showDeletePopup,
-    setShowDeletePopup,
-    deleteId,
-    setDeleteId,
-    setDeleteType,
-  } = useContext(AdminContext);
+const CourseList = ({ search }) => {
+  const { loading, course } = useGetAllCourses({ search });
+  const { setShowDeletePopup, setDeleteId, setDeleteType } =
+    useContext(AdminContext);
 
-  // Debounce the refetch function (only recreated when 'refetch' changes)
-  const debouncedRefetch = useMemo(
-    () =>
-      debounce(() => {
-        console.log("Debounced refetch called with search:", search);
-        refetch();
-      }, 900),
-    [refetch, search] // add search here to log current search value
-  );
+  if (loading) return <Loading />;
 
-  useEffect(() => {
-    debouncedRefetch();
-
-    // Cleanup on unmount or dependency change
-    return () => {
-      debouncedRefetch.cancel();
-    };
-  }, [search, refetchTrigger, debouncedRefetch]);
-  return loading ? (
-    <Loading />
-  ) : (
+  return (
     <TableContainer component={Paper}>
       <Table aria-label="course table">
         <TableHead>
@@ -80,10 +53,7 @@ const CourseList = ({ search, refetchTrigger }) => {
                 <div className="flex justify-between items-center w-full">
                   <span>{item.courseName}</span>
                   <div className="flex gap-3">
-                    <Link
-                      to={`/domain/course/${item._id}/edit`}
-                      className="text-[#5B93FF] hover:text-[#bed1f9]"
-                    >
+                    <Link to={`/domain/course/${item._id}/edit`}>
                       <CiEdit className="text-blue-600 text-[18px] hover:text-blue-800" />
                     </Link>
                     <button
