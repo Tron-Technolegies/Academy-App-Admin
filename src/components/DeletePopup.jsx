@@ -11,6 +11,7 @@ import useDeleteCommunity from "../hooks/community/useDeleteCommunity";
 import useDeleteSubCommunity from "../hooks/subCommunity/useDeleteSubCommunity";
 import useDeleteChatRoom from "../hooks/chatRoom/useDeleteChatRoom";
 import useDeleteVideo from "../hooks/video/useDeleteVideo";
+import useDeleteQuiz from "../hooks/quiz/useDeleteQuiz";
 
 const DeletePopup = () => {
   const {
@@ -35,6 +36,7 @@ const DeletePopup = () => {
     useDeleteSubCommunity();
   const { loading: chatRoomLoading, deleteChatRoom } = useDeleteChatRoom();
   const { loading: videoLoading, deleteVideo } = useDeleteVideo();
+  const { loading: quizLoading, deleteQuiz } = useDeleteQuiz();
 
   const loading =
     categoryLoading ||
@@ -45,7 +47,8 @@ const DeletePopup = () => {
     subCommunityLoading ||
     chatRoomLoading ||
     communityLoading ||
-    videoLoading;
+    videoLoading ||
+    quizLoading;
 
   async function handleDelete() {
     if (deleteType === "category") await deleteCategory({ id: deleteId });
@@ -60,6 +63,7 @@ const DeletePopup = () => {
       await deleteSubCommunity({ id: deleteId });
     else if (deleteType === "chatRoom") await deleteChatRoom({ id: deleteId });
     else if (deleteType === "video") await deleteVideo({ id: deleteId });
+    else if (deleteType === "quiz") await deleteQuiz({ id: deleteId });
 
     setDeleteId("");
     setShowDeletePopup(false);

@@ -5,7 +5,7 @@ import useAddQuiz from "../../../hooks/quiz/useAddQuiz";
 import useGetAllCourses from "../../../hooks/course/useGetAllCourses";
 import useGetAllModule from "../../../hooks/module/useGetAllModule";
 import useGetAllCategory from "../../../hooks/courseCategories/useGetAllCategory";
-import { MdDeleteOutline } from "react-icons/md";
+import QuestionItem from "../../QuestionItem";
 
 const AddQuizForm = () => {
   const [name, setName] = useState("");
@@ -14,7 +14,6 @@ const AddQuizForm = () => {
   const [course, setCourse] = useState("");
   const [module, setModule] = useState("");
 
-  // Questions state - array of question objects
   const [questions, setQuestions] = useState([
     {
       question: "",
@@ -38,14 +37,12 @@ const AddQuizForm = () => {
     (mod) => mod.relatedCourse && mod.relatedCourse._id === course
   );
 
-  // Handle question input change
   const handleQuestionChange = (index, field, value) => {
     const newQuestions = [...questions];
     newQuestions[index][field] = value;
     setQuestions(newQuestions);
   };
 
-  // Add a new empty question
   const addQuestion = () => {
     setQuestions([
       ...questions,
@@ -60,7 +57,6 @@ const AddQuizForm = () => {
     ]);
   };
 
-  // Remove a question by index
   const removeQuestion = (index) => {
     const newQuestions = questions.filter((_, i) => i !== index);
     setQuestions(newQuestions);
@@ -125,73 +121,14 @@ const AddQuizForm = () => {
         <div>
           <h5 className="text-xl font-semibold mb-2">Questions</h5>
           {questions.map((q, index) => (
-            <div key={index} className="p-4 mb-4 rounded space-y-3 bg-gray-50">
-              <FormInput
-                label={`Question ${index + 1}`}
-                type="text"
-                value={q.question}
-                onChange={(e) =>
-                  handleQuestionChange(index, "question", e.target.value)
-                }
-              />
-              <FormInput
-                label="Option 1"
-                type="text"
-                value={q.option1}
-                onChange={(e) =>
-                  handleQuestionChange(index, "option1", e.target.value)
-                }
-              />
-              <FormInput
-                label="Option 2"
-                type="text"
-                value={q.option2}
-                onChange={(e) =>
-                  handleQuestionChange(index, "option2", e.target.value)
-                }
-              />
-              <FormInput
-                label="Option 3"
-                type="text"
-                value={q.option3}
-                onChange={(e) =>
-                  handleQuestionChange(index, "option3", e.target.value)
-                }
-              />
-              <FormInput
-                label="Option 4"
-                type="text"
-                value={q.option4}
-                onChange={(e) =>
-                  handleQuestionChange(index, "option4", e.target.value)
-                }
-              />
-
-              <FormSelect
-                title="Answer"
-                value={q.answer}
-                onChange={(e) =>
-                  handleQuestionChange(index, "answer", e.target.value)
-                }
-                list={[
-                  { _id: "option1", optionName: "Option 1" },
-                  { _id: "option2", optionName: "Option 2" },
-                  { _id: "option3", optionName: "Option 3" },
-                  { _id: "option4", optionName: "Option 4" },
-                ]}
-                displayField="optionName"
-              />
-
-              {questions.length > 1 && (
-                <button
-                  type="button"
-                  onClick={() => removeQuestion(index)}
-                  className="flex text-red-600 hover:underline"
-                >
-                  <MdDeleteOutline className="text-red-600  text-2xl" /> Remove
-                </button>
-              )}
-            </div>
+            <QuestionItem
+              key={index}
+              index={index}
+              questionData={q}
+              onChange={handleQuestionChange}
+              onRemove={removeQuestion}
+              canRemove={questions.length > 1}
+            />
           ))}
 
           <button

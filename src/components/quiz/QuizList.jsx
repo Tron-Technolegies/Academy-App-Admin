@@ -21,9 +21,11 @@ import {
 } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
 import useGetAllQuiz from "../../hooks/quiz/useGetAllQuiz";
+import useDeleteQuiz from "../../hooks/quiz/useDeleteQuiz";
 
 const QuizList = () => {
   const { loading, quiz, refetch } = useGetAllQuiz();
+  const { deleteQuiz } = useDeleteQuiz();
   const {
     showDeletePopup,
     setShowDeletePopup,
