@@ -4,7 +4,7 @@ import GoBack from "../../GoBack";
 const AddQuizHeader = () => {
   return (
     <div>
-      <GoBack route={"/quiz"} />;
+      <GoBack route={"/quiz"} />
     </div>
   );
 };

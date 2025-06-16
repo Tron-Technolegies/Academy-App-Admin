@@ -48,8 +48,6 @@ const EditModuleForm = () => {
     loadingModule || loadingCategories || loadingCourses || updating;
   if (isLoading) return <Loading />;
 
-  if (!module) return <p className="p-4 text-red-500">Module not found.</p>;
-
   return (
     <form onSubmit={handleSubmit} className="pt-4">
       <h4 className="text-[#4F4F4F] text-3xl p-6 font-semibold">Edit Module</h4>

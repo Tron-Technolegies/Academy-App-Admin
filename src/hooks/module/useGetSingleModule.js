@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { base_url } from "../../utils/constants";
+import { toast } from "react-toastify";
 
 const useGetSingleModule = ({ id }) => {
   const [loading, setLoading] = useState(false);

@@ -19,7 +19,7 @@ const useAddQuiz = () => {
     setLoading(true);
     try {
       const res = await axios.post(
-        `${base_url}/quiz/`,
+        `${base_url}/quiz/addQuiz`,
         {
           name,
           time,
