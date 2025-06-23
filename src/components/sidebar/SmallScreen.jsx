@@ -94,4 +94,3 @@ export default function SmallScreen() {
     </div>
   );
 }
-//hi
