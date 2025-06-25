@@ -37,7 +37,7 @@ const useGetUserInfo = () => {
     if (user && user.role !== "admin") {
       navigate("/login");
     }
-  }, [user]);
+  }, [user, loading, navigate]);
 
   const refetch = () => {
     getUserInfo();
