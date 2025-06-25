@@ -21,7 +21,7 @@ const useLogin = () => {
 
       navigate("/");
     } catch (err) {
-      console.error(
+      toast.error(
         err?.response?.data?.message ||
           err?.response?.data?.msg ||
           "Login failed"

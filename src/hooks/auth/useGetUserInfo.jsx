@@ -21,7 +21,7 @@ const useGetUserInfo = () => {
       // IMPORTANT: setUser to the nested user object directly
       setUser(data.user);
     } catch (error) {
-      toast.error(
+      console.error(
         error?.response?.data?.msg || error?.message || "Something went wrong"
       );
     } finally {
