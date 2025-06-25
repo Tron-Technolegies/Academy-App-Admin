@@ -31,6 +31,10 @@ const EditChatRoomForm = () => {
     }
   }, [chatRoom]);
 
+  const filteredSubCommunities = subCommunities.filter(
+    (sub) => sub.relatedCommunity?._id === community
+  );
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -73,7 +77,7 @@ const EditChatRoomForm = () => {
           title="Sub Community"
           value={subCommunity}
           onChange={(e) => setSubCommunity(e.target.value)}
-          list={subCommunities}
+          list={filteredSubCommunities}
           multi={false}
           displayField="subCommunityName"
         />

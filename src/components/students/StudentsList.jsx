@@ -65,13 +65,13 @@ const StudentsList = ({ search, refetchTrigger }) => {
                       x.gender === "male"
                         ? "#D6E4FF"
                         : x.gender === "female"
-                        ? "#FFE0D6"
+                        ? "#D6FFE0"
                         : "#F0F0F0",
                     color:
                       x.gender === "male"
                         ? "#5B93FF"
                         : x.gender === "female"
-                        ? "#FF8F6B"
+                        ? "#52CC70"
                         : "#333",
                     fontWeight: 500,
                     borderRadius: "20px",

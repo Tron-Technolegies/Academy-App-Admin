@@ -23,6 +23,14 @@ const AddVideoForm = () => {
   const { category: categories = [], loading: loadingCategories } =
     useGetAllCategory();
 
+  const filteredCourses = courses.filter(
+    (c) => c.courseCategory?._id === (category || "")
+  );
+
+  const filteredModules = modules.filter(
+    (mod) => mod.relatedCourse && mod.relatedCourse._id === (course || "")
+  );
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!name.trim() || !videoUrl.trim() || !course || !module || !category) {
@@ -45,28 +53,37 @@ const AddVideoForm = () => {
 
       <div className="max-w-150 h-auto py-6 px-6">
         <FormSelect
-          title="Course"
-          value={course}
-          onChange={(e) => setCourse(e.target.value)}
-          list={courses}
-          multi={false}
-          displayField="courseName"
-          className="w-full"
-        />
-        <FormSelect
           title="Category"
           value={category}
-          onChange={(e) => setCategory(e.target.value)}
+          onChange={(e) => {
+            setCategory(e.target.value);
+            setCourse(""); // Reset course selection when category changes
+            setModule(""); // Reset module selection when category changes too
+          }}
           list={categories}
           multi={false}
           displayField="categoryName"
           className="w-full"
         />
+
+        <FormSelect
+          title="Course"
+          value={course}
+          onChange={(e) => {
+            setCourse(e.target.value);
+            setModule(""); // Reset module selection when course changes
+          }}
+          list={filteredCourses}
+          multi={false}
+          displayField="courseName"
+          className="w-full"
+        />
+
         <FormSelect
           title="Module"
           value={module}
           onChange={(e) => setModule(e.target.value)}
-          list={modules}
+          list={filteredModules}
           multi={false}
           displayField="moduleName"
           className="w-full"

@@ -77,13 +77,13 @@ const TeacherTable = ({ search, refetchTrigger }) => {
                       x.gender === "male"
                         ? "#D6E4FF"
                         : x.gender === "female"
-                        ? "#FFEAE4"
+                        ? "#FFF9E4"
                         : "#F0F0F0",
                     color:
                       x.gender === "male"
                         ? "#5B93FF"
                         : x.gender === "female"
-                        ? "#FF8F6B"
+                        ? "#CCC84F"
                         : "#333",
                     fontWeight: 500,
                     borderRadius: "20px",

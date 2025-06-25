@@ -30,6 +30,10 @@ const EditModuleForm = () => {
     }
   }, [module]);
 
+  const filteredCourses = courses.filter(
+    (c) => c.courseCategory?._id === category
+  );
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!name.trim() || !category || !course) {
@@ -65,7 +69,7 @@ const EditModuleForm = () => {
           title="Course"
           value={course}
           onChange={(e) => setCourse(e.target.value)}
-          list={courses}
+          list={filteredCourses}
           multi={false}
           displayField="courseName"
         />

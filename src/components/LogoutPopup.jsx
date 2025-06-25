@@ -28,16 +28,16 @@ export default function LogoutPopup({ isOpen, onConfirm, onCancel }) {
 
             <div className="flex justify-between gap-3">
               <button
-                onClick={onConfirm}
-                className="flex-1 border border-white text-white hover:bg-white hover:text-[#48089F] py-2 rounded-sm transition"
-              >
-                Logout
-              </button>
-              <button
                 onClick={onCancel}
                 className="flex-1 border border-white-400 text-white hover:bg-white hover:text-[#48089F] py-2 rounded-sm transition"
               >
                 Cancel
+              </button>
+              <button
+                onClick={onConfirm}
+                className="flex-1 border border-white text-white hover:bg-white hover:text-[#48089F] py-2 rounded-sm transition"
+              >
+                Logout
               </button>
             </div>
           </motion.div>

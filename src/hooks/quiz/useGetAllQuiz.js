@@ -13,16 +13,16 @@ const useGetAllQuiz = () => {
       const res = await axios.get(`${base_url}/quiz/getAllQuiz`, {
         withCredentials: true,
       });
-      const data = res.data;
-      setQuiz(data);
+      setQuiz(res.data);
     } catch (err) {
       toast.error(
-        err?.response?.data?.message || err?.error || "something went wrong"
+        err?.response?.data?.message || err?.error || "Something went wrong"
       );
     } finally {
       setLoading(false);
     }
   };
+
   useEffect(() => {
     getAllQuiz();
   }, []);
