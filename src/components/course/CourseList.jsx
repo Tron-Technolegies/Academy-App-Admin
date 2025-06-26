@@ -14,11 +14,18 @@ import { Link } from "react-router-dom";
 import { CiEdit } from "react-icons/ci";
 import { MdDeleteOutline } from "react-icons/md";
 import { AdminContext } from "../../utils/AdminContext";
+import useDeleteCourse from "../../hooks/course/useDeleteCourse";
 
-const CourseList = ({ search }) => {
-  const { loading, course } = useGetAllCourses({ search });
-  const { setShowDeletePopup, setDeleteId, setDeleteType } =
-    useContext(AdminContext);
+const CourseList = () => {
+  const { deleteCourse } = useDeleteCourse();
+  const {
+    setShowDeletePopup,
+    setDeleteId,
+    setDeleteType,
+    searchTerm,
+    refetchTrigger,
+  } = useContext(AdminContext);
+  const { loading, course } = useGetAllCourses({ search: searchTerm });
 
   if (loading) return <Loading />;
 

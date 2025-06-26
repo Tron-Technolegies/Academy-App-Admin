@@ -31,7 +31,6 @@ const StudentHeader = () => {
         <h4 className="text-xl sm:text-3xl text-[#1D0B30] font-semibold pl-5 sm:pl-0 md:pt-6">
           Students
         </h4>
-        <AddButton route={"/quiz/new"} title={"Add"} />
       </div>
       <div className="w-full p-4">
         <SearchBox

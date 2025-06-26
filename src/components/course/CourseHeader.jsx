@@ -2,8 +2,29 @@ import React, { useContext, useEffect, useState } from "react";
 import AddButton from "../AddButton";
 import SearchBox from "../SearchBox";
 import { AdminContext } from "../../utils/AdminContext";
-const CourseHeader = ({ search, setSearch }) => {
-  const { setRefetchTrigger, refetchTrigger } = useContext(AdminContext);
+
+const CourseHeader = () => {
+  const { setRefetchTrigger, refetchTrigger, searchTerm, setSearchTerm } =
+    useContext(AdminContext);
+
+  const [localSearch, setLocalSearch] = useState(searchTerm);
+  const [debouncedSearch, setDebouncedSearch] = useState(searchTerm);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearch(localSearch);
+    }, 1000);
+
+    return () => clearTimeout(handler);
+  }, [localSearch]);
+
+  useEffect(() => {
+    if (debouncedSearch !== searchTerm) {
+      setSearchTerm(debouncedSearch); // update context searchTerm
+      setRefetchTrigger(!refetchTrigger); // trigger data refresh
+    }
+  }, [debouncedSearch]);
+
   return (
     <div>
       <div className="flex justify-between items-center p-6">
@@ -14,10 +35,13 @@ const CourseHeader = ({ search, setSearch }) => {
       </div>
       <div className="w-full p-4">
         <SearchBox
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          submit={() => setRefetchTrigger(!refetchTrigger)}
-          placeholder="search by course"
+          value={localSearch}
+          onChange={(e) => setLocalSearch(e.target.value)}
+          submit={() => {
+            setSearchTerm(localSearch);
+            setRefetchTrigger(!refetchTrigger);
+          }}
+          placeholder="Search by course"
         />
       </div>
     </div>
