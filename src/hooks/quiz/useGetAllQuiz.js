@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { base_url } from "../../utils/constants";
 
-const useGetAllQuiz = () => {
+const useGetAllQuiz = ({ search = "" } = {}) => {
   const [loading, setLoading] = useState(false);
   const [quiz, setQuiz] = useState([]);
 
@@ -11,6 +11,7 @@ const useGetAllQuiz = () => {
     setLoading(true);
     try {
       const res = await axios.get(`${base_url}/quiz/getAllQuiz`, {
+        params: { search },
         withCredentials: true,
       });
       setQuiz(res.data);
@@ -25,7 +26,7 @@ const useGetAllQuiz = () => {
 
   useEffect(() => {
     getAllQuiz();
-  }, []);
+  }, [search]);
 
   const refetch = () => {
     getAllQuiz();

@@ -9,6 +9,7 @@ export default function AdminContextProvider({ children }) {
   const [deleteType, setDeleteType] = useState("");
   const [refetchTrigger, setRefetchTrigger] = useState(false);
   const [user, setUser] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
   return (
     <AdminContext.Provider
       value={{
@@ -24,6 +25,8 @@ export default function AdminContextProvider({ children }) {
         setRefetchTrigger,
         user,
         setUser,
+        searchTerm, // expose searchTerm
+        setSearchTerm,
       }}
     >
       {children}

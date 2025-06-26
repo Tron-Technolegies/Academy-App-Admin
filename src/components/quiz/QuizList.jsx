@@ -24,9 +24,9 @@ import useGetAllQuiz from "../../hooks/quiz/useGetAllQuiz";
 import useDeleteQuiz from "../../hooks/quiz/useDeleteQuiz";
 
 const QuizList = () => {
-  const { loading, quiz, refetch } = useGetAllQuiz();
   const { deleteQuiz } = useDeleteQuiz();
   const {
+    searchTerm,
     showDeletePopup,
     setShowDeletePopup,
     deleteId,
@@ -35,10 +35,12 @@ const QuizList = () => {
     refetchTrigger,
   } = useContext(AdminContext);
 
+  const { loading, quiz, refetch } = useGetAllQuiz({ search: searchTerm });
   const [openQuiz, setOpenQuiz] = useState({});
+
   useEffect(() => {
     refetch();
-  }, [refetchTrigger]);
+  }, [refetchTrigger, searchTerm]);
 
   const toggleOpen = (id) => {
     setOpenQuiz((prev) => ({
@@ -47,9 +49,9 @@ const QuizList = () => {
     }));
   };
 
-  return loading ? (
-    <Loading />
-  ) : (
+  if (loading) return <Loading />;
+
+  return (
     <div className="p-4">
       <TableContainer component={Paper}>
         <Table aria-label="quiz table">
@@ -165,7 +167,7 @@ const QuizList = () => {
                               {item.questions.map((q, idx) => (
                                 <TableRow key={idx}>
                                   <TableCell>
-                                    <strong>{idx + 1}</strong>{" "}
+                                    <strong>{idx + 1}</strong>
                                   </TableCell>
                                   <TableCell>{q.question}</TableCell>
                                   <TableCell>
@@ -188,7 +190,7 @@ const QuizList = () => {
                                     </ul>
                                   </TableCell>
                                   <TableCell>
-                                    <strong> {q.answer}</strong>
+                                    <strong>{q.answer}</strong>
                                   </TableCell>
                                 </TableRow>
                               ))}
