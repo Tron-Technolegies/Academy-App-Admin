@@ -16,20 +16,21 @@ import { CiEdit } from "react-icons/ci";
 import { MdDeleteOutline } from "react-icons/md";
 import { AdminContext } from "../../utils/AdminContext";
 
-const VideoList = ({ search, refetchTrigger }) => {
-  const { loading, video, refetch } = useGetAllVideo({ search });
+const VideoList = () => {
   const { deleteVideo } = useDeleteVideo();
   const {
+    searchTerm,
+    refetchTrigger,
     showDeletePopup,
     setShowDeletePopup,
     deleteId,
     setDeleteId,
     setDeleteType,
   } = useContext(AdminContext);
-
+  const { loading, video, refetch } = useGetAllVideo({ search: searchTerm });
   useEffect(() => {
     refetch();
-  }, [refetchTrigger, search]);
+  }, [refetchTrigger, searchTerm]);
 
   if (loading) return <Loading />;
 

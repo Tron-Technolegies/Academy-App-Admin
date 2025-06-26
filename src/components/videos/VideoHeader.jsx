@@ -1,13 +1,33 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AddButton from "../AddButton";
 import SearchBox from "../SearchBox";
 import { AdminContext } from "../../utils/AdminContext";
 
-const VideoHeader = ({ search, setSearch }) => {
-  const { setRefetchTrigger, refetchTrigger } = useContext(AdminContext);
+const VideoHeader = () => {
+  const { setRefetchTrigger, refetchTrigger, searchTerm, setSearchTerm } =
+    useContext(AdminContext);
+
+  const [localSearch, setLocalSearch] = useState(searchTerm);
+  const [debouncedSearch, setDebouncedSearch] = useState(searchTerm);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearch(localSearch);
+    }, 1000);
+
+    return () => clearTimeout(handler);
+  }, [localSearch]);
+
+  useEffect(() => {
+    if (debouncedSearch !== searchTerm) {
+      setSearchTerm(debouncedSearch); // update context searchTerm
+      setRefetchTrigger(!refetchTrigger); // trigger data refresh
+    }
+  }, [debouncedSearch]);
+
   return (
     <div>
-      <div className="flex items-center justify-between p-6">
+      <div className="flex justify-between items-center p-6">
         <h4 className="text-xl sm:text-3xl text-[#1D0B30] font-semibold pl-5 sm:pl-0 md:pt-6">
           Videos
         </h4>
@@ -15,10 +35,13 @@ const VideoHeader = ({ search, setSearch }) => {
       </div>
       <div className="w-full p-4">
         <SearchBox
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          submit={() => setRefetchTrigger(!refetchTrigger)}
-          placeholder="search by video"
+          value={localSearch}
+          onChange={(e) => setLocalSearch(e.target.value)}
+          submit={() => {
+            setSearchTerm(localSearch);
+            setRefetchTrigger(!refetchTrigger);
+          }}
+          placeholder="Search by module"
         />
       </div>
     </div>
