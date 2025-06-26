@@ -16,20 +16,22 @@ import { MdDeleteOutline } from "react-icons/md";
 import { AdminContext } from "../../utils/AdminContext";
 import useDeleteModule from "../../hooks/module/useDeleteModule";
 
-const ModuleList = ({ search, refetchTrigger }) => {
-  const { loading, module, refetch } = useGetAllModule({ search });
+const ModuleList = () => {
   const { deleteModule } = useDeleteModule();
   const {
+    searchTerm,
+    refetchTrigger,
     showDeletePopup,
     setShowDeletePopup,
     deleteId,
     setDeleteId,
     setDeleteType,
   } = useContext(AdminContext);
+  const { loading, module, refetch } = useGetAllModule({ search: searchTerm });
 
   useEffect(() => {
     refetch();
-  }, [refetchTrigger, search]);
+  }, [refetchTrigger, searchTerm]);
   return loading ? (
     <Loading />
   ) : (
