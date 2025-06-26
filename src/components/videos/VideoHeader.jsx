@@ -41,7 +41,7 @@ const VideoHeader = () => {
             setSearchTerm(localSearch);
             setRefetchTrigger(!refetchTrigger);
           }}
-          placeholder="Search by module"
+          placeholder="Search by video"
         />
       </div>
     </div>
