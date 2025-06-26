@@ -14,14 +14,20 @@ import { MdDeleteOutline } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
 import { Box } from "@mui/material";
 
-const TeacherTable = ({ search, refetchTrigger }) => {
-  const { instructor, loading, refetch } = useGetAllInstructor({ search });
-  const { setShowDeletePopup, setDeleteId, setDeleteType } =
-    useContext(AdminContext);
-
+const TeacherTable = () => {
+  const {
+    refetchTrigger,
+    searchTerm,
+    setShowDeletePopup,
+    setDeleteId,
+    setDeleteType,
+  } = useContext(AdminContext);
+  const { instructor, loading, refetch } = useGetAllInstructor({
+    search: searchTerm,
+  });
   useEffect(() => {
     refetch();
-  }, [refetchTrigger, search]);
+  }, [refetchTrigger, searchTerm]);
 
   if (loading) return <Loading />;
 
